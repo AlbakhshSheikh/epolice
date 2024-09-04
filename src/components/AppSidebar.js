@@ -44,7 +44,7 @@ const AppSidebar = () => {
       <CSidebarFooter className="border-top d-none d-lg-flex flex-column align-items-center">
         <div className="d-flex align-items-center mb-2">
           <span className="fw-bold" style={{ fontSize: '25px' }}>
-            Admin Panel
+            Admin
           </span>
         </div>
         <CButton color="dark" className="w-100 text-start d-flex align-items-center">
@@ -64,9 +64,9 @@ const AppSidebar = () => {
             <CIcon icon={cilUser} />
           </div>
           <div>
-            <span className="fw-bold">John Doe</span>
+            <span className="fw-bold">SP AKOLA</span>
             <br />
-            <span className="text-muted">Administrator</span>
+            <span className="text-muted">Head_Person</span>
           </div>
         </CButton>
       </CSidebarFooter>

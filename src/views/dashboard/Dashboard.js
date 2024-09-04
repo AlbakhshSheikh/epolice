@@ -180,12 +180,10 @@ const Dashboard = () => {
 
   return (
     <>
-      {/* <WidgetsDropdown className="mb-4" /> */}
-      <CCard className="md-4">
+      <CCard className="mb-2">
         <DropdownComponent />
       </CCard>
-      <br />
-      <GoogleMapComponent className="mb-4" />
+      <GoogleMapComponent />
       <CCard className="mb-4">
         {/* <CCardBody>
           <CRow>
