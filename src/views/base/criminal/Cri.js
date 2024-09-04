@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React, { useState } from 'react'
 import {
   CButton,
@@ -23,7 +24,7 @@ import {
   CDropdownItem,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import { cilSearch, cilSettings, cilPencil, cilTrash } from '@coreui/icons'
+import { cilSearch, cilSettings, cilPencil, cilTrash, cilUser, cilStar, cilPlus } from '@coreui/icons'
 
 const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setCurrentPage }) => {
   const handleEditClick = (id) => {
@@ -47,10 +48,10 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
 
   // Filter rows based on search query
   const filteredRows = rows.filter(row =>
-    row.state.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    row.district.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    row.city.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    row.sdpoName.toLowerCase().includes(searchQuery.toLowerCase()),
+    row.policeStation.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    row.criminalName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    row.mobile.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    row.address.toLowerCase().includes(searchQuery.toLowerCase()),
   )
 
   // Paginate rows
@@ -65,11 +66,11 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
           <CTable bordered>
             <CTableHead>
               <CTableRow>
-                <CTableHeaderCell>Sr.No</CTableHeaderCell>
-                <CTableHeaderCell>State</CTableHeaderCell>
-                <CTableHeaderCell>District</CTableHeaderCell>
-                <CTableHeaderCell>City</CTableHeaderCell>
-                <CTableHeaderCell>SDPO Name</CTableHeaderCell>
+                <CTableHeaderCell>Sr. No</CTableHeaderCell>
+                <CTableHeaderCell>Police Station</CTableHeaderCell>
+                <CTableHeaderCell>Criminal Name</CTableHeaderCell>
+                <CTableHeaderCell>Mobile</CTableHeaderCell>
+                <CTableHeaderCell>Address</CTableHeaderCell>
                 <CTableHeaderCell>Status</CTableHeaderCell>
                 <CTableHeaderCell>Action</CTableHeaderCell>
               </CTableRow>
@@ -81,41 +82,41 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                   <CTableDataCell>
                     {row.isEditing ? (
                       <CFormInput
-                        value={row.state}
-                        onChange={(e) => handleInputChange(e, row.id, 'state')}
+                        value={row.policeStation}
+                        onChange={(e) => handleInputChange(e, row.id, 'policeStation')}
                       />
                     ) : (
-                      row.state
+                      row.policeStation
                     )}
                   </CTableDataCell>
                   <CTableDataCell>
                     {row.isEditing ? (
                       <CFormInput
-                        value={row.district}
-                        onChange={(e) => handleInputChange(e, row.id, 'district')}
+                        value={row.criminalName}
+                        onChange={(e) => handleInputChange(e, row.id, 'criminalName')}
                       />
                     ) : (
-                      row.district
+                      row.criminalName
                     )}
                   </CTableDataCell>
                   <CTableDataCell>
                     {row.isEditing ? (
                       <CFormInput
-                        value={row.city}
-                        onChange={(e) => handleInputChange(e, row.id, 'city')}
+                        value={row.mobile}
+                        onChange={(e) => handleInputChange(e, row.id, 'mobile')}
                       />
                     ) : (
-                      row.city
+                      row.mobile
                     )}
                   </CTableDataCell>
                   <CTableDataCell>
                     {row.isEditing ? (
                       <CFormInput
-                        value={row.sdpoName}
-                        onChange={(e) => handleInputChange(e, row.id, 'sdpoName')}
+                        value={row.address}
+                        onChange={(e) => handleInputChange(e, row.id, 'address')}
                       />
                     ) : (
-                      row.sdpoName
+                      row.address
                     )}
                   </CTableDataCell>
                   <CTableDataCell>
@@ -152,6 +153,22 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                       </>
                     ) : (
                       <>
+                        <CButton
+                          color="info"
+                          size="sm"
+                          className="me-2"
+                          onClick={() => handleEditClick(row.id)}
+                        >
+                          <CIcon icon={cilUser} />
+                        </CButton>
+                        <CButton
+                          color="info"
+                          size="sm"
+                          className="me-2"
+                          onClick={() => handleEditClick(row.id)}
+                        >
+                          <CIcon icon={cilPlus} />
+                        </CButton>
                         <CButton
                           color="info"
                           size="sm"
@@ -215,45 +232,27 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
     </>
   )
 }
-
 const Validation = () => {
   const [rows, setRows] = useState([
     {
       id: 1,
-      state: 'Maharashtra',
-      district: 'Akola',
-      city: 'Akola',
-      sdpoName: 'DYSP BALLAPUR',
+      policeStation: 'Police Station 1',
+      criminalName: 'Criminal Name 1',
+      mobile: '1234567890',
+      address: 'Address 1',
       status: 'Active',
       isEditing: false,
     },
     {
       id: 2,
-      state: 'Maharashtra',
-      district: 'Akola',
-      city: 'Akola',
-      sdpoName: 'DYSP AKOT',
+      policeStation: 'Police Station 2',
+      criminalName: 'Criminal Name 2',
+      mobile: '0987654321',
+      address: 'Address 2',
       status: 'Active',
       isEditing: false,
     },
-    {
-      id: 3,
-      state: 'Maharashtra',
-      district: 'Akola',
-      city: 'Akola',
-      sdpoName: 'DYSP MURTIJAPUR',
-      status: 'Active',
-      isEditing: false,
-    },
-    {
-      id: 4,
-      state: 'Maharashtra',
-      district: 'Akola',
-      city: 'Akola',
-      sdpoName: 'DYSP AKOLA',
-      status: 'Active',
-      isEditing: false,
-    },
+    // Add more rows as needed
   ])
 
   const [searchQuery, setSearchQuery] = useState('')
@@ -263,10 +262,10 @@ const Validation = () => {
   const handleAddRow = () => {
     const newRow = {
       id: rows.length + 1,
-      state: '',
-      district: '',
-      city: '',
-      sdpoName: '',
+      policeStation: '',
+      criminalName: '',
+      mobile: '',
+      address: '',
       status: 'Active',
       isEditing: true,
     }
@@ -278,7 +277,7 @@ const Validation = () => {
       <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader className="d-flex justify-content-between align-items-center">
-            <strong>Manage SDPO</strong>
+            <strong>Manage Criminal Records</strong>
             <div className="d-flex align-items-center">
               <CInputGroup>
                 <CInputGroupText>

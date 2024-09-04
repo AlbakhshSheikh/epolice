@@ -18,7 +18,6 @@ const DropdownComponent = () => {
     border: `1px solid ${colorMode === 'dark' ? '#444' : '#ddd'}`,
     borderRadius: '4px',
     width: '100%', // Full width of the container
-    maxWidth: '1270px', // Max width to prevent it from getting too wide
     margin: 'auto',
     backgroundColor: colorMode === 'dark' ? '#333' : '#f9f9f9',
   };

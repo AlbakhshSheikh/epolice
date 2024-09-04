@@ -135,7 +135,7 @@ const WidgetsBrand = (props) => {
             // { title: 'feeds', value: '1.292F89k' },
           ]}
           style={{
-            '--cui-card-cap-bg': '#4875b4',
+            '--cui-card-cap-bg': 'purple ',
           }}
         />
       </CCol>
@@ -173,7 +173,6 @@ const WidgetsBrand = (props) => {
       </CCol>
       <CCol sm={6} xl={4} xxl={3}>
         <CWidgetStatsD
-          color="warning"
           {...(props.withCharts && {
             chart: (
               <CChart
@@ -201,6 +200,9 @@ const WidgetsBrand = (props) => {
             { title: 'Total Cameras', value: '120' },
             // { title: 'meetings', value: '4' },
           ]}
+          style={{
+            '--cui-card-cap-bg': 'grey',
+          }}
         />
       </CCol>
       <CCol sm={6} xl={4} xxl={3}>
@@ -233,7 +235,7 @@ const WidgetsBrand = (props) => {
             // { title: 'feeds', value: '1.292F89k' },
           ]}
           style={{
-            '--cui-card-cap-bg': '#4875b4',
+            '--cui-card-cap-bg': 'red',
           }}
         />
       </CCol>
@@ -267,7 +269,7 @@ const WidgetsBrand = (props) => {
             // { title: 'tweets', value: '1.792' },
           ]}
           style={{
-            '--cui-card-cap-bg': '#00aced',
+            '--cui-card-cap-bg': 'green',
           }}
         />
       </CCol>
@@ -301,7 +303,7 @@ const WidgetsBrand = (props) => {
             // { title: 'feeds', value: '459' },
           ]}
           style={{
-            '--cui-card-cap-bg': '#3b5998',
+            '--cui-card-cap-bg': 'black',
           }}
         />
       </CCol>

@@ -47,10 +47,10 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
 
   // Filter rows based on search query
   const filteredRows = rows.filter(row =>
-    row.state.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    row.district.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    row.city.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    row.sdpoName.toLowerCase().includes(searchQuery.toLowerCase()),
+    row.policeName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    row.attendanceDate.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    row.inTime.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    row.outTime.toLowerCase().includes(searchQuery.toLowerCase()),
   )
 
   // Paginate rows
@@ -66,10 +66,10 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
             <CTableHead>
               <CTableRow>
                 <CTableHeaderCell>Sr.No</CTableHeaderCell>
-                <CTableHeaderCell>State</CTableHeaderCell>
-                <CTableHeaderCell>District</CTableHeaderCell>
-                <CTableHeaderCell>City</CTableHeaderCell>
-                <CTableHeaderCell>SDPO Name</CTableHeaderCell>
+                <CTableHeaderCell>Police Name</CTableHeaderCell>
+                <CTableHeaderCell>Attendance Date</CTableHeaderCell>
+                <CTableHeaderCell>In Time</CTableHeaderCell>
+                <CTableHeaderCell>Out Time</CTableHeaderCell>
                 <CTableHeaderCell>Status</CTableHeaderCell>
                 <CTableHeaderCell>Action</CTableHeaderCell>
               </CTableRow>
@@ -81,41 +81,41 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                   <CTableDataCell>
                     {row.isEditing ? (
                       <CFormInput
-                        value={row.state}
-                        onChange={(e) => handleInputChange(e, row.id, 'state')}
+                        value={row.policeName}
+                        onChange={(e) => handleInputChange(e, row.id, 'policeName')}
                       />
                     ) : (
-                      row.state
+                      row.policeName
                     )}
                   </CTableDataCell>
                   <CTableDataCell>
                     {row.isEditing ? (
                       <CFormInput
-                        value={row.district}
-                        onChange={(e) => handleInputChange(e, row.id, 'district')}
+                        value={row.attendanceDate}
+                        onChange={(e) => handleInputChange(e, row.id, 'attendanceDate')}
                       />
                     ) : (
-                      row.district
+                      row.attendanceDate
                     )}
                   </CTableDataCell>
                   <CTableDataCell>
                     {row.isEditing ? (
                       <CFormInput
-                        value={row.city}
-                        onChange={(e) => handleInputChange(e, row.id, 'city')}
+                        value={row.inTime}
+                        onChange={(e) => handleInputChange(e, row.id, 'inTime')}
                       />
                     ) : (
-                      row.city
+                      row.inTime
                     )}
                   </CTableDataCell>
                   <CTableDataCell>
                     {row.isEditing ? (
                       <CFormInput
-                        value={row.sdpoName}
-                        onChange={(e) => handleInputChange(e, row.id, 'sdpoName')}
+                        value={row.outTime}
+                        onChange={(e) => handleInputChange(e, row.id, 'outTime')}
                       />
                     ) : (
-                      row.sdpoName
+                      row.outTime
                     )}
                   </CTableDataCell>
                   <CTableDataCell>
@@ -220,40 +220,23 @@ const Validation = () => {
   const [rows, setRows] = useState([
     {
       id: 1,
-      state: 'Maharashtra',
-      district: 'Akola',
-      city: 'Akola',
-      sdpoName: 'DYSP BALLAPUR',
+      policeName: 'John Doe',
+      attendanceDate: '2024-09-01',
+      inTime: '08:00',
+      outTime: '17:00',
       status: 'Active',
       isEditing: false,
     },
     {
       id: 2,
-      state: 'Maharashtra',
-      district: 'Akola',
-      city: 'Akola',
-      sdpoName: 'DYSP AKOT',
+      policeName: 'Jane Smith',
+      attendanceDate: '2024-09-01',
+      inTime: '08:00',
+      outTime: '17:00',
       status: 'Active',
       isEditing: false,
     },
-    {
-      id: 3,
-      state: 'Maharashtra',
-      district: 'Akola',
-      city: 'Akola',
-      sdpoName: 'DYSP MURTIJAPUR',
-      status: 'Active',
-      isEditing: false,
-    },
-    {
-      id: 4,
-      state: 'Maharashtra',
-      district: 'Akola',
-      city: 'Akola',
-      sdpoName: 'DYSP AKOLA',
-      status: 'Active',
-      isEditing: false,
-    },
+    // Add more rows as needed
   ])
 
   const [searchQuery, setSearchQuery] = useState('')
@@ -263,10 +246,10 @@ const Validation = () => {
   const handleAddRow = () => {
     const newRow = {
       id: rows.length + 1,
-      state: '',
-      district: '',
-      city: '',
-      sdpoName: '',
+      policeName: '',
+      attendanceDate: '',
+      inTime: '',
+      outTime: '',
       status: 'Active',
       isEditing: true,
     }
@@ -278,7 +261,7 @@ const Validation = () => {
       <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader className="d-flex justify-content-between align-items-center">
-            <strong>Manage SDPO</strong>
+            <strong>Manage Attendance</strong>
             <div className="d-flex align-items-center">
               <CInputGroup>
                 <CInputGroupText>

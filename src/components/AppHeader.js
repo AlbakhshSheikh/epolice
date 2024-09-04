@@ -18,6 +18,7 @@ import {
 } from '@coreui/react';
 import CIcon from '@coreui/icons-react';
 import {
+  cilAccountLogout,
   cilBell,
   cilContrast,
   cilEnvelopeOpen,
@@ -113,7 +114,7 @@ const AppHeader = () => {
             <div className="vr h-100 mx-2 text-body text-opacity-75"></div>
           </li>
           <CNavLink href="#">
-            <CIcon icon={cilList} size="lg" />
+            <CIcon icon={cilAccountLogout} size="lg" />
           </CNavLink>
         </CHeaderNav>
       </CContainer>
