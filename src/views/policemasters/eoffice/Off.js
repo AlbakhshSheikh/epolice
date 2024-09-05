@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React, { useState } from 'react'
 import {
   CButton,
@@ -22,8 +23,8 @@ import {
   CDropdownMenu,
   CDropdownItem,
 } from '@coreui/react'
-import { CIcon } from '@coreui/icons-react'
-import { cilSearch, cilSettings } from '@coreui/icons'
+import CIcon from '@coreui/icons-react'
+import { cilSearch, cilSettings, cilPencil, cilTrash, cilUser } from '@coreui/icons'
 
 const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setCurrentPage }) => {
   const handleEditClick = (id) => {
@@ -47,13 +48,16 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
 
   // Filter rows based on search query
   const filteredRows = rows.filter(row =>
-    row.stationName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    row.policeName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    row.buckalNumber.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    row.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    row.scantime.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    row.scanlocation.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    row.selfie.toLowerCase().includes(searchQuery.toLowerCase()),
+    row.nature.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    row.computer.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    row.receipt.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    row.subject.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    row.sentBy.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    row.sentOn.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    row.section.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    row.remarks.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    row.receivedBy.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    row.receivedOn.toLowerCase().includes(searchQuery.toLowerCase())
   )
 
   // Paginate rows
@@ -63,20 +67,24 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
   return (
     <>
       <CForm className="row g-3 needs-validation" noValidate>
+        {/* Table */}
         <CCol xs={12} className="mt-4">
           <CTable bordered>
             <CTableHead>
               <CTableRow>
                 <CTableHeaderCell>Sr.No</CTableHeaderCell>
-                <CTableHeaderCell>Police Station Name</CTableHeaderCell>
-                <CTableHeaderCell>Police Name</CTableHeaderCell>
-                <CTableHeaderCell>Buckal Number</CTableHeaderCell>
-                <CTableHeaderCell>Location</CTableHeaderCell>
-                <CTableHeaderCell>Scan Time</CTableHeaderCell>
-                <CTableHeaderCell>Scan Location</CTableHeaderCell>
-                <CTableHeaderCell>Selfie Pic</CTableHeaderCell>
-                {/* <CTableHeaderCell>Status</CTableHeaderCell>
-                <CTableHeaderCell>Action</CTableHeaderCell> */}
+                <CTableHeaderCell>Nature</CTableHeaderCell>
+                <CTableHeaderCell>Computer</CTableHeaderCell>
+                <CTableHeaderCell>Receipt</CTableHeaderCell>
+                <CTableHeaderCell>Subject</CTableHeaderCell>
+                <CTableHeaderCell>Sent By</CTableHeaderCell>
+                <CTableHeaderCell>Sent On</CTableHeaderCell>
+                <CTableHeaderCell>Section</CTableHeaderCell>
+                <CTableHeaderCell>Remarks</CTableHeaderCell>
+                <CTableHeaderCell>Received By</CTableHeaderCell>
+                <CTableHeaderCell>Received On</CTableHeaderCell>
+                <CTableHeaderCell>Status</CTableHeaderCell>
+                <CTableHeaderCell>Action</CTableHeaderCell>
               </CTableRow>
             </CTableHead>
             <CTableBody>
@@ -86,87 +94,104 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                   <CTableDataCell>
                     {row.isEditing ? (
                       <CFormInput
-                        value={row.stationName}
-                        onChange={(e) => handleInputChange(e, row.id, 'stationName')}
+                        value={row.nature}
+                        onChange={(e) => handleInputChange(e, row.id, 'nature')}
                       />
                     ) : (
-                      row.stationName
+                      row.nature
                     )}
                   </CTableDataCell>
                   <CTableDataCell>
                     {row.isEditing ? (
                       <CFormInput
-                        value={row.policeName}
-                        onChange={(e) => handleInputChange(e, row.id, 'policeName')}
+                        value={row.computer}
+                        onChange={(e) => handleInputChange(e, row.id, 'computer')}
                       />
                     ) : (
-                      row.policeName
+                      row.computer
                     )}
                   </CTableDataCell>
                   <CTableDataCell>
                     {row.isEditing ? (
                       <CFormInput
-                        value={row.buckalNumber}
-                        onChange={(e) => handleInputChange(e, row.id, 'buckalNumber')}
+                        value={row.receipt}
+                        onChange={(e) => handleInputChange(e, row.id, 'receipt')}
                       />
                     ) : (
-                      row.buckalNumber
+                      row.receipt
                     )}
                   </CTableDataCell>
                   <CTableDataCell>
                     {row.isEditing ? (
                       <CFormInput
-                        value={row.location}
-                        onChange={(e) => handleInputChange(e, row.id, 'location')}
+                        value={row.subject}
+                        onChange={(e) => handleInputChange(e, row.id, 'subject')}
                       />
                     ) : (
-                      row.location
+                      row.subject
                     )}
                   </CTableDataCell>
-
                   <CTableDataCell>
                     {row.isEditing ? (
                       <CFormInput
-                        value={row.scantime}
-                        onChange={(e) => handleInputChange(e, row.id, 'scantime')}
+                        value={row.sentBy}
+                        onChange={(e) => handleInputChange(e, row.id, 'sentBy')}
                       />
                     ) : (
-                      row.scantime
+                      row.sentBy
                     )}
                   </CTableDataCell>
-
                   <CTableDataCell>
                     {row.isEditing ? (
                       <CFormInput
-                        value={row.scanlocation}
-                        onChange={(e) => handleInputChange(e, row.id, 'scanlocation')}
+                        value={row.sentOn}
+                        onChange={(e) => handleInputChange(e, row.id, 'sentOn')}
                       />
                     ) : (
-                      row.scanlocation
+                      row.sentOn
                     )}
                   </CTableDataCell>
-
                   <CTableDataCell>
                     {row.isEditing ? (
                       <CFormInput
-                        value={row.selfie}
-                        onChange={(e) => handleInputChange(e, row.id, 'selfie')}
+                        value={row.section}
+                        onChange={(e) => handleInputChange(e, row.id, 'section')}
                       />
                     ) : (
-                      <>
-                        {row.selfie && (
-                          <img
-                            src='https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg?t=st=1725271852~exp=1725275452~hmac=c6cff51c8b70509d2d25131b776d91adb73ef04584c11d70e6446fab636de852&w=826'
-                            // src={row.selfie}
-                            alt="Selfie"
-                            style={{ width: '100px', height: 'auto', objectFit: 'contain' }}
-                          />
-                        )}
-                      </>
+                      row.section
                     )}
                   </CTableDataCell>
-
-                  {/* <CTableDataCell>
+                  <CTableDataCell>
+                    {row.isEditing ? (
+                      <CFormInput
+                        value={row.remarks}
+                        onChange={(e) => handleInputChange(e, row.id, 'remarks')}
+                      />
+                    ) : (
+                      row.remarks
+                    )}
+                  </CTableDataCell>
+                  <CTableDataCell>
+                    {row.isEditing ? (
+                      <CFormInput
+                        value={row.receivedBy}
+                        onChange={(e) => handleInputChange(e, row.id, 'receivedBy')}
+                      />
+                    ) : (
+                      row.receivedBy
+                    )}
+                  </CTableDataCell>
+                  <CTableDataCell>
+                    {row.isEditing ? (
+                      <CFormInput
+                        value={row.receivedOn}
+                        onChange={(e) => handleInputChange(e, row.id, 'receivedOn')}
+                      />
+                    ) : (
+                      row.receivedOn
+                    )}
+                  </CTableDataCell>
+                  <CTableDataCell>
                     {row.isEditing ? (
                       <CFormSelect
                         value={row.status}
@@ -182,8 +207,8 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                         {row.status}
                       </span>
                     )}
-                  </CTableDataCell> */}
-                  {/* <CTableDataCell>
+                  </CTableDataCell>
+                  <CTableDataCell>
                     {row.isEditing ? (
                       <>
                         <CButton color="success" size="sm" onClick={() => handleSaveClick(row.id)}>
@@ -206,14 +231,22 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                           className="me-2"
                           onClick={() => handleEditClick(row.id)}
                         >
-                          <i className="cil-pencil"></i>
+                          <CIcon icon={cilUser} />
+                        </CButton>
+                        <CButton
+                          color="info"
+                          size="sm"
+                          className="me-2"
+                          onClick={() => handleEditClick(row.id)}
+                        >
+                          <CIcon icon={cilPencil} />
                         </CButton>
                         <CButton color="danger" size="sm" onClick={() => handleDeleteClick(row.id)}>
-                          <i className="cil-trash"></i>
+                          <CIcon icon={cilTrash} />
                         </CButton>
                       </>
                     )}
-                  </CTableDataCell> */}
+                  </CTableDataCell>
                 </CTableRow>
               ))}
             </CTableBody>
@@ -221,6 +254,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
         </CCol>
       </CForm>
 
+      {/* Pagination Controls */}
       <CRow className="mt-3">
         <CCol className="d-flex justify-content-end">
           <CButton
@@ -242,7 +276,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
           </CButton>
         </CCol>
       </CRow>
-
+      {/* Settings Icon with Dropdown */}
       <CDropdown className="position-fixed bottom-0 end-0 m-3">
         <CDropdownToggle
           color="secondary"
@@ -267,74 +301,85 @@ const Validation = () => {
   const [rows, setRows] = useState([
     {
       id: 1,
-      stationName: 'Maharashtra',
-      policeName: 'Akola',
-      buckalNumber: 'Akola',
-      location: 'DYSP BALLAPUR',
-      scantime: 'DYSP BALLAPUR',
-      scanlocation: 'DYSP BALLAPUR',
-      selfie: 'Images'
-      // status: 'Active',
-      // isEditing: false,
+      nature: 'Nature 1',
+      computer: 'Computer 1',
+      receipt: 'Receipt 1',
+      subject: 'Subject 1',
+      sentBy: 'Sender 1',
+      sentOn: '2024-01-01',
+      section: 'Section 1',
+      remarks: 'Remarks 1',
+      receivedBy: 'Receiver 1',
+      receivedOn: '2024-01-02',
+      status: 'Active',
+      isEditing: false,
     },
     {
       id: 2,
-      stationName: 'Maharashtra',
-      policeName: 'Akola',
-      buckalNumber: 'Akola',
-      location: 'DYSP BALLAPUR',
-      scantime: 'DYSP BALLAPUR',
-      scanlocation: 'DYSP BALLAPUR',
-      selfie: 'Images'
-      // status: 'Active',
-      // isEditing: false,
+      nature: 'Nature 2',
+      computer: 'Computer 2',
+      receipt: 'Receipt 2',
+      subject: 'Subject 2',
+      sentBy: 'Sender 2',
+      sentOn: '2024-01-03',
+      section: 'Section 2',
+      remarks: 'Remarks 2',
+      receivedBy: 'Receiver 2',
+      receivedOn: '2024-01-04',
+      status: 'Active',
+      isEditing: false,
     },
     {
       id: 3,
-      stationName: 'Maharashtra',
-      policeName: 'Akola',
-      buckalNumber: 'Akola',
-      location: 'DYSP BALLAPUR',
-      scantime: 'DYSP BALLAPUR',
-      scanlocation: 'DYSP BALLAPUR',
-      selfie: 'Images'
-      // status: 'Active',
-      // isEditing: false,
+      nature: 'Nature 3',
+      computer: 'Computer 3',
+      receipt: 'Receipt 3',
+      subject: 'Subject 3',
+      sentBy: 'Sender 3',
+      sentOn: '2024-01-05',
+      section: 'Section 3',
+      remarks: 'Remarks 3',
+      receivedBy: 'Receiver 3',
+      receivedOn: '2024-01-06',
+      status: 'Inactive',
+      isEditing: false,
     },
     {
       id: 4,
-      stationName: 'Maharashtra',
-      policeName: 'Akola',
-      buckalNumber: 'Akola',
-      location: 'DYSP BALLAPUR',
-      scantime: 'DYSP BALLAPUR',
-      scanlocation: 'DYSP BALLAPUR',
-      selfie: 'Images'
-      // status: 'Active',
-      // isEditing: false,
+      nature: 'Nature 4',
+      computer: 'Computer 4',
+      receipt: 'Receipt 4',
+      subject: 'Subject 4',
+      sentBy: 'Sender 4',
+      sentOn: '2024-01-07',
+      section: 'Section 4',
+      remarks: 'Remarks 4',
+      receivedBy: 'Receiver 4',
+      receivedOn: '2024-01-08',
+      status: 'Active',
+      isEditing: false,
     },
   ])
 
   const [searchQuery, setSearchQuery] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
-  const [fromDate, setFromDate] = useState('')
-  const [toDate, setToDate] = useState('')
-  const [dropdownValue, setDropdownValue] = useState('')
-  const [inputValue, setInputValue] = useState('')
   const pageSize = 5
 
   const handleAddRow = () => {
     const newRow = {
       id: rows.length + 1,
-      stationName: '',
-      policeName: '',
-      buckalNumber: '',
-      location: '',
-      scantime: '',
-      scanlocation: '',
-      selfie: ''
-      // status: 'Active',
-      // isEditing: false,
+      nature: '',
+      computer: '',
+      receipt: '',
+      subject: '',
+      sentBy: '',
+      sentOn: '',
+      section: '',
+      remarks: '',
+      receivedBy: '',
+      receivedOn: '',
+      status: 'Active',
+      isEditing: true,
     }
     setRows([...rows, newRow])
   }
@@ -344,7 +389,7 @@ const Validation = () => {
       <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader className="d-flex justify-content-between align-items-center">
-            <strong>Manage Selfie Report</strong>
+            <strong>Manage Records</strong>
             <div className="d-flex align-items-center">
               <CInputGroup>
                 <CInputGroupText>
@@ -357,58 +402,10 @@ const Validation = () => {
                 />
               </CInputGroup>
               <CButton color="primary" className="ms-2" onClick={handleAddRow}>
-                Export
+                Add
               </CButton>
             </div>
           </CCardHeader>
-
-          <CCardHeader className="d-flex p-2">
-            <CInputGroup className='p-1'>
-              <CInputGroupText>From Date</CInputGroupText>
-              <CFormInput
-                type="date"
-                value={fromDate}
-                onChange={(e) => setFromDate(e.target.value)}
-              />
-              </CInputGroup>
-              
-              <CInputGroup className='p-1'>
-              <CInputGroupText>To Date</CInputGroupText>
-              <CFormInput
-                type="date"
-                value={toDate}
-                onChange={(e) => setToDate(e.target.value)}
-              />
-              </CInputGroup>
-
-              <CInputGroup className='p-1'>
-              <CInputGroupText>Police Station Name</CInputGroupText>
-              <CFormSelect value={dropdownValue} onChange={(e) => setDropdownValue(e.target.value)}>
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
-              </CFormSelect>
-              </CInputGroup>
-
-              <CInputGroup className='p-1'>
-              <CInputGroupText>Police Name</CInputGroupText>
-              <CFormInput
-                placeholder="Enter text..."
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-              />
-              </CInputGroup>
-
-              <CInputGroup className='p-1'>
-              <CInputGroupText>Police Designation</CInputGroupText>
-              <CFormSelect value={dropdownValue} onChange={(e) => setDropdownValue(e.target.value)}>
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
-              </CFormSelect>
-            </CInputGroup>
-          </CCardHeader>
-
           <CCardBody>
             <CustomStyles1
               rows={rows}

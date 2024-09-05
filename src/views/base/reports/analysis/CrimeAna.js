@@ -428,43 +428,45 @@ const Validation = () => {
             </div>
           </CCardHeader>
 
-          <CCardHeader className="d-flex justify-content-between align-items-center">
-            <CInputGroup>
+          <CCardHeader className="d-flex p-2">
+            <CInputGroup className='p-1'>
               <CInputGroupText>From Date</CInputGroupText>
               <CFormInput
                 type="date"
                 value={fromDate}
                 onChange={(e) => setFromDate(e.target.value)}
               />
+            </CInputGroup>
 
+            <CInputGroup className='p-1'>
               <CInputGroupText>To Date</CInputGroupText>
               <CFormInput
                 type="date"
                 value={toDate}
                 onChange={(e) => setToDate(e.target.value)}
               />
+            </CInputGroup>
 
+            <CInputGroup className='p-1'>
               <CInputGroupText>Police Station Name</CInputGroupText>
               <CFormSelect value={dropdownValue} onChange={(e) => setDropdownValue(e.target.value)}>
                 <option value="option1">Option 1</option>
                 <option value="option2">Option 2</option>
                 <option value="option3">Option 3</option>
               </CFormSelect>
-
-              {/* <CInputGroupText>Criminal Name</CInputGroupText> */}
-              <CFormInput
-                placeholder="Criminal Name"
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-              />
-
-              {/* <CInputGroupText>Police Designation</CInputGroupText>
-              <CFormSelect value={dropdownValue} onChange={(e) => setDropdownValue(e.target.value)}>
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
-              </CFormSelect> */}
             </CInputGroup>
+
+            <CInputGroup className='p-1'>
+              <CInputGroupText>
+                <CFormSelect value={dropdownValue} onChange={(e) => setDropdownValue(e.target.value)}>
+                  <option value="Criminal">Criminal Name</option>
+                  <option value="option1">Option1</option>
+                  <option value="option2">Option 2</option>
+                  <option value="option3">Option 3</option>
+                </CFormSelect>
+              </CInputGroupText>
+            </CInputGroup>
+
           </CCardHeader>
 
           <CCardBody>

@@ -48,11 +48,12 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
 
   // Filter rows based on search query
   const filteredRows = rows.filter(row =>
-    row.stationName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    row.policeName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    row.incidentName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    row.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    row.location.toLowerCase().includes(searchQuery.toLowerCase()),
+    //   row.state.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    //  row.district.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    //  row.city.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    //  row.sdpoName.toLowerCase().includes(searchQuery.toLowerCase()),
+    row.Crime_Name.toLowerCase().includes(searchQuery.toLowerCase()),
+
   )
 
   // Paginate rows
@@ -67,91 +68,74 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
           <CTable bordered>
             <CTableHead>
               <CTableRow>
-                <CTableHeaderCell>Sr. No</CTableHeaderCell>
-                <CTableHeaderCell>Station Name</CTableHeaderCell>
-                <CTableHeaderCell>Police Name</CTableHeaderCell>
-                <CTableHeaderCell>Incident Name</CTableHeaderCell>
-                <CTableHeaderCell>Description</CTableHeaderCell>
-                <CTableHeaderCell>Date</CTableHeaderCell>
-                <CTableHeaderCell>Time</CTableHeaderCell>
-                <CTableHeaderCell>Location</CTableHeaderCell>
-                <CTableHeaderCell>View</CTableHeaderCell>
+                <CTableHeaderCell>Sr.No</CTableHeaderCell>
+                <CTableHeaderCell>Crime Name</CTableHeaderCell>
+                {/* <CTableHeaderCell>District</CTableHeaderCell> */}
+                {/* <CTableHeaderCell>City</CTableHeaderCell> */}
+                {/* <CTableHeaderCell>SDPO Name</CTableHeaderCell> */}
+                <CTableHeaderCell>Status</CTableHeaderCell>
+                <CTableHeaderCell>Action</CTableHeaderCell>
               </CTableRow>
             </CTableHead>
             <CTableBody>
               {paginatedRows.map((row) => (
                 <CTableRow key={row.id}>
                   <CTableDataCell>{row.id}</CTableDataCell>
+                  {/* <CTableDataCell>
+                    {row.isEditing ? (
+                      <CFormInput
+                        value={row.state}
+                        onChange={(e) => handleInputChange(e, row.id, 'state')}
+                      />
+                    ) : (
+                      row.state
+                    )}
+                  </CTableDataCell> */}
+                  {/* <CTableDataCell>
+                    {row.isEditing ? (
+                      <CFormInput
+                        value={row.district}
+                        onChange={(e) => handleInputChange(e, row.id, 'district')}
+                      />
+                    ) : (
+                      row.district
+                    )}
+                  </CTableDataCell> */}
+                  {/* <CTableDataCell>
+                    {row.isEditing ? (
+                      <CFormInput
+                        value={row.city}
+                        onChange={(e) => handleInputChange(e, row.id, 'city')}
+                      />
+                    ) : (
+                      row.city
+                    )}
+                  </CTableDataCell> */}
                   <CTableDataCell>
                     {row.isEditing ? (
                       <CFormInput
-                        value={row.stationName}
-                        onChange={(e) => handleInputChange(e, row.id, 'stationName')}
+                        value={row.CrimeName}
+                        onChange={(e) => handleInputChange(e, row.id, 'Crime_Name')}
                       />
                     ) : (
-                      row.stationName
+                      row.Crime_Name
                     )}
                   </CTableDataCell>
                   <CTableDataCell>
                     {row.isEditing ? (
-                      <CFormInput
-                        value={row.policeName}
-                        onChange={(e) => handleInputChange(e, row.id, 'policeName')}
-                      />
+                      <CFormSelect
+                        value={row.status}
+                        onChange={(e) => handleInputChange(e, row.id, 'status')}
+                      >
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
+                      </CFormSelect>
                     ) : (
-                      row.policeName
-                    )}
-                  </CTableDataCell>
-                  <CTableDataCell>
-                    {row.isEditing ? (
-                      <CFormInput
-                        value={row.incidentName}
-                        onChange={(e) => handleInputChange(e, row.id, 'incidentName')}
-                      />
-                    ) : (
-                      row.incidentName
-                    )}
-                  </CTableDataCell>
-                  <CTableDataCell>
-                    {row.isEditing ? (
-                      <CFormInput
-                        value={row.description}
-                        onChange={(e) => handleInputChange(e, row.id, 'description')}
-                      />
-                    ) : (
-                      row.description
-                    )}
-                  </CTableDataCell>
-                  <CTableDataCell>
-                    {row.isEditing ? (
-                      <CFormInput
-                        type="date"
-                        value={row.date}
-                        onChange={(e) => handleInputChange(e, row.id, 'date')}
-                      />
-                    ) : (
-                      row.date
-                    )}
-                  </CTableDataCell>
-                  <CTableDataCell>
-                    {row.isEditing ? (
-                      <CFormInput
-                        type="time"
-                        value={row.time}
-                        onChange={(e) => handleInputChange(e, row.id, 'time')}
-                      />
-                    ) : (
-                      row.time
-                    )}
-                  </CTableDataCell>
-                  <CTableDataCell>
-                    {row.isEditing ? (
-                      <CFormInput
-                        value={row.location}
-                        onChange={(e) => handleInputChange(e, row.id, 'location')}
-                      />
-                    ) : (
-                      row.location
+                      <span
+                        className={`badge bg-${row.status === 'Active' ? 'success' : 'danger'}`}
+                      >
+                        {row.status}
+                      </span>
                     )}
                   </CTableDataCell>
                   <CTableDataCell>
@@ -182,6 +166,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                         <CButton color="danger" size="sm" onClick={() => handleDeleteClick(row.id)}>
                           <CIcon icon={cilTrash} />
                         </CButton>
+
                       </>
                     )}
                   </CTableDataCell>
@@ -239,65 +224,75 @@ const Validation = () => {
   const [rows, setRows] = useState([
     {
       id: 1,
-      stationName: 'Station A',
-      policeName: 'Officer X',
-      incidentName: 'Incident 1',
-      description: 'Description 1',
-      date: '2024-01-01',
-      time: '12:00',
-      location: 'Location 1',
+      Crime_Name: 'THIFT',
+      status: 'Active',
       isEditing: false,
     },
     {
       id: 2,
-      stationName: 'Station B',
-      policeName: 'Officer Y',
-      incidentName: 'Incident 2',
-      description: 'Description 2',
-      date: '2024-01-02',
-      time: '13:00',
-      location: 'Location 2',
+      Crime_Name: 'MURDER',
+      status: 'Active',
       isEditing: false,
     },
-    // Add more rows as needed
     {
       id: 3,
-      stationName: 'Station C',
-      policeName: 'Officer Z',
-      incidentName: 'Incident 3',
-      description: 'Description 3',
-      date: '2024-01-03',
-      time: '14:00',
-      location: 'Location 3',
+      Crime_Name: 'THEFT',
+      status: 'Active',
       isEditing: false,
     },
     {
       id: 4,
-      stationName: 'Station D',
-      policeName: 'Officer A',
-      incidentName: 'Incident 4',
-      description: 'Description 4',
-      date: '2024-01-04',
-      time: '15:00',
-      location: 'Location 4',
+      Crime_Name: 'MAHITGAR',
+      status: 'Active',
+      isEditing: false,
+    },
+    {
+      id: 5,
+      Crime_Name: 'MOKA',
+      status: 'Active',
+      isEditing: false,
+    }, {
+      id: 6,
+      Crime_Name: 'SURVEILLANCE',
+      status: 'Active',
+      isEditing: false,
+    }, {
+      id: 7,
+      Crime_Name: 'GANG HISTORY SHEETER',
+      status: 'Active',
+      isEditing: false,
+    }, {
+      id: 8,
+      Crime_Name: 'HISTORY SHEETER',
+      status: 'Active',
+      isEditing: false,
+    }, {
+      id: 9,
+      Crime_Name: 'DACOITY',
+      status: 'Active',
+      isEditing: false,
+    }, {
+      id: 10,
+      Crime_Name: 'CHAIN SNATCHING',
+      status: 'Active',
+      isEditing: false,
+    }, {
+      id: 11,
+      Crime_Name: 'ROBBERY',
+      status: 'Active',
       isEditing: false,
     },
   ])
 
   const [searchQuery, setSearchQuery] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
-  const pageSize = 5
+  const pageSize = 11
 
   const handleAddRow = () => {
     const newRow = {
       id: rows.length + 1,
-      stationName: '',
-      policeName: '',
-      incidentName: '',
-      description: '',
-      date: '',
-      time: '',
-      location: '',
+      Crime_Name: '',
+      status: 'Active',
       isEditing: true,
     }
     setRows([...rows, newRow])
@@ -308,7 +303,7 @@ const Validation = () => {
       <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader className="d-flex justify-content-between align-items-center">
-            <strong>Incidence Spot</strong>
+            <strong>Manage Crime</strong>
             <div className="d-flex align-items-center">
               <CInputGroup>
                 <CInputGroupText>

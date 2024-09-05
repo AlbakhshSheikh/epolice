@@ -50,10 +50,11 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
     row.stationName.toLowerCase().includes(searchQuery.toLowerCase()) ||
     row.policeName.toLowerCase().includes(searchQuery.toLowerCase()) ||
     row.buckalNumber.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    row.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    row.scantime.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    row.scanlocation.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    row.selfie.toLowerCase().includes(searchQuery.toLowerCase()),
+    row.designation.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    row.image.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    row.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    row.mobile.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    row.gender.toLowerCase().includes(searchQuery.toLowerCase()),
   )
 
   // Paginate rows
@@ -71,12 +72,14 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                 <CTableHeaderCell>Police Station Name</CTableHeaderCell>
                 <CTableHeaderCell>Police Name</CTableHeaderCell>
                 <CTableHeaderCell>Buckal Number</CTableHeaderCell>
-                <CTableHeaderCell>Location</CTableHeaderCell>
-                <CTableHeaderCell>Scan Time</CTableHeaderCell>
-                <CTableHeaderCell>Scan Location</CTableHeaderCell>
-                <CTableHeaderCell>Selfie Pic</CTableHeaderCell>
-                {/* <CTableHeaderCell>Status</CTableHeaderCell>
-                <CTableHeaderCell>Action</CTableHeaderCell> */}
+                <CTableHeaderCell>Designation Type</CTableHeaderCell>
+                <CTableHeaderCell>Images</CTableHeaderCell>
+                <CTableHeaderCell>Email</CTableHeaderCell>
+                <CTableHeaderCell>Mobile</CTableHeaderCell>
+                <CTableHeaderCell>Gender</CTableHeaderCell>
+                <CTableHeaderCell>Approved</CTableHeaderCell>
+                <CTableHeaderCell>Status</CTableHeaderCell>
+                <CTableHeaderCell>Action</CTableHeaderCell>
               </CTableRow>
             </CTableHead>
             <CTableBody>
@@ -116,45 +119,23 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                   <CTableDataCell>
                     {row.isEditing ? (
                       <CFormInput
-                        value={row.location}
-                        onChange={(e) => handleInputChange(e, row.id, 'location')}
+                        value={row.designation}
+                        onChange={(e) => handleInputChange(e, row.id, 'designation')}
                       />
                     ) : (
-                      row.location
+                      row.designation
                     )}
                   </CTableDataCell>
 
                   <CTableDataCell>
                     {row.isEditing ? (
                       <CFormInput
-                        value={row.scantime}
-                        onChange={(e) => handleInputChange(e, row.id, 'scantime')}
-                      />
-                    ) : (
-                      row.scantime
-                    )}
-                  </CTableDataCell>
-
-                  <CTableDataCell>
-                    {row.isEditing ? (
-                      <CFormInput
-                        value={row.scanlocation}
-                        onChange={(e) => handleInputChange(e, row.id, 'scanlocation')}
-                      />
-                    ) : (
-                      row.scanlocation
-                    )}
-                  </CTableDataCell>
-
-                  <CTableDataCell>
-                    {row.isEditing ? (
-                      <CFormInput
-                        value={row.selfie}
-                        onChange={(e) => handleInputChange(e, row.id, 'selfie')}
+                        value={row.image}
+                        onChange={(e) => handleInputChange(e, row.id, 'image')}
                       />
                     ) : (
                       <>
-                        {row.selfie && (
+                        {row.image && (
                           <img
                             src='https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg?t=st=1725271852~exp=1725275452~hmac=c6cff51c8b70509d2d25131b776d91adb73ef04584c11d70e6446fab636de852&w=826'
                             // src={row.selfie}
@@ -166,7 +147,59 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                     )}
                   </CTableDataCell>
 
-                  {/* <CTableDataCell>
+                  <CTableDataCell>
+                    {row.isEditing ? (
+                      <CFormInput
+                        value={row.email}
+                        onChange={(e) => handleInputChange(e, row.id, 'email')}
+                      />
+                    ) : (
+                      row.email
+                    )}
+                  </CTableDataCell>
+
+                  <CTableDataCell>
+                    {row.isEditing ? (
+                      <CFormInput
+                        value={row.mobile}
+                        onChange={(e) => handleInputChange(e, row.id, 'mobile')}
+                      />
+                    ) : (
+                      row.mobile
+                    )}
+                  </CTableDataCell>
+
+                  <CTableDataCell>
+                    {row.isEditing ? (
+                      <CFormInput
+                        value={row.gender}
+                        onChange={(e) => handleInputChange(e, row.id, 'gender')}
+                      />
+                    ) : (
+                      row.gender
+                    )}
+                  </CTableDataCell>
+
+
+                  <CTableDataCell>
+                    {row.isEditing ? (
+                      <CFormSelect
+                        value={row.approved}
+                        onChange={(e) => handleInputChange(e, row.id, 'approved')}
+                      >
+                        <option value="Approved">Approved</option>
+                        <option value="Notapproved">Not Approved</option>
+                      </CFormSelect>
+                    ) : (
+                      <span
+                        className={`badge bg-${row.approved === 'Approved' ? 'success' : 'danger'}`}
+                      >
+                        {row.approved}
+                      </span>
+                    )}
+                  </CTableDataCell>
+
+                  <CTableDataCell>
                     {row.isEditing ? (
                       <CFormSelect
                         value={row.status}
@@ -182,8 +215,10 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                         {row.status}
                       </span>
                     )}
-                  </CTableDataCell> */}
-                  {/* <CTableDataCell>
+                  </CTableDataCell>
+
+
+                  <CTableDataCell>
                     {row.isEditing ? (
                       <>
                         <CButton color="success" size="sm" onClick={() => handleSaveClick(row.id)}>
@@ -213,7 +248,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                         </CButton>
                       </>
                     )}
-                  </CTableDataCell> */}
+                  </CTableDataCell>
                 </CTableRow>
               ))}
             </CTableBody>
@@ -269,49 +304,57 @@ const Validation = () => {
       id: 1,
       stationName: 'Maharashtra',
       policeName: 'Akola',
-      buckalNumber: 'Akola',
-      location: 'DYSP BALLAPUR',
-      scantime: 'DYSP BALLAPUR',
-      scanlocation: 'DYSP BALLAPUR',
-      selfie: 'Images'
-      // status: 'Active',
-      // isEditing: false,
+      buckalNumber: '123213',
+      designation: 'Police',
+      image: 'Images',
+      email: 'DYSPBALLAPUR@gmail.com',
+      mobile: '9876543210',
+      gender: 'Male',
+      approved: 'Approved',
+      status: 'Active',
+      isEditing: false,
     },
     {
       id: 2,
       stationName: 'Maharashtra',
       policeName: 'Akola',
-      buckalNumber: 'Akola',
-      location: 'DYSP BALLAPUR',
-      scantime: 'DYSP BALLAPUR',
-      scanlocation: 'DYSP BALLAPUR',
-      selfie: 'Images'
-      // status: 'Active',
-      // isEditing: false,
+      buckalNumber: '123213',
+      designation: 'Police',
+      image: 'Images',
+      email: 'DYSPBALLAPUR@gmail.com',
+      mobile: '9876543210',
+      gender: 'Male',
+      approved: 'Approved',
+      status: 'Active',
+      isEditing: false,
     },
     {
       id: 3,
       stationName: 'Maharashtra',
       policeName: 'Akola',
-      buckalNumber: 'Akola',
-      location: 'DYSP BALLAPUR',
-      scantime: 'DYSP BALLAPUR',
-      scanlocation: 'DYSP BALLAPUR',
-      selfie: 'Images'
-      // status: 'Active',
-      // isEditing: false,
+      buckalNumber: '123213',
+      designation: 'Police',
+      image: 'Images',
+      email: 'DYSPBALLAPUR@gmail.com',
+      mobile: '9876543210',
+      gender: 'Male',
+      approved: 'Approved',
+      status: 'Active',
+      isEditing: false,
     },
     {
       id: 4,
       stationName: 'Maharashtra',
       policeName: 'Akola',
-      buckalNumber: 'Akola',
-      location: 'DYSP BALLAPUR',
-      scantime: 'DYSP BALLAPUR',
-      scanlocation: 'DYSP BALLAPUR',
-      selfie: 'Images'
-      // status: 'Active',
-      // isEditing: false,
+      buckalNumber: '123213',
+      designation: 'Police',
+      image: 'Images',
+      email: 'DYSPBALLAPUR@gmail.com',
+      mobile: '9876543210',
+      gender: 'Male',
+      approved: 'Notapproved',
+      status: 'Active',
+      isEditing: false,
     },
   ])
 
@@ -329,12 +372,14 @@ const Validation = () => {
       stationName: '',
       policeName: '',
       buckalNumber: '',
-      location: '',
-      scantime: '',
-      scanlocation: '',
-      selfie: ''
-      // status: 'Active',
-      // isEditing: false,
+      designation: '',
+      image: '',
+      email: '',
+      mobile: '',
+      gender: '',
+      approved: 'Approved',
+      status: 'Active',
+      isEditing: false,
     }
     setRows([...rows, newRow])
   }
@@ -344,7 +389,7 @@ const Validation = () => {
       <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader className="d-flex justify-content-between align-items-center">
-            <strong>Manage Selfie Report</strong>
+            <strong>Manage Polices</strong>
             <div className="d-flex align-items-center">
               <CInputGroup>
                 <CInputGroupText>
@@ -356,59 +401,14 @@ const Validation = () => {
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
               </CInputGroup>
+              <CButton color="success" className="ms-2" onClick={handleAddRow}>
+                Upload
+              </CButton>
               <CButton color="primary" className="ms-2" onClick={handleAddRow}>
-                Export
+                Add
               </CButton>
             </div>
           </CCardHeader>
-
-          <CCardHeader className="d-flex p-2">
-            <CInputGroup className='p-1'>
-              <CInputGroupText>From Date</CInputGroupText>
-              <CFormInput
-                type="date"
-                value={fromDate}
-                onChange={(e) => setFromDate(e.target.value)}
-              />
-              </CInputGroup>
-              
-              <CInputGroup className='p-1'>
-              <CInputGroupText>To Date</CInputGroupText>
-              <CFormInput
-                type="date"
-                value={toDate}
-                onChange={(e) => setToDate(e.target.value)}
-              />
-              </CInputGroup>
-
-              <CInputGroup className='p-1'>
-              <CInputGroupText>Police Station Name</CInputGroupText>
-              <CFormSelect value={dropdownValue} onChange={(e) => setDropdownValue(e.target.value)}>
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
-              </CFormSelect>
-              </CInputGroup>
-
-              <CInputGroup className='p-1'>
-              <CInputGroupText>Police Name</CInputGroupText>
-              <CFormInput
-                placeholder="Enter text..."
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-              />
-              </CInputGroup>
-
-              <CInputGroup className='p-1'>
-              <CInputGroupText>Police Designation</CInputGroupText>
-              <CFormSelect value={dropdownValue} onChange={(e) => setDropdownValue(e.target.value)}>
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
-              </CFormSelect>
-            </CInputGroup>
-          </CCardHeader>
-
           <CCardBody>
             <CustomStyles1
               rows={rows}

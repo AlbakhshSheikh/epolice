@@ -1,18 +1,48 @@
+/* eslint-disable prettier/prettier */
 import { element } from 'prop-types'
 import React from 'react'
 
-
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
-const Colors = React.lazy(() => import('./views/theme/colors/Colors'))
-const Typography = React.lazy(() => import('./views/theme/typography/Typography'))
+const Check = React.lazy(() => import('./views/managemasters/checkpost/Check'))
+const Sdpo = React.lazy(() => import('./views/managemasters/managesdpo/Sdpo'))
+const Mcrime = React.lazy(() => import('./views/managemasters/managecrime/Mcrime'))
+
+// PoliceMasters
+const Station = React.lazy(() => import('./views/policemasters/policestation/Station'))
+const Designation = React.lazy(() => import('./views/policemasters/policedesignation/Designation'))
+const Eyes = React.lazy(() => import('./views/policemasters/policeeyes/Eye'))
+const Off = React.lazy(() => import('./views/policemasters/eoffice/Off'))
+const Sens = React.lazy(() => import('./views/policemasters/senstivearea/Sens'))
+const Vehicle = React.lazy(() => import('./views/policemasters/vehicles/Vehicle'))
+
+// Tasks
+const Stationmanages = React.lazy(() => import('./views/tasks/managestation/Stationmanages'))
+const Taskmanages = React.lazy(() => import('./views/tasks/managepolice/Taskmanages'))
+const Managepolice = React.lazy(() => import('./views/tasks/policetask/Managepolice'))
 
 //Incedence Spot
 const Spot = React.lazy(() => import('./views/base/incedencespot/Spot'))
-const User = React.lazy(() => import('./views/base/policeusers/User'))
-const Cri = React.lazy(() => import('./views/base/criminal/Cri'))
-const Patrol = React.lazy(() => import('./views/base/patrolling/Patrol'))
-const Policesum = React.lazy(() => import('./views/base/newpolice/Policesum'))
-const Failedqr = React.lazy(() => import('./views/base/failedqr/Failedqr'))
+//Manage Police User
+const User = React.lazy(() => import('./views/policeusers/User'))
+const Cri = React.lazy(() => import('./views/criminal/Cri'))
+const Patrol = React.lazy(() => import('./views/patrolling/Patrol'))
+
+// Reports
+const Pics = React.lazy(() => import('./views/reports/selfie/Pics'))
+const Assign = React.lazy(() => import('./views/reports/task/Assign'))
+const Pol = React.lazy(() => import('./views/reports/police/Pol'))
+const Policenight = React.lazy(() => import('./views/reports/night/Policenight'))
+const CrimeAna = React.lazy(() => import("./views/reports/analysis/CrimeAna"))
+const Crime = React.lazy(() => import('./views/reports/verification/Crime'))
+const Anlinc = React.lazy(() => import('./views/reports/incidence/Anlinc'))
+
+const Policesum = React.lazy(() => import('./views/newpolice/Policesum'))
+const Failedqr = React.lazy(() => import('./views/failedqr/Failedqr'))
+
+const Colors = React.lazy(() => import('./views/theme/colors/Colors'))
+const Typography = React.lazy(() => import('./views/theme/typography/Typography'))
+
+
 
 // Base
 const Accordion = React.lazy(() => import('./views/base/accordion/Accordion'))
@@ -33,27 +63,6 @@ const Tables = React.lazy(() => import('./views/base/tables/Tables'))
 const Mars = React.lazy(() => import('./views/base/manges/Mars'))
 const Tooltips = React.lazy(() => import('./views/base/tooltips/Tooltips'))
 
-// PoliceMasters
-const Station = React.lazy(() => import('./views/base/policemasters/policestation/Station'))
-const Designation = React.lazy(() => import('./views/base/policemasters/policedesignation/Designation'))
-const Eyes = React.lazy(() => import('./views/base/policemasters/policeeyes/Eye'))
-const Off = React.lazy(() => import('./views/base/policemasters/eoffice/Off'))
-const Sens = React.lazy(() => import('./views/base/policemasters/senstivearea/Sens'))
-const Vehicle = React.lazy(() => import('./views/base/policemasters/vehicles/Vehicle'))
-
-// Tasks
-const Stationmanages = React.lazy(() => import('./views/base/tasks/managestation/Stationmanages'))
-const Taskmanages = React.lazy(() => import('./views/base/tasks/managepolice/Taskmanages'))
-const Managepolice = React.lazy(() => import('./views/base/tasks/policetask/Managepolice'))
-
-// Reports
-const CrimeAna = React.lazy(() => import("./views/base/reports/analysis/CrimeAna"))
-const Anlinc = React.lazy(() => import('./views/base/reports/incidence/Anlinc'))
-const Policenight = React.lazy(() => import('./views/base/reports/night/Policenight'))
-const Pol = React.lazy(() => import('./views/base/reports/police/Pol'))
-const Pics = React.lazy(() => import('./views/base/reports/selfie/Pics'))
-const Assign = React.lazy(() => import('./views/base/reports/task/Assign'))
-const Crime = React.lazy(() => import('./views/base/reports/verification/Crime'))
 
 // Buttons
 const Buttons = React.lazy(() => import('./views/buttons/buttons/Buttons'))
@@ -88,6 +97,41 @@ const Widgets = React.lazy(() => import('./views/widgets/Widgets'))
 const routes = [
   { path: '/', exact: true, name: 'Home' },
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
+  { path: '/managemasters/checkpost/Check', name: 'CheckPost', element: Check },
+  { path: '/managemasters/managesdpo/Sdpo', name: 'Manage SDPO', element: Sdpo },
+  { path: '/managemasters/managecrime/Mcrime', name: 'Manage Crime', element: Mcrime },
+
+  // Policemaster.
+  { path: '/policemasters/policestation', name: 'Manage Police Station', element: Station },
+  { path: '/policemasters/policedesignation', name: 'Police Designation', element: Designation },
+  { path: '/policemasters/policeeyes', name: 'Manage Police Eyes', element: Eyes },
+  { path: '/policemasters/vehicles', name: 'Vehicles', element: Vehicle },
+  { path: '/policemasters/senstivearea', name: 'Senstive Areas', element: Sens },
+  { path: '/policemasters/eoffice', name: 'E-Office', element: Off },
+
+  // Managestation
+  { path: '/tasks/managestation', name: 'Manage Police Tasks', element: Stationmanages },
+  { path: '/tasks/managepolice', name: 'Manage Assigned Station Task', element: Taskmanages },
+  { path: '/tasks/policetask', name: 'Manage Police Task', element: Managepolice },
+  { path: '/policeusers', name: 'Manage Polices ', element: User },
+
+  { path: '/incedencespot', name: 'Incidence Spot', element: Spot },
+  { path: '/criminal', name: 'Manage Criminals', element: Cri },
+  { path: '/patrolling', name: 'Patrol', element: Patrol },
+
+  //Reports 
+  { path: '/reports/selfie', name: 'Selfie Report', element: Pics },
+  { path: '/reports/task', name: 'Task Report', element: Assign },
+  { path: '/reports/police', name: 'Manage Police Summary Report', element: Pol },
+  { path: '/reports/night', name: 'Manage Night Patrolling Report', element: Policenight },
+  { path: '/reports/analysis', name: 'Criminal Analysis', element: CrimeAna },
+  { path: '/reports/verification', name: 'Criminal Verification', element: Crime },
+  { path: '/reports/incidence', name: 'Incidence Analysis', element: Anlinc },
+
+  
+  { path: '/newpolice', name: 'Mapping of Police Stations', element: Policesum },
+  { path: '/failedqr', name: 'Failed QR Report', element: Failedqr },
+
   { path: '/theme', name: 'Theme', element: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', element: Colors },
   { path: '/theme/typography', name: 'Typography', element: Typography },
@@ -96,12 +140,16 @@ const routes = [
   { path: '/base/breadcrumbs', name: 'Breadcrumbs', element: Breadcrumbs },
   { path: '/base/cards', name: 'Cards', element: Cards },
   { path: '/base/carousels', name: 'Carousel', element: Carousels },
-  { path: '/base/incedencespot', name: 'Spot', element: Spot },
-  { path: '/base/criminal', name: 'Cri', element: Cri },
-  { path: '/base/patrolling', name: 'Patrol', element: Patrol },
-  { path: '/base/policeusers', name: 'User', element: User },
-  { path: '/base/newpolice', name: 'Policesum', element: Policesum },
-  { path: '/base/failedqr', name: 'Failedqr', element: Failedqr },
+
+  
+
+ 
+ 
+  
+
+
+
+ 
 
   { path: '/base/collapses', name: 'Collapse', element: Collapses },
   { path: '/base/list-groups', name: 'List Groups', element: ListGroups },
