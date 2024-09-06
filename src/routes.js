@@ -36,6 +36,9 @@ const CrimeAna = React.lazy(() => import("./views/reports/analysis/CrimeAna"))
 const Crime = React.lazy(() => import('./views/reports/verification/Crime'))
 const Anlinc = React.lazy(() => import('./views/reports/incidence/Anlinc'))
 
+const Stationcategory = React.lazy(() => import('./views/policestationscategory/Stationcategory'))
+const Policemaster = React.lazy(() => import('./views/stationsmaster/Policemaster'))
+const Mapping = React.lazy(() => import('./views/mappingofpolicestations/Mapping'))
 const Policesum = React.lazy(() => import('./views/newpolice/Policesum'))
 const Failedqr = React.lazy(() => import('./views/failedqr/Failedqr'))
 
@@ -128,7 +131,9 @@ const routes = [
   { path: '/reports/verification', name: 'Criminal Verification', element: Crime },
   { path: '/reports/incidence', name: 'Incidence Analysis', element: Anlinc },
 
-  
+  { path: '/policestationscategory', name: 'Police Station Category', element: Stationcategory },
+  { path: '/stationsmaster', name: 'Master Police Station', element: Policemaster },
+  { path: '/mappingofpolicestations', name: 'Mapping of Police Station', element: Mapping },
   { path: '/newpolice', name: 'Mapping of Police Stations', element: Policesum },
   { path: '/failedqr', name: 'Failed QR Report', element: Failedqr },
 
@@ -141,15 +146,15 @@ const routes = [
   { path: '/base/cards', name: 'Cards', element: Cards },
   { path: '/base/carousels', name: 'Carousel', element: Carousels },
 
-  
-
- 
- 
-  
 
 
 
- 
+
+
+
+
+
+
 
   { path: '/base/collapses', name: 'Collapse', element: Collapses },
   { path: '/base/list-groups', name: 'List Groups', element: ListGroups },
