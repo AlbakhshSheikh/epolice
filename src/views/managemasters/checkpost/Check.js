@@ -7,307 +7,190 @@ import {
   CCardHeader,
   CCol,
   CForm,
+  CFormCheck,
   CFormInput,
+  CFormFeedback,
+  CFormLabel,
   CFormSelect,
+  CInputGroup,
+  CInputGroupText,
+  CRow,
   CTable,
   CTableBody,
   CTableDataCell,
   CTableHead,
   CTableHeaderCell,
   CTableRow,
-  CRow,
-  CInputGroup,
-  CInputGroupText,
-  CDropdown,
-  CDropdownToggle,
-  CDropdownMenu,
-  CDropdownItem,
 } from '@coreui/react'
-import CIcon from '@coreui/icons-react'
-import { cilSearch, cilSettings, cilPencil, cilTrash } from '@coreui/icons'
 
-const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setCurrentPage }) => {
-  const handleEditClick = (id) => {
-    setRows((rows) =>
-      rows.map((row) => (row.id === id ? { ...row, isEditing: !row.isEditing } : row)),
-    )
+const CustomStyles = () => {
+  const [validated, setValidated] = useState(false)
+
+  const handleSubmit = (event) => {
+    const form = event.currentTarget
+    if (form.checkValidity() === false) {
+      event.preventDefault()
+      event.stopPropagation()
+    }
+    setValidated(true)
   }
-
-  const handleSaveClick = (id) => {
-    setRows((rows) => rows.map((row) => (row.id === id ? { ...row, isEditing: false } : row)))
-  }
-
-  const handleInputChange = (e, id, field) => {
-    const value = e.target.value
-    setRows((rows) => rows.map((row) => (row.id === id ? { ...row, [field]: value } : row)))
-  }
-
-  const handleDeleteClick = (id) => {
-    setRows((rows) => rows.filter((row) => row.id !== id))
-  }
-
-  // Filter rows based on search query
-  const filteredRows = rows.filter(row =>
-    row.state.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    row.district.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    row.city.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    row.sdpoName.toLowerCase().includes(searchQuery.toLowerCase()),
-  )
-
-  // Paginate rows
-  const totalPages = Math.ceil(filteredRows.length / pageSize)
-  const paginatedRows = filteredRows.slice((currentPage - 1) * pageSize, currentPage * pageSize)
 
   return (
-    <>
-      <CForm className="row g-3 needs-validation" noValidate>
-        {/* Table */}
-        <CCol xs={12} className="mt-4">
-          <CTable bordered>
-            <CTableHead>
-              <CTableRow>
-                <CTableHeaderCell>Sr.No</CTableHeaderCell>
-                <CTableHeaderCell>State</CTableHeaderCell>
-                <CTableHeaderCell>District</CTableHeaderCell>
-                <CTableHeaderCell>City</CTableHeaderCell>
-                <CTableHeaderCell>SDPO Name</CTableHeaderCell>
-                <CTableHeaderCell>Status</CTableHeaderCell>
-                <CTableHeaderCell>Action</CTableHeaderCell>
-              </CTableRow>
-            </CTableHead>
-            <CTableBody>
-              {paginatedRows.map((row) => (
-                <CTableRow key={row.id}>
-                  <CTableDataCell>{row.id}</CTableDataCell>
-                  <CTableDataCell>
-                    {row.isEditing ? (
-                      <CFormInput
-                        value={row.state}
-                        onChange={(e) => handleInputChange(e, row.id, 'state')}
-                      />
-                    ) : (
-                      row.state
-                    )}
-                  </CTableDataCell>
-                  <CTableDataCell>
-                    {row.isEditing ? (
-                      <CFormInput
-                        value={row.district}
-                        onChange={(e) => handleInputChange(e, row.id, 'district')}
-                      />
-                    ) : (
-                      row.district
-                    )}
-                  </CTableDataCell>
-                  <CTableDataCell>
-                    {row.isEditing ? (
-                      <CFormInput
-                        value={row.city}
-                        onChange={(e) => handleInputChange(e, row.id, 'city')}
-                      />
-                    ) : (
-                      row.city
-                    )}
-                  </CTableDataCell>
-                  <CTableDataCell>
-                    {row.isEditing ? (
-                      <CFormInput
-                        value={row.sdpoName}
-                        onChange={(e) => handleInputChange(e, row.id, 'sdpoName')}
-                      />
-                    ) : (
-                      row.sdpoName
-                    )}
-                  </CTableDataCell>
-                  <CTableDataCell>
-                    {row.isEditing ? (
-                      <CFormSelect
-                        value={row.status}
-                        onChange={(e) => handleInputChange(e, row.id, 'status')}
-                      >
-                        <option value="Active">Active</option>
-                        <option value="Inactive">Inactive</option>
-                      </CFormSelect>
-                    ) : (
-                      <span
-                        className={`badge bg-${row.status === 'Active' ? 'success' : 'danger'}`}
-                      >
-                        {row.status}
-                      </span>
-                    )}
-                  </CTableDataCell>
-                  <CTableDataCell>
-                    {row.isEditing ? (
-                      <>
-                        <CButton color="success" size="sm" onClick={() => handleSaveClick(row.id)}>
-                          Save
-                        </CButton>
-                        <CButton
-                          color="danger"
-                          size="sm"
-                          className="ms-2"
-                          onClick={() => handleDeleteClick(row.id)}
-                        >
-                          Delete
-                        </CButton>
-                      </>
-                    ) : (
-                      <>
-                        <CButton
-                          color="info"
-                          size="sm"
-                          className="me-2"
-                          onClick={() => handleEditClick(row.id)}
-                        >
-                          <CIcon icon={cilPencil} />
-                        </CButton>
-                        <CButton color="danger" size="sm" onClick={() => handleDeleteClick(row.id)}>
-                          <CIcon icon={cilTrash} />
-                        </CButton>
-                      </>
-                    )}
-                  </CTableDataCell>
-                </CTableRow>
-              ))}
-            </CTableBody>
-          </CTable>
-        </CCol>
-      </CForm>
+    <CForm
+      className="row g-3 needs-validation"
+      noValidate
+      validated={validated}
+      onSubmit={handleSubmit}
+    >
+      <CCol md={4}>
+        <CFormLabel htmlFor="validationCustomCity2">Police Station :</CFormLabel>
+        <CFormSelect id="validationCustomCity2" required>
+          <option disabled>Choose...</option>
+          <option>--select--</option>
+        </CFormSelect>
+        <CFormFeedback invalid>Please provide a valid city.</CFormFeedback>
+      </CCol>
+      <CCol md={4}>
+        <CFormLabel htmlFor="validationCustomCity1">Checkpost Area:</CFormLabel>
+        <CFormInput type="text" id="validationCustomCity1" required />
+        <CFormFeedback invalid>Please provide a valid city.</CFormFeedback>
+      </CCol>
+      <CCol md={4}>
+        <CFormLabel htmlFor="validationCustomCity1">Assigned By:</CFormLabel>
+        <CFormInput type="text" id="validationCustomCity1" required />
+        <CFormFeedback invalid>Please provide a valid city.</CFormFeedback>
+      </CCol>
+      {/* <CCol md={4}>
+        <CFormLabel htmlFor="validationCustomEmail1">Email</CFormLabel>
+        <CFormInput type="email" id="validationCustomEmail1" required />
+        <CFormFeedback valid>Looks good!</CFormFeedback>
+        <CFormFeedback invalid>Please provide a valid email.</CFormFeedback>
+      </CCol>
+      <CCol md={4}>
+        <CFormLabel htmlFor="validationCustomEmail2">Email</CFormLabel>
+        <CFormInput type="email" id="validationCustomEmail2" required />
+        <CFormFeedback valid>Looks good!</CFormFeedback>
+        <CFormFeedback invalid>Please provide a valid email.</CFormFeedback>
+      </CCol>
+      <CCol md={4}>
+        <CFormLabel htmlFor="validationCustomUsername">Username</CFormLabel>
+        <CInputGroup className="has-validation">
+          <CInputGroupText id="inputGroupPrepend">@</CInputGroupText>
+          <CFormInput
+            type="text"
+            id="validationCustomUsername"
+            aria-describedby="inputGroupPrepend"
+            required
+          />
+          <CFormFeedback invalid>Please choose a username.</CFormFeedback>
+        </CInputGroup>
+      </CCol> */}
+      <CCol md={8}>
+        <CFormLabel htmlFor="validationCustomCity1">Purpose:</CFormLabel>
+        <CFormInput type="text" id="validationCustomCity1" required />
+        <CFormFeedback invalid>Please provide a valid city.</CFormFeedback>
+      </CCol>
+      <CCol md={4}>
+        <CFormLabel htmlFor="validationCustomDOB">Created on:</CFormLabel>
+        <CFormInput type="date" id="validationCustomDOB" required />
+        <CFormFeedback invalid>Please provide a valid date of birth.</CFormFeedback>
+      </CCol>
 
-      {/* Pagination Controls */}
-      <CRow className="mt-3">
-        <CCol className="d-flex justify-content-end">
-          <CButton
-            color="primary"
-            disabled={currentPage === 1}
-            onClick={() => setCurrentPage(currentPage - 1)}
-          >
-            Previous
+      {/* <CCol xs={12}>
+        <CFormCheck
+          type="checkbox"
+          id="invalidCheck"
+          label="Agree to terms and conditions"
+          required
+        />
+        <CFormFeedback invalid>You must agree before submitting.</CFormFeedback>
+      </CCol> */}
+      <CCol xs={12}>
+        <div className="d-flex justify-content-end">
+          <CButton color="primary" type="submit">
+            Submit form
           </CButton>
-          <CButton color="secondary" className="mx-2" disabled>
-            Page {currentPage} of {totalPages}
-          </CButton>
-          <CButton
-            color="primary"
-            disabled={currentPage === totalPages}
-            onClick={() => setCurrentPage(currentPage + 1)}
-          >
-            Next
-          </CButton>
-        </CCol>
-      </CRow>
-      {/* Settings Icon with Dropdown */}
-      <CDropdown className="position-fixed bottom-0 end-0 m-3">
-        <CDropdownToggle
-          color="secondary"
-          style={{ borderRadius: '50%', width: '50px', height: '50px' }}
-        >
-          <CIcon icon={cilSettings} className="text-white" />
-        </CDropdownToggle>
-        <CDropdownMenu>
-          <CDropdownItem>PDF</CDropdownItem>
-          <CDropdownItem>Copy</CDropdownItem>
-          <CDropdownItem>Excel</CDropdownItem>
-          <CDropdownItem>Print</CDropdownItem>
-          <CDropdownItem>Show 50 rows</CDropdownItem>
-          <CDropdownItem>Column visibility</CDropdownItem>
-        </CDropdownMenu>
-      </CDropdown>
-    </>
+        </div>
+      </CCol>
+    </CForm>
+  )
+}
+
+const CustomStyles1 = () => {
+  const [validated, setValidated] = useState(false)
+
+  const handleSubmit = (event) => {
+    const form = event.currentTarget
+    if (form.checkValidity() === false) {
+      event.preventDefault()
+      event.stopPropagation()
+    }
+    setValidated(true)
+  }
+
+  return (
+    <CForm
+      className="row g-3 needs-validation"
+      noValidate
+      validated={validated}
+      onSubmit={handleSubmit}
+    >
+      {/* Table */}
+      <CCol xs={12} className="mt-4">
+        <CTable bordered>
+          <CTableHead>
+            <CTableRow>
+              <CTableHeaderCell>Sr.</CTableHeaderCell>
+              <CTableHeaderCell>Police Station</CTableHeaderCell>
+              <CTableHeaderCell>Checkpost Area</CTableHeaderCell>
+              <CTableHeaderCell>Assigned By</CTableHeaderCell>
+              <CTableHeaderCell>Purpose</CTableHeaderCell>
+              <CTableHeaderCell>Created On</CTableHeaderCell>
+              <CTableHeaderCell>Actions</CTableHeaderCell>
+            </CTableRow>
+          </CTableHead>
+          <CTableBody>
+            <CTableRow>
+              <CTableDataCell>1</CTableDataCell>
+              <CTableDataCell>Data 1</CTableDataCell>
+              <CTableDataCell>Data 2</CTableDataCell>
+              <CTableDataCell>Data 3</CTableDataCell>
+              <CTableDataCell>Data 4</CTableDataCell>
+              <CTableDataCell>Data 5</CTableDataCell>
+              <CTableDataCell>Data 6</CTableDataCell>
+            </CTableRow>
+            {/* Additional rows can be added here */}
+          </CTableBody>
+        </CTable>
+      </CCol>
+    </CForm>
   )
 }
 
 const Validation = () => {
-  const [rows, setRows] = useState([
-    {
-      id: 1,
-      state: 'Maharashtra',
-      district: 'Akola',
-      city: 'Akola',
-      sdpoName: 'DYSP BALLAPUR',
-      status: 'Active',
-      isEditing: false,
-    },
-    {
-      id: 2,
-      state: 'Maharashtra',
-      district: 'Akola',
-      city: 'Akola',
-      sdpoName: 'DYSP AKOT',
-      status: 'Active',
-      isEditing: false,
-    },
-    {
-      id: 3,
-      state: 'Maharashtra',
-      district: 'Akola',
-      city: 'Akola',
-      sdpoName: 'DYSP MURTIJAPUR',
-      status: 'Active',
-      isEditing: false,
-    },
-    {
-      id: 4,
-      state: 'Maharashtra',
-      district: 'Akola',
-      city: 'Akola',
-      sdpoName: 'DYSP AKOLA',
-      status: 'Active',
-      isEditing: false,
-    },
-  ])
-
-  const [searchQuery, setSearchQuery] = useState('')
-  const [currentPage, setCurrentPage] = useState(1)
-  const pageSize = 5
-
-  const handleAddRow = () => {
-    const newRow = {
-      id: rows.length + 1,
-      state: '',
-      district: '',
-      city: '',
-      sdpoName: '',
-      status: 'Active',
-      isEditing: true,
-    }
-    setRows([...rows, newRow])
-  }
-
   return (
     <CRow>
       <CCol xs={12}>
         <CCard className="mb-4">
-          <CCardHeader className="d-flex justify-content-between align-items-center">
-            <strong>Manage SDPO</strong>
-            <div className="d-flex align-items-center">
-              <CInputGroup>
-                <CInputGroupText>
-                  <CIcon icon={cilSearch} />
-                </CInputGroupText>
-                <CFormInput
-                  placeholder="Search..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
-              </CInputGroup>
-              <CButton color="primary" className="ms-2" onClick={handleAddRow}>
-                Add
-              </CButton>
-            </div>
+          <CCardHeader>
+            <strong>Police Station Category:</strong>
           </CCardHeader>
           <CCardBody>
-            <CustomStyles1
-              rows={rows}
-              setRows={setRows}
-              searchQuery={searchQuery}
-              currentPage={currentPage}
-              pageSize={pageSize}
-              setCurrentPage={setCurrentPage}
-            />
+            <CustomStyles />
           </CCardBody>
         </CCard>
       </CCol>
+      <CCol xs={12}>
+        <CCard className="mb-4">
+          <CCardHeader>
+            <strong>All Master Police Stations List:</strong>
+          </CCardHeader>
+          <CCardBody>
+            <CustomStyles1 />
+          </CCardBody>
+        </CCard>
+      </CCol>
+      {/* Additional sections can be added here */}
     </CRow>
   )
 }
