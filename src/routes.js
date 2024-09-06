@@ -3,9 +3,15 @@ import { element } from 'prop-types'
 import React from 'react'
 
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
+
+// ManageMaster
 const Check = React.lazy(() => import('./views/managemasters/checkpost/Check'))
 const Sdpo = React.lazy(() => import('./views/managemasters/managesdpo/Sdpo'))
 const Mcrime = React.lazy(() => import('./views/managemasters/managecrime/Mcrime'))
+const State = React.lazy(() => import('./views/managemasters/managestates/State'))
+const District = React.lazy(() => import('./views/managemasters/managedistricts/District'))
+const Cities = React.lazy(() => import('./views/managemasters/managecities/Cities'))
+
 
 // PoliceMasters
 const Station = React.lazy(() => import('./views/policemasters/policestation/Station'))
@@ -22,6 +28,7 @@ const Managepolice = React.lazy(() => import('./views/tasks/policetask/Managepol
 
 //Incedence Spot
 const Spot = React.lazy(() => import('./views/base/incedencespot/Spot'))
+
 //Manage Police User
 const User = React.lazy(() => import('./views/policeusers/User'))
 const Cri = React.lazy(() => import('./views/criminal/Cri'))
@@ -54,7 +61,6 @@ const ListGroups = React.lazy(() => import('./views/base/list-groups/ListGroups'
 const Navs = React.lazy(() => import('./views/base/navs/Navs'))
 const Paginations = React.lazy(() => import('./views/base/paginations/Paginations'))
 const Placeholders = React.lazy(() => import('./views/base/placeholders/Placeholders'))
-
 const Popovers = React.lazy(() => import('./views/base/popovers/Popovers'))
 const Progress = React.lazy(() => import('./views/base/progress/Progress'))
 const Spinners = React.lazy(() => import('./views/base/spinners/Spinners'))
@@ -97,9 +103,15 @@ const Widgets = React.lazy(() => import('./views/widgets/Widgets'))
 const routes = [
   { path: '/dashboard', exact: true, name: 'Dashboard' },
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
+
+  // ManageMaster
   { path: '/managemasters/checkpost/Check', name: 'CheckPost', element: Check },
   { path: '/managemasters/managesdpo/Sdpo', name: 'Manage SDPO', element: Sdpo },
   { path: '/managemasters/managecrime/Mcrime', name: 'Manage Crime', element: Mcrime },
+  { path: '/managemasters/managestates/State', name: 'Manage State', element: State },
+  { path: '/managemasters/managedistricts/District', name: 'Manage Districts', element: District },
+  { path: '/managemasters/managecities/Cities', name: 'Manage Cities', element: Cities },
+  
 
   // Policemaster.
   { path: '/policemasters/policestation', name: 'Manage Police Station', element: Station },

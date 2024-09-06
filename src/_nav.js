@@ -39,17 +39,17 @@ const _nav = [
       {
         component: CNavItem,
         name: 'Manage States',
-        to: '/managemasters/managesdpo/States',
+        to: '/managemasters/managestates/State',
       },
       {
         component: CNavItem,
         name: 'Manage Districts',
-        to: '/managemasters/managesdpo/Districts',
+        to: '/managemasters/managedistricts/District',
       },
       {
         component: CNavItem,
         name: 'Manage Cities',
-        to: '/managemasters/managesdpo/Cities',
+        to: '/managemasters/managecities/Cities',
       },
       {
         component: CNavItem,
