@@ -67,7 +67,7 @@ const Login = () => {
                     <h2>Sign up</h2>
                     <br/>
                     <p>
-                      Create New User Login Profile Here!
+                      Create New User Login Profile Here.!
                     </p>
                     <Link to="/register">
                       <CButton color="primary" className="mt-4" active tabIndex={-1}>

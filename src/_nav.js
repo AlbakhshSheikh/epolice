@@ -174,7 +174,7 @@ const _nav = [
         name: 'Criminal Analysis',
         to: '/reports/analysis',
       },
-      { 
+      {
         component: CNavItem,
         name: 'Criminal Verification',
         to: '/reports/verification',

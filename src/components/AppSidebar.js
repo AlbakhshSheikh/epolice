@@ -1,5 +1,6 @@
-import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 import {
   CCloseButton,
@@ -10,21 +11,27 @@ import {
   CSidebarToggler,
   CButton,
   CHeaderToggler,
-  CTooltip,
-} from '@coreui/react'
-import CIcon from '@coreui/icons-react'
+  CTooltip
+} from '@coreui/react';
+import CIcon from '@coreui/icons-react';
+import { cilUser, cilMenu } from '@coreui/icons';
 
-import { AppSidebarNav } from './AppSidebarNav'
-import EpoliceLogo from 'src/assets/brand/Epolice.png'
-import { cilUser, cilMenu } from '@coreui/icons'
+
+import { AppSidebarNav } from './AppSidebarNav';
+import EpoliceLogo from 'src/assets/brand/Epolice.png';
 
 // sidebar nav config
-import navigation from '../_nav'
+import navigation from '../_nav';
 
 const AppSidebar = () => {
-  const dispatch = useDispatch()
-  const unfoldable = useSelector((state) => state.sidebarUnfoldable)
-  const sidebarShow = useSelector((state) => state.sidebarShow)
+  const dispatch = useDispatch();
+  const navigate = useNavigate(); // Initialize navigate
+  const unfoldable = useSelector((state) => state.sidebarUnfoldable);
+  const sidebarShow = useSelector((state) => state.sidebarShow);
+
+  const handleClick = () => {
+    navigate('/views/user/UserProfile'); // Navigate to UserProfile on click
+  };
 
   return (
     <CSidebar
@@ -34,7 +41,7 @@ const AppSidebar = () => {
       unfoldable={unfoldable}
       visible={sidebarShow}
       onVisibleChange={(visible) => {
-        dispatch({ type: 'set', sidebarShow: visible })
+        dispatch({ type: 'set', sidebarShow: visible });
       }}
     >
       <CSidebarHeader className="border-bottom d-flex justify-content-center">
@@ -48,7 +55,7 @@ const AppSidebar = () => {
             Admin
           </span>
         </div>
-        <CButton color="dark" className="w-100 text-start d-flex align-items-center">
+        <CButton color="dark" className="w-100 text-start d-flex align-items-center" onClick={handleClick}>
           <div
             style={{
               border: '2px solid white',
@@ -85,7 +92,7 @@ const AppSidebar = () => {
         </CHeaderToggler>
       </CSidebarFooter>
     </CSidebar>
-  )
-}
+  );
+};
 
-export default React.memo(AppSidebar)
+export default React.memo(AppSidebar);
