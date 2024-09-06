@@ -10,6 +10,7 @@ import {
   CSidebarToggler,
   CButton,
   CHeaderToggler,
+  CTooltip,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 
@@ -61,7 +62,9 @@ const AppSidebar = () => {
               marginRight: '10px',
             }}
           >
-            <CIcon icon={cilUser} />
+            <CTooltip content="Update Profile" placement="bottom">
+              <CIcon icon={cilUser} />
+            </CTooltip>
           </div>
           <div>
             <span className="fw-bold">SP AKOLA</span>
@@ -76,7 +79,9 @@ const AppSidebar = () => {
           onClick={() => dispatch({ type: 'set', sidebarShow: !sidebarShow })}
           style={{ marginTop: 'auto', marginInlineStart: 'auto' }}
         >
-          <CIcon icon={cilMenu} size="lg" />
+          <CTooltip content="Hide Menu" placement="bottom">
+            <CIcon icon={cilMenu} size="lg" />
+          </CTooltip>
         </CHeaderToggler>
       </CSidebarFooter>
     </CSidebar>

@@ -37,29 +37,6 @@ const _nav = [
   },
   {
     component: CNavGroup,
-    name: 'Manage Masters',
-    to: '/manage-masters',
-    icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
-    items: [
-      {
-        component: CNavItem,
-        name: 'Checkpost/Nakabandi',
-        to: '/managemasters/checkpost/Check',
-      },
-      {
-        component: CNavItem,
-        name: 'Manage SDPO',
-        to: '/managemasters/managesdpo/Sdpo',
-      },
-      {
-        component: CNavItem,
-        name: 'Manage Crime',
-        to: '/managemasters/managecrime/Mcrime',
-      },
-    ],
-  },
-  {
-    component: CNavGroup,
     name: 'Police Masters',
     to: '/policemasters',
     icon: <CIcon icon={cilCursor} customClassName="nav-icon" />,
@@ -93,6 +70,29 @@ const _nav = [
         component: CNavItem,
         name: 'E-Office',
         to: '/policemasters/eoffice',
+      },
+    ],
+  },
+  {
+    component: CNavGroup,
+    name: 'Manage Masters',
+    to: '/manage-masters',
+    icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
+    items: [
+      {
+        component: CNavItem,
+        name: 'Checkpost/Nakabandi',
+        to: '/managemasters/checkpost/Check',
+      },
+      {
+        component: CNavItem,
+        name: 'Manage SDPO',
+        to: '/managemasters/managesdpo/Sdpo',
+      },
+      {
+        component: CNavItem,
+        name: 'Manage Crime',
+        to: '/managemasters/managecrime/Mcrime',
       },
     ],
   },

@@ -95,7 +95,7 @@ const Toasts = React.lazy(() => import('./views/notifications/toasts/Toasts'))
 const Widgets = React.lazy(() => import('./views/widgets/Widgets'))
 
 const routes = [
-  { path: '/', exact: true, name: 'Home' },
+  { path: '/dashboard', exact: true, name: 'Dashboard' },
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
   { path: '/managemasters/checkpost/Check', name: 'CheckPost', element: Check },
   { path: '/managemasters/managesdpo/Sdpo', name: 'Manage SDPO', element: Sdpo },
