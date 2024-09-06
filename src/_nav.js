@@ -30,6 +30,45 @@ const _nav = [
     icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
   },
   {
+    component: CNavGroup,
+    name: 'Manage Masters',
+    to: '/manage-masters',
+    icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
+    items: [
+
+      {
+        component: CNavItem,
+        name: 'Manage States',
+        to: '/managemasters/managesdpo/States',
+      },
+      {
+        component: CNavItem,
+        name: 'Manage Districts',
+        to: '/managemasters/managesdpo/Districts',
+      },
+      {
+        component: CNavItem,
+        name: 'Manage Cities',
+        to: '/managemasters/managesdpo/Cities',
+      },
+      {
+        component: CNavItem,
+        name: 'Manage SDPO',
+        to: '/managemasters/managesdpo/Sdpo',
+      },
+      {
+        component: CNavItem,
+        name: 'Manage Crime',
+        to: '/managemasters/managecrime/Mcrime',
+      },
+      {
+        component: CNavItem,
+        name: 'Checkpost/Nakabandi',
+        to: '/managemasters/checkpost/Check',
+      },
+    ],
+  },
+  {
     component: CNavItem,
     name: 'Live Tracking',
     to: '/live-tracking',
@@ -73,29 +112,7 @@ const _nav = [
       },
     ],
   },
-  {
-    component: CNavGroup,
-    name: 'Manage Masters',
-    to: '/manage-masters',
-    icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
-    items: [
-      {
-        component: CNavItem,
-        name: 'Checkpost/Nakabandi',
-        to: '/managemasters/checkpost/Check',
-      },
-      {
-        component: CNavItem,
-        name: 'Manage SDPO',
-        to: '/managemasters/managesdpo/Sdpo',
-      },
-      {
-        component: CNavItem,
-        name: 'Manage Crime',
-        to: '/managemasters/managecrime/Mcrime',
-      },
-    ],
-  },
+
   {
     component: CNavGroup,
     name: 'Tasks',
@@ -185,6 +202,27 @@ const _nav = [
         to: '/reports/incidence',
       },
     ],
+  },
+  {
+    component: CNavItem,
+    name: 'Police Stations Category',
+    to: '/sationcategory',
+    icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
+    style: navItemStyle,
+  },
+  {
+    component: CNavItem,
+    name: 'Police Stations Master',
+    to: '/stationmaster',
+    icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
+    style: navItemStyle,
+  },
+  {
+    component: CNavItem,
+    name: 'Mapping of Police Stations',
+    to: '/mappingps',
+    icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
+    style: navItemStyle,
   },
   {
     component: CNavItem,
