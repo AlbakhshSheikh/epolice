@@ -22,8 +22,8 @@ import {
   CDropdownMenu,
   CDropdownItem,
 } from '@coreui/react'
-import CIcon from '@coreui/icons-react'
-import { cilSearch, cilSettings, cilPencil, cilTrash } from '@coreui/icons'
+import { CIcon } from '@coreui/icons-react'
+import { cilSearch, cilSettings } from '@coreui/icons'
 
 const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setCurrentPage }) => {
   const handleEditClick = (id) => {
@@ -48,9 +48,9 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
   // Filter rows based on search query
   const filteredRows = rows.filter(row =>
     row.policeName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    row.attendanceDate.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    row.inTime.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    row.outTime.toLowerCase().includes(searchQuery.toLowerCase()),
+    row.attendance.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    row.in.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    row.out.toLowerCase().includes(searchQuery.toLowerCase()),
   )
 
   // Paginate rows
@@ -60,7 +60,6 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
   return (
     <>
       <CForm className="row g-3 needs-validation" noValidate>
-        {/* Table */}
         <CCol xs={12} className="mt-4">
           <CTable bordered>
             <CTableHead>
@@ -70,8 +69,6 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                 <CTableHeaderCell>Attendance Date</CTableHeaderCell>
                 <CTableHeaderCell>In Time</CTableHeaderCell>
                 <CTableHeaderCell>Out Time</CTableHeaderCell>
-                <CTableHeaderCell>Status</CTableHeaderCell>
-                <CTableHeaderCell>Action</CTableHeaderCell>
               </CTableRow>
             </CTableHead>
             <CTableBody>
@@ -88,82 +85,37 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                       row.policeName
                     )}
                   </CTableDataCell>
+
                   <CTableDataCell>
                     {row.isEditing ? (
                       <CFormInput
-                        value={row.attendanceDate}
-                        onChange={(e) => handleInputChange(e, row.id, 'attendanceDate')}
+                        value={row.attendance}
+                        onChange={(e) => handleInputChange(e, row.id, 'attendance')}
                       />
                     ) : (
-                      row.attendanceDate
+                      row.attendance
                     )}
                   </CTableDataCell>
+
                   <CTableDataCell>
                     {row.isEditing ? (
                       <CFormInput
-                        value={row.inTime}
-                        onChange={(e) => handleInputChange(e, row.id, 'inTime')}
+                        value={row.in}
+                        onChange={(e) => handleInputChange(e, row.id, 'in')}
                       />
                     ) : (
-                      row.inTime
+                      row.in
                     )}
                   </CTableDataCell>
+
                   <CTableDataCell>
                     {row.isEditing ? (
                       <CFormInput
-                        value={row.outTime}
-                        onChange={(e) => handleInputChange(e, row.id, 'outTime')}
+                        value={row.out}
+                        onChange={(e) => handleInputChange(e, row.id, 'out')}
                       />
                     ) : (
-                      row.outTime
-                    )}
-                  </CTableDataCell>
-                  <CTableDataCell>
-                    {row.isEditing ? (
-                      <CFormSelect
-                        value={row.status}
-                        onChange={(e) => handleInputChange(e, row.id, 'status')}
-                      >
-                        <option value="Active">Active</option>
-                        <option value="Inactive">Inactive</option>
-                      </CFormSelect>
-                    ) : (
-                      <span
-                        className={`badge bg-${row.status === 'Active' ? 'success' : 'danger'}`}
-                      >
-                        {row.status}
-                      </span>
-                    )}
-                  </CTableDataCell>
-                  <CTableDataCell>
-                    {row.isEditing ? (
-                      <>
-                        <CButton color="success" size="sm" onClick={() => handleSaveClick(row.id)}>
-                          Save
-                        </CButton>
-                        <CButton
-                          color="danger"
-                          size="sm"
-                          className="ms-2"
-                          onClick={() => handleDeleteClick(row.id)}
-                        >
-                          Delete
-                        </CButton>
-                      </>
-                    ) : (
-                      <>
-                        <CButton
-                          color="info"
-                          size="sm"
-                          className="me-2"
-                          onClick={() => handleEditClick(row.id)}
-                        >
-                          <CIcon icon={cilPencil} />
-                        </CButton>
-                        <CButton color="danger" size="sm" onClick={() => handleDeleteClick(row.id)}>
-                          <CIcon icon={cilTrash} />
-                        </CButton>
-                      </>
+                      row.out
                     )}
                   </CTableDataCell>
                 </CTableRow>
@@ -173,7 +125,6 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
         </CCol>
       </CForm>
 
-      {/* Pagination Controls */}
       <CRow className="mt-3">
         <CCol className="d-flex justify-content-end">
           <CButton
@@ -195,7 +146,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
           </CButton>
         </CCol>
       </CRow>
-      {/* Settings Icon with Dropdown */}
+
       <CDropdown className="position-fixed bottom-0 end-0 m-3">
         <CDropdownToggle
           color="secondary"
@@ -220,38 +171,49 @@ const Validation = () => {
   const [rows, setRows] = useState([
     {
       id: 1,
-      policeName: 'John Doe',
-      attendanceDate: '2024-09-01',
-      inTime: '08:00',
-      outTime: '17:00',
-      status: 'Active',
-      isEditing: false,
+      policeName: 'Sachin yermekar',
+      attendance: '10-09-2024',
+      in: '12:38 PM',
+      out: '12:38 PM',
     },
     {
       id: 2,
-      policeName: 'Jane Smith',
-      attendanceDate: '2024-09-01',
-      inTime: '08:00',
-      outTime: '17:00',
-      status: 'Active',
-      isEditing: false,
+      policeName: 'Sachin yermekar',
+      attendance: '10-09-2024',
+      in: '12:38 PM',
+      out: '12:38 PM',
     },
-    // Add more rows as needed
+    {
+      id: 3,
+      policeName: 'Sachin yermekar',
+      attendance: '10-09-2024',
+      in: '12:38 PM',
+      out: '12:38 PM',
+    },
+    {
+      id: 4,
+      policeName: 'Sachin yermekar',
+      attendance: '10-09-2024',
+      in: '12:38 PM',
+      out: '12:38 PM',
+    },
   ])
 
   const [searchQuery, setSearchQuery] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
+  const [fromDate, setFromDate] = useState('')
+  const [toDate, setToDate] = useState('')
+  const [dropdownValue, setDropdownValue] = useState('')
+  const [inputValue, setInputValue] = useState('')
   const pageSize = 5
 
   const handleAddRow = () => {
     const newRow = {
       id: rows.length + 1,
       policeName: '',
-      attendanceDate: '',
-      inTime: '',
-      outTime: '',
-      status: 'Active',
-      isEditing: true,
+      attendance: '',
+      in: '',
+      out: '',
     }
     setRows([...rows, newRow])
   }
@@ -261,7 +223,7 @@ const Validation = () => {
       <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader className="d-flex justify-content-between align-items-center">
-            <strong>Manage Attendance</strong>
+            <strong>Patrolling Attendance</strong>
             <div className="d-flex align-items-center">
               <CInputGroup>
                 <CInputGroupText>
@@ -274,10 +236,58 @@ const Validation = () => {
                 />
               </CInputGroup>
               <CButton color="primary" className="ms-2" onClick={handleAddRow}>
-                Add
+                Export
               </CButton>
             </div>
           </CCardHeader>
+
+          <CCardHeader className="d-flex p-2">
+            <CInputGroup className='p-1'>
+              <CInputGroupText>From Date</CInputGroupText>
+              <CFormInput
+                type="date"
+                value={fromDate}
+                onChange={(e) => setFromDate(e.target.value)}
+              />
+            </CInputGroup>
+
+            <CInputGroup className='p-1'>
+              <CInputGroupText>To Date</CInputGroupText>
+              <CFormInput
+                type="date"
+                value={toDate}
+                onChange={(e) => setToDate(e.target.value)}
+              />
+            </CInputGroup>
+
+            <CInputGroup className='p-1'>
+              <CInputGroupText>Police Station Name</CInputGroupText>
+              <CFormSelect value={dropdownValue} onChange={(e) => setDropdownValue(e.target.value)}>
+                <option value="option1">Option 1</option>
+                <option value="option2">Option 2</option>
+                <option value="option3">Option 3</option>
+              </CFormSelect>
+            </CInputGroup>
+
+            <CInputGroup className='p-1'>
+              <CInputGroupText>Police Name</CInputGroupText>
+              <CFormInput
+                placeholder="Enter text..."
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+              />
+            </CInputGroup>
+
+            <CInputGroup className='p-1'>
+              <CInputGroupText>Police Designation</CInputGroupText>
+              <CFormSelect value={dropdownValue} onChange={(e) => setDropdownValue(e.target.value)}>
+                <option value="option1">Option 1</option>
+                <option value="option2">Option 2</option>
+                <option value="option3">Option 3</option>
+              </CFormSelect>
+            </CInputGroup>
+          </CCardHeader>
+
           <CCardBody>
             <CustomStyles1
               rows={rows}

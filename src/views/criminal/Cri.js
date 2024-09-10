@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import React, { useState } from 'react'
 import {
   CButton,
@@ -23,8 +22,8 @@ import {
   CDropdownMenu,
   CDropdownItem,
 } from '@coreui/react'
-import CIcon from '@coreui/icons-react'
-import { cilSearch, cilSettings, cilPencil, cilTrash, cilUser, cilStar, cilPlus } from '@coreui/icons'
+import { CIcon } from '@coreui/icons-react'
+import { cilSearch, cilSettings, cilTrash, cilUser, cilPencil, cilPlus } from '@coreui/icons'
 
 const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setCurrentPage }) => {
   const handleEditClick = (id) => {
@@ -48,7 +47,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
 
   // Filter rows based on search query
   const filteredRows = rows.filter(row =>
-    row.policeStation.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    row.stationName.toLowerCase().includes(searchQuery.toLowerCase()) ||
     row.criminalName.toLowerCase().includes(searchQuery.toLowerCase()) ||
     row.mobile.toLowerCase().includes(searchQuery.toLowerCase()) ||
     row.address.toLowerCase().includes(searchQuery.toLowerCase()),
@@ -61,12 +60,11 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
   return (
     <>
       <CForm className="row g-3 needs-validation" noValidate>
-        {/* Table */}
         <CCol xs={12} className="mt-4">
           <CTable bordered>
             <CTableHead>
               <CTableRow>
-                <CTableHeaderCell>Sr. No</CTableHeaderCell>
+                <CTableHeaderCell>Sr.No</CTableHeaderCell>
                 <CTableHeaderCell>Police Station</CTableHeaderCell>
                 <CTableHeaderCell>Criminal Name</CTableHeaderCell>
                 <CTableHeaderCell>Mobile</CTableHeaderCell>
@@ -82,17 +80,17 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                   <CTableDataCell>
                     {row.isEditing ? (
                       <CFormInput
-                        value={row.policeStation}
-                        onChange={(e) => handleInputChange(e, row.id, 'policeStation')}
+                        value={row.stationName}
+                        onChange={(e) => handleInputChange(e, row.id, 'stationName')}
                       />
                     ) : (
-                      row.policeStation
+                      row.stationName
                     )}
                   </CTableDataCell>
                   <CTableDataCell>
                     {row.isEditing ? (
                       <CFormInput
-                        value={row.criminalName}
+                        value={row.criminalNameName}
                         onChange={(e) => handleInputChange(e, row.id, 'criminalName')}
                       />
                     ) : (
@@ -119,6 +117,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                       row.address
                     )}
                   </CTableDataCell>
+
                   <CTableDataCell>
                     {row.isEditing ? (
                       <CFormSelect
@@ -136,6 +135,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                       </span>
                     )}
                   </CTableDataCell>
+
                   <CTableDataCell>
                     {row.isEditing ? (
                       <>
@@ -153,7 +153,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                       </>
                     ) : (
                       <>
-                        <CButton
+                          <CButton
                           color="info"
                           size="sm"
                           className="me-2"
@@ -161,6 +161,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                         >
                           <CIcon icon={cilUser} />
                         </CButton>
+
                         <CButton
                           color="info"
                           size="sm"
@@ -169,6 +170,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                         >
                           <CIcon icon={cilPlus} />
                         </CButton>
+
                         <CButton
                           color="info"
                           size="sm"
@@ -177,12 +179,14 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                         >
                           <CIcon icon={cilPencil} />
                         </CButton>
+
                         <CButton color="danger" size="sm" onClick={() => handleDeleteClick(row.id)}>
                           <CIcon icon={cilTrash} />
                         </CButton>
                       </>
                     )}
                   </CTableDataCell>
+
                 </CTableRow>
               ))}
             </CTableBody>
@@ -190,7 +194,6 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
         </CCol>
       </CForm>
 
-      {/* Pagination Controls */}
       <CRow className="mt-3">
         <CCol className="d-flex justify-content-end">
           <CButton
@@ -212,7 +215,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
           </CButton>
         </CCol>
       </CRow>
-      {/* Settings Icon with Dropdown */}
+
       <CDropdown className="position-fixed bottom-0 end-0 m-3">
         <CDropdownToggle
           color="secondary"
@@ -232,42 +235,64 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
     </>
   )
 }
+
 const Validation = () => {
   const [rows, setRows] = useState([
     {
       id: 1,
-      policeStation: 'Police Station 1',
-      criminalName: 'Criminal Name 1',
-      mobile: '1234567890',
-      address: 'Address 1',
+      stationName: 'Maharashtra',
+      criminalName: 'Alok',
+      mobile: '9876543210',
+      address: 'BALLAPUR',
       status: 'Active',
       isEditing: false,
     },
     {
       id: 2,
-      policeStation: 'Police Station 2',
-      criminalName: 'Criminal Name 2',
-      mobile: '0987654321',
-      address: 'Address 2',
+      stationName: 'Maharashtra',
+      criminalName: 'Alok',
+      mobile: '9876543210',
+      address: 'BALLAPUR',
       status: 'Active',
       isEditing: false,
     },
-    // Add more rows as needed
+    {
+      id: 3,
+      stationName: 'Maharashtra',
+      criminalName: 'Alok',
+      mobile: '9876543210',
+      address: 'BALLAPUR',
+      status: 'Active',
+      isEditing: false,
+    },
+    {
+      id: 4,
+      stationName: 'Maharashtra',
+      criminalName: 'Alok',
+      mobile: '9876543210',
+      address: 'BALLAPUR',
+      status: 'Active',
+      isEditing: false,
+    },
   ])
 
   const [searchQuery, setSearchQuery] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
+  const [fromDate, setFromDate] = useState('')
+  const [toDate, setToDate] = useState('')
+  const [dropdownValue, setDropdownValue] = useState('')
+  const [inputValue, setInputValue] = useState('')
   const pageSize = 5
 
   const handleAddRow = () => {
     const newRow = {
       id: rows.length + 1,
-      policeStation: '',
+      stationName: '',
       criminalName: '',
       mobile: '',
       address: '',
       status: 'Active',
-      isEditing: true,
+      isEditing: false,
     }
     setRows([...rows, newRow])
   }
@@ -277,7 +302,7 @@ const Validation = () => {
       <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader className="d-flex justify-content-between align-items-center">
-            <strong>Manage Criminal</strong>
+            <strong>Manage Selfie Report</strong>
             <div className="d-flex align-items-center">
               <CInputGroup>
                 <CInputGroupText>
@@ -290,10 +315,35 @@ const Validation = () => {
                 />
               </CInputGroup>
               <CButton color="primary" className="ms-2" onClick={handleAddRow}>
+                Upload
+              </CButton>
+              <CButton color="primary" className="ms-2" onClick={handleAddRow}>
                 Add
               </CButton>
             </div>
           </CCardHeader>
+
+          <CCardHeader className="d-flex p-2">
+
+              <CInputGroup className='p-1'>
+              <CInputGroupText>City</CInputGroupText>
+              <CFormSelect value={dropdownValue} onChange={(e) => setDropdownValue(e.target.value)}>
+                <option value="option1">Option 1</option>
+                <option value="option2">Option 2</option>
+                <option value="option3">Option 3</option>
+              </CFormSelect>
+              </CInputGroup>
+
+              <CInputGroup className='p-1'>
+              <CInputGroupText>Police Station</CInputGroupText>
+              <CFormSelect value={dropdownValue} onChange={(e) => setDropdownValue(e.target.value)}>
+                <option value="option1">Option 1</option>
+                <option value="option2">Option 2</option>
+                <option value="option3">Option 3</option>
+              </CFormSelect>
+            </CInputGroup>
+          </CCardHeader>
+
           <CCardBody>
             <CustomStyles1
               rows={rows}

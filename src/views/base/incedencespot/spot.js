@@ -24,7 +24,7 @@ import {
   CDropdownItem,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import { cilSearch, cilSettings, cilPencil, cilTrash } from '@coreui/icons'
+import { cilSearch, cilSettings, cilPencil, cilTrash , cilUser } from '@coreui/icons'
 
 const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setCurrentPage }) => {
   const handleEditClick = (id) => {
@@ -177,7 +177,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                           className="me-2"
                           onClick={() => handleEditClick(row.id)}
                         >
-                          <CIcon icon={cilPencil} />
+                          <CIcon icon={cilUser} />
                         </CButton>
                         <CButton color="danger" size="sm" onClick={() => handleDeleteClick(row.id)}>
                           <CIcon icon={cilTrash} />

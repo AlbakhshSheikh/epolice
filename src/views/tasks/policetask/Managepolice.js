@@ -172,14 +172,15 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                       </>
                     ) : (
                       <>
-                        <CButton
+                        {/* <CButton
                           color="info"
                           size="sm"
                           className="me-2"
                           onClick={() => handleEditClick(row.id)}
                         >
                           <CIcon icon={cilUser} />
-                        </CButton>
+                        </CButton> */}
+                        
                         <CButton
                           color="info"
                           size="sm"

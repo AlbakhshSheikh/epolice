@@ -83,8 +83,8 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                 <CTableHeaderCell>Remarks</CTableHeaderCell>
                 <CTableHeaderCell>Received By</CTableHeaderCell>
                 <CTableHeaderCell>Received On</CTableHeaderCell>
-                <CTableHeaderCell>Status</CTableHeaderCell>
-                <CTableHeaderCell>Action</CTableHeaderCell>
+                {/* <CTableHeaderCell>Status</CTableHeaderCell>
+                <CTableHeaderCell>Action</CTableHeaderCell> */}
               </CTableRow>
             </CTableHead>
             <CTableBody>
@@ -191,7 +191,8 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                       row.receivedOn
                     )}
                   </CTableDataCell>
-                  <CTableDataCell>
+
+                  {/* <CTableDataCell>
                     {row.isEditing ? (
                       <CFormSelect
                         value={row.status}
@@ -207,8 +208,9 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                         {row.status}
                       </span>
                     )}
-                  </CTableDataCell>
-                  <CTableDataCell>
+                  </CTableDataCell> */}
+
+                  {/* <CTableDataCell>
                     {row.isEditing ? (
                       <>
                         <CButton color="success" size="sm" onClick={() => handleSaveClick(row.id)}>
@@ -246,7 +248,8 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                         </CButton>
                       </>
                     )}
-                  </CTableDataCell>
+                  </CTableDataCell> */}
+                  
                 </CTableRow>
               ))}
             </CTableBody>

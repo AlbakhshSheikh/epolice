@@ -114,7 +114,7 @@ const routes = [
   { path: '/managemasters/managestates/State', name: 'Manage State', element: State },
   { path: '/managemasters/managedistricts/District', name: 'Manage Districts', element: District },
   { path: '/managemasters/managecities/Cities', name: 'Manage Cities', element: Cities },
-  
+
 
   // Policemaster.
   { path: '/policemasters/policestation', name: 'Manage Police Station', element: Station },
@@ -132,7 +132,7 @@ const routes = [
 
   { path: '/incedencespot', name: 'Incidence Spot', element: Spot },
   { path: '/criminal', name: 'Manage Criminals', element: Cri },
-  { path: '/patrolling', name: 'Patrol', element: Patrol },
+  { path: '/patrolling', name: 'Patrolling Attendance', element: Patrol },
 
   //Reports 
   { path: '/reports/selfie', name: 'Selfie Report', element: Pics },

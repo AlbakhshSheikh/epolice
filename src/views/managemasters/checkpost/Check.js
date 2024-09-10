@@ -108,7 +108,7 @@ const CustomStyles = () => {
       <CCol xs={12}>
         <div className="d-flex justify-content-end">
           <CButton color="primary" type="submit">
-            Submit form
+            Add Now
           </CButton>
         </div>
       </CCol>
