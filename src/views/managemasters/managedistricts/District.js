@@ -226,9 +226,9 @@ const Validation = () => {
       id: 1,
       country: 'India',
       state: 'Maharashtra',
-      district: 'Akola',
+      district: 'NagpurTcs',
       status: 'Active',
-      distance: '15 Meters',
+      distance: '50 Meters',
       isEditing: false,
     },
     {

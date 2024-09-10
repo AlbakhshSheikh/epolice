@@ -118,7 +118,7 @@ const routes = [
 
   // Policemaster.
   { path: '/policemasters/policestation', name: 'Manage Police Station', element: Station },
-  { path: '/policemasters/policedesignation', name: 'Police Designation', element: Designation },
+  { path: '/policemasters/policedesignation', name: 'Manage Police Designation', element: Designation },
   { path: '/policemasters/policeeyes', name: 'Manage Police Eyes', element: Eyes },
   { path: '/policemasters/vehicles', name: 'Vehicles', element: Vehicle },
   { path: '/policemasters/senstivearea', name: 'Senstive Areas', element: Sens },

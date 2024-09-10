@@ -331,7 +331,7 @@ const Validation = () => {
       <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader className="d-flex justify-content-between align-items-center">
-            <strong>Manage Police Stations</strong>
+            <strong>Manage Police Eyes</strong>
             <div className="d-flex align-items-center">
               <CInputGroup>
                 <CInputGroupText>

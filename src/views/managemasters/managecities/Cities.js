@@ -282,7 +282,7 @@ const Validation = () => {
       <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader className="d-flex justify-content-between align-items-center">
-            <strong>Manage SDPO</strong>
+            <strong>Manage Cities</strong>
             <div className="d-flex align-items-center">
               <CInputGroup>
                 <CInputGroupText>

@@ -19,7 +19,7 @@ import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 const navItemStyle = {
   whiteSpace: 'normal',
   wordBreak: 'break-word',
-  fontSize: '14px', // Adjust font size if needed
+  fontSize: '16px', // Adjust font size if needed
 }
 
 const _nav = [
@@ -208,21 +208,18 @@ const _nav = [
     name: 'Police Stations Category',
     to: '/policestationscategory',
     icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
-    style: navItemStyle,
   },
   {
     component: CNavItem,
     name: 'Police Stations Master',
     to: '/stationsmaster', 
     icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
-    style: navItemStyle,
   },
   {
     component: CNavItem,
     name: 'Mapping of Police Stations',
     to: '/mappingofpolicestations',
     icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
-    style: navItemStyle,
   },
   {
     component: CNavItem,

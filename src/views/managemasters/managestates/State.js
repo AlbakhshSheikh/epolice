@@ -204,20 +204,7 @@ const Validation = () => {
       status: 'Active',
       isEditing: false,
     },
-    {
-      id: 2,
-      country: 'USA',
-      state: 'Las Vegas',
-      status: 'Active',
-      isEditing: false,
-    },
-    {
-      id: 3,
-      country: 'Japan',
-      state: 'Tokiyo',
-      status: 'Active',
-      isEditing: false,
-    },
+    
   ])
 
   const [searchQuery, setSearchQuery] = useState('')
@@ -240,7 +227,7 @@ const Validation = () => {
       <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader className="d-flex justify-content-between align-items-center">
-            <strong>Manage SDPO</strong>
+            <strong>Manage State</strong>
             <div className="d-flex align-items-center">
               <CInputGroup>
                 <CInputGroupText>

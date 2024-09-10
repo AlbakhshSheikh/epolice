@@ -461,24 +461,7 @@ const Validation = () => {
             </CInputGroup>
 
           </CCardHeader>
-          <CCardHeader className="d-flex justify-content-between align-items-center">
-            <strong>Police Station Category:</strong>
-            <div className="d-flex align-items-center">
-              <CInputGroup>
-                <CInputGroupText>
-                  <CIcon icon={cilSearch} />
-                </CInputGroupText>
-                <CFormInput
-                  placeholder="Search..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
-              </CInputGroup>
-              <CButton color="primary" className="ms-2" onClick={handleAddRow}>
-                Export
-              </CButton>
-            </div>
-          </CCardHeader>
+
           <CCardBody>
             <CustomStyles1
               rows={rows}

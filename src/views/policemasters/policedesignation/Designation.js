@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React, { useState } from 'react'
 import {
   CButton,
@@ -269,7 +270,7 @@ const Validation = () => {
       <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader className="d-flex justify-content-between align-items-center">
-            <strong>Designation Manage</strong>
+            <strong>Manage Police Designation</strong>
             <div className="d-flex align-items-center">
               <CInputGroup>
                 <CInputGroupText>
@@ -282,7 +283,7 @@ const Validation = () => {
                 />
               </CInputGroup>
               <CButton color="primary" className="ms-2" onClick={handleAddRow}>
-                Add Row
+                Add
               </CButton>
             </div>
           </CCardHeader>
