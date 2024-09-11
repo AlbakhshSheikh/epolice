@@ -47,15 +47,15 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
 
   // Filter rows based on search query
   const filteredRows = rows.filter(row =>
-    row.station.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    row.total.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    row.day.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    row.day1.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    row.after.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    row.even.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    row.all.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    row.officer.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    row.percentage.toLowerCase().includes(searchQuery.toLowerCase()),
+      row.station.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      row.total.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      row.day.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      row.day1.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      row.after.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      row.even.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      row.all.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      row.officer.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      row.percentage.toLowerCase().includes(searchQuery.toLowerCase()),
   )
 
   // Paginate rows
@@ -306,8 +306,8 @@ const Validation = () => {
   const [rows, setRows] = useState([
     {
       id: 1,
-      station: 'Maharashtra',
-      total: '66',
+      station: 'TCS',
+      total: '1',
       day: '0',
       day1: '0',
       after: '0',
@@ -321,8 +321,8 @@ const Validation = () => {
     },
     {
       id: 2,
-      station: 'Maharashtra',
-      total: '66',
+      station: 'Vishesh Patrolling',
+      total: '0',
       day: '0',
       day1: '0',
       after: '0',
@@ -336,8 +336,8 @@ const Validation = () => {
     },
     {
       id: 3,
-      station: 'Maharashtra',
-      total: '66',
+      station: 'Pachral',
+      total: '1',
       day: '0',
       day1: '0',
       after: '0',
@@ -351,8 +351,98 @@ const Validation = () => {
     },
     {
       id: 4,
-      station: 'Maharashtra',
-      total: '66',
+      station: 'GHOSALE SCHOOL',
+      total: '1',
+      day: '0',
+      day1: '0',
+      after: '0',
+      even: '0',
+      all: '0',
+      officer: '0',
+      percentage: '0%',
+      // selfie: 'Images'
+      // status: 'Active',
+      // isEditing: false,
+    },
+    {
+      id: 5,
+      station: 'Pevey JT',
+      total: '1',
+      day: '0',
+      day1: '0',
+      after: '0',
+      even: '0',
+      all: '0',
+      officer: '0',
+      percentage: '0%',
+      // selfie: 'Images'
+      // status: 'Active',
+      // isEditing: false,
+    },
+    {
+      id: 6,
+      station: 'PEVE GAWTHAN',
+      total: '1',
+      day: '0',
+      day1: '0',
+      after: '0',
+      even: '0',
+      all: '0',
+      officer: '0',
+      percentage: '0%',
+      // selfie: 'Images'
+      // status: 'Active',
+      // isEditing: false,
+    },
+    {
+      id: 7,
+      station: 'MHAPRAL POLICE CHECK POST',
+      total: '1',
+      day: '0',
+      day1: '0',
+      after: '0',
+      even: '0',
+      all: '0',
+      officer: '0',
+      percentage: '0%',
+      // selfie: 'Images'
+      // status: 'Active',
+      // isEditing: false,
+    },
+    {
+      id: 8,
+      station: 'Yavatmal City',
+      total: '1',
+      day: '0',
+      day1: '0',
+      after: '0',
+      even: '0',
+      all: '0',
+      officer: '0',
+      percentage: '0%',
+      // selfie: 'Images'
+      // status: 'Active',
+      // isEditing: false,
+    },
+    {
+      id: 9,
+      station: 'Khandala',
+      total: '1',
+      day: '0',
+      day1: '0',
+      after: '0',
+      even: '0',
+      all: '0',
+      officer: '0',
+      percentage: '0%',
+      // selfie: 'Images'
+      // status: 'Active',
+      // isEditing: false,
+    },
+    {
+      id: 10,
+      station: 'Vasantnagar',
+      total: '0',
       day: '0',
       day1: '0',
       after: '0',
@@ -372,7 +462,7 @@ const Validation = () => {
   const [toDate, setToDate] = useState('')
   const [dropdownValue, setDropdownValue] = useState('')
   const [inputValue, setInputValue] = useState('')
-  const pageSize = 5
+  const pageSize = 10
 
   const handleAddRow = () => {
     const newRow = {
@@ -428,19 +518,12 @@ const Validation = () => {
 
             <CInputGroup className="p-1">
               <CInputGroupText>To Date</CInputGroupText>
-              <CFormInput
-                type="date"
-                value={toDate}
-                onChange={(e) => setToDate(e.target.value)}
-              />
+              <CFormInput type="date" value={toDate} onChange={(e) => setToDate(e.target.value)} />
             </CInputGroup>
 
             <CInputGroup className="p-1">
               <CInputGroupText>Police Station Name</CInputGroupText>
-              <CFormSelect
-                value={dropdownValue}
-                onChange={(e) => setDropdownValue(e.target.value)}
-              >
+              <CFormSelect value={dropdownValue} onChange={(e) => setDropdownValue(e.target.value)}>
                 <option value="option1">Option 1</option>
                 <option value="option2">Option 2</option>
                 <option value="option3">Option 3</option>
