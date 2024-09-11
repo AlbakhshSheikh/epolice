@@ -83,7 +83,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                 <CTableHeaderCell>Station</CTableHeaderCell>
                 <CTableHeaderCell>District</CTableHeaderCell>
                 <CTableHeaderCell>City</CTableHeaderCell>
-                <CTableHeaderCell>Action</CTableHeaderCell>
+                {/* <CTableHeaderCell>Action</CTableHeaderCell> */}
               </CTableRow>
             </CTableHead>
             <CTableBody>
@@ -190,7 +190,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                       row.city
                     )}
                   </CTableDataCell>
-                  <CTableDataCell>
+                  {/* <CTableDataCell>
                     {row.isEditing ? (
                       <>
                         <CButton color="success" size="sm" onClick={() => handleSaveClick(row.id)}>
@@ -220,7 +220,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                         </CButton>
                       </>
                     )}
-                  </CTableDataCell>
+                  </CTableDataCell> */}
                 </CTableRow>
               ))}
             </CTableBody>
