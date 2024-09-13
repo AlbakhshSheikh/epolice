@@ -22,6 +22,7 @@ import {
   CDropdownToggle,
   CDropdownMenu,
   CDropdownItem,
+  CTooltip,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilSearch, cilSettings, cilPencil, cilTrash, cilUser } from '@coreui/icons'
@@ -100,6 +101,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                       <CFormInput
                         value={row.policeStationName}
                         onChange={(e) => handleInputChange(e, row.id, 'policeStationName')}
+                        placeholder='Police Station Name'
                       />
                     ) : (
                       row.policeStationName
@@ -125,6 +127,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                       <CFormInput
                         value={row.vehicleName}
                         onChange={(e) => handleInputChange(e, row.id, 'vehicleName')}
+                        placeholder='Vehicle Name'
                       />
                     ) : (
                       row.vehicleName
@@ -135,6 +138,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                       <CFormInput
                         value={row.vehicleNo}
                         onChange={(e) => handleInputChange(e, row.id, 'vehicleNo')}
+                        placeholder='Vehicle Number'
                       />
                     ) : (
                       row.vehicleNo
@@ -145,6 +149,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                       <CFormInput
                         value={row.vehicleType}
                         onChange={(e) => handleInputChange(e, row.id, 'vehicleType')}
+                        placeholder='Vehicle Type'
                       />
                     ) : (
                       row.vehicleType
@@ -170,9 +175,13 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                   <CTableDataCell>
                     {row.isEditing ? (
                       <>
+                        <CTooltip content = "Save changes">
                         <CButton color="success" size="sm" onClick={() => handleSaveClick(row.id)}>
                           Save
                         </CButton>
+                        </CTooltip>
+
+                        <CTooltip content="Delete">
                         <CButton
                           color="danger"
                           size="sm"
@@ -181,9 +190,11 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                         >
                           Delete
                         </CButton>
+                        </CTooltip>
                       </>
                     ) : (
                       <>
+                      <CTooltip content = "View">
                         <CButton
                           color="info"
                           size="sm"
@@ -192,6 +203,9 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                         >
                           <CIcon icon={cilUser} />
                         </CButton>
+                        </CTooltip>
+
+                        <CTooltip content = "Edit">
                         <CButton
                           color="info"
                           size="sm"
@@ -200,9 +214,13 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                         >
                           <CIcon icon={cilPencil} />
                         </CButton>
+                        </CTooltip>
+                        
+                        <CTooltip content = "Delete">
                         <CButton color="danger" size="sm" onClick={() => handleDeleteClick(row.id)}>
                           <CIcon icon={cilTrash} />
                         </CButton>
+                        </CTooltip>
                       </>
                     )}
                   </CTableDataCell>
@@ -302,7 +320,7 @@ const Validation = () => {
 
   const [searchQuery, setSearchQuery] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
-  const pageSize = 5
+  const pageSize = 10
 
   const handleAddRow = () => {
     const newRow = {

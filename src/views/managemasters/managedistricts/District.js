@@ -1,5 +1,4 @@
-/* eslint-disable prettier/prettier */
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import {
   CButton,
   CCard,
@@ -22,41 +21,42 @@ import {
   CDropdownToggle,
   CDropdownMenu,
   CDropdownItem,
-} from '@coreui/react'
-import CIcon from '@coreui/icons-react'
-import { cilSearch, cilSettings, cilPencil, cilTrash } from '@coreui/icons'
+  CTooltip,
+} from '@coreui/react';
+import CIcon from '@coreui/icons-react';
+import { cilSearch, cilSettings, cilPencil, cilTrash } from '@coreui/icons';
 
 const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setCurrentPage }) => {
   const handleEditClick = (id) => {
     setRows((rows) =>
       rows.map((row) => (row.id === id ? { ...row, isEditing: !row.isEditing } : row)),
-    )
-  }
+    );
+  };
 
   const handleSaveClick = (id) => {
-    setRows((rows) => rows.map((row) => (row.id === id ? { ...row, isEditing: false } : row)))
-  }
+    setRows((rows) => rows.map((row) => (row.id === id ? { ...row, isEditing: false } : row)));
+  };
 
   const handleInputChange = (e, id, field) => {
-    const value = e.target.value
-    setRows((rows) => rows.map((row) => (row.id === id ? { ...row, [field]: value } : row)))
-  }
+    const value = e.target.value;
+    setRows((rows) => rows.map((row) => (row.id === id ? { ...row, [field]: value } : row)));
+  };
 
   const handleDeleteClick = (id) => {
-    setRows((rows) => rows.filter((row) => row.id !== id))
-  }
+    setRows((rows) => rows.filter((row) => row.id !== id));
+  };
 
   // Filter rows based on search query
   const filteredRows = rows.filter(row =>
     row.country.toLowerCase().includes(searchQuery.toLowerCase()) ||
     row.state.toLowerCase().includes(searchQuery.toLowerCase()) ||
     row.district.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    row.distance.toLowerCase().includes(searchQuery.toLowerCase()),
-  )
+    row.distance.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   // Paginate rows
-  const totalPages = Math.ceil(filteredRows.length / pageSize)
-  const paginatedRows = filteredRows.slice((currentPage - 1) * pageSize, currentPage * pageSize)
+  const totalPages = Math.ceil(filteredRows.length / pageSize);
+  const paginatedRows = filteredRows.slice((currentPage - 1) * pageSize, currentPage * pageSize);
 
   return (
     <>
@@ -70,19 +70,20 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                 <CTableHeaderCell>Country Name</CTableHeaderCell>
                 <CTableHeaderCell>State Name</CTableHeaderCell>
                 <CTableHeaderCell>District Name</CTableHeaderCell>
-                <CTableHeaderCell>Status</CTableHeaderCell>
                 <CTableHeaderCell>Distance</CTableHeaderCell>
+                <CTableHeaderCell>Status</CTableHeaderCell>
                 <CTableHeaderCell>Action</CTableHeaderCell>
               </CTableRow>
             </CTableHead>
             <CTableBody>
               {paginatedRows.map((row) => (
                 <CTableRow key={row.id}>
-                  <CTableDataCell>{row.id}</CTableDataCell>
+                  <CTableDataCell>{row.serial}</CTableDataCell>
                   <CTableDataCell>
                     {row.isEditing ? (
                       <CFormInput
                         value={row.country}
+                        placeholder="Enter Country"
                         onChange={(e) => handleInputChange(e, row.id, 'country')}
                       />
                     ) : (
@@ -93,6 +94,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                     {row.isEditing ? (
                       <CFormInput
                         value={row.state}
+                        placeholder="Enter State"
                         onChange={(e) => handleInputChange(e, row.id, 'state')}
                       />
                     ) : (
@@ -103,19 +105,31 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                     {row.isEditing ? (
                       <CFormInput
                         value={row.district}
+                        placeholder="Enter District"
                         onChange={(e) => handleInputChange(e, row.id, 'district')}
                       />
                     ) : (
                       row.district
                     )}
                   </CTableDataCell>
-                 
+                  <CTableDataCell>
+                    {row.isEditing ? (
+                      <CFormInput
+                        value={row.distance}
+                        placeholder="Enter Distance"
+                        onChange={(e) => handleInputChange(e, row.id, 'distance')}
+                      />
+                    ) : (
+                      row.distance
+                    )}
+                  </CTableDataCell>
                   <CTableDataCell>
                     {row.isEditing ? (
                       <CFormSelect
                         value={row.status}
                         onChange={(e) => handleInputChange(e, row.id, 'status')}
                       >
+                        <option value="">Select Status</option>
                         <option value="Active">Active</option>
                         <option value="Inactive">Inactive</option>
                       </CFormSelect>
@@ -127,46 +141,42 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                       </span>
                     )}
                   </CTableDataCell>
-
-                  <CTableDataCell>
-                    {row.isEditing ? (
-                      <CFormInput
-                        value={row.distance}
-                        onChange={(e) => handleInputChange(e, row.id, 'distance')}
-                      />
-                    ) : (
-                      row.distance
-                    )}
-                  </CTableDataCell>
-
                   <CTableDataCell>
                     {row.isEditing ? (
                       <>
-                        <CButton color="success" size="sm" onClick={() => handleSaveClick(row.id)}>
-                          Save
-                        </CButton>
-                        <CButton
-                          color="danger"
-                          size="sm"
-                          className="ms-2"
-                          onClick={() => handleDeleteClick(row.id)}
-                        >
-                          Delete
-                        </CButton>
+                        <CTooltip content="Save changes">
+                          <CButton color="success" size="sm" onClick={() => handleSaveClick(row.id)}>
+                            Save
+                          </CButton>
+                        </CTooltip>
+                        <CTooltip content="Delete">
+                          <CButton
+                            color="danger"
+                            size="sm"
+                            className="ms-2"
+                            onClick={() => handleDeleteClick(row.id)}
+                          >
+                            Delete
+                          </CButton>
+                        </CTooltip>
                       </>
                     ) : (
                       <>
-                        <CButton
-                          color="info"
-                          size="sm"
-                          className="me-2"
-                          onClick={() => handleEditClick(row.id)}
-                        >
-                          <CIcon icon={cilPencil} />
-                        </CButton>
-                        <CButton color="danger" size="sm" onClick={() => handleDeleteClick(row.id)}>
-                          <CIcon icon={cilTrash} />
-                        </CButton>
+                        <CTooltip content="Edit">
+                          <CButton
+                            color="info"
+                            size="sm"
+                            className="me-2"
+                            onClick={() => handleEditClick(row.id)}
+                          >
+                            <CIcon icon={cilPencil} />
+                          </CButton>
+                        </CTooltip>
+                        <CTooltip content="Delete">
+                          <CButton color="danger" size="sm" onClick={() => handleDeleteClick(row.id)}>
+                            <CIcon icon={cilTrash} />
+                          </CButton>
+                        </CTooltip>
                       </>
                     )}
                   </CTableDataCell>
@@ -199,6 +209,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
           </CButton>
         </CCol>
       </CRow>
+
       {/* Settings Icon with Dropdown */}
       <CDropdown className="position-fixed bottom-0 end-0 m-3">
         <CDropdownToggle
@@ -217,72 +228,92 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
         </CDropdownMenu>
       </CDropdown>
     </>
-  )
-}
+  );
+};
 
 const Validation = () => {
   const [rows, setRows] = useState([
     {
       id: 1,
+      serial: 1,
       country: 'India',
       state: 'Maharashtra',
-      district: 'NagpurTcs',
-      status: 'Active',
+      district: 'Nagpur (Urban)',
       distance: '50 Meters',
+      status: 'Active',
       isEditing: false,
     },
     {
       id: 2,
+      serial: 2,
       country: 'India',
       state: 'Maharashtra',
-      district: 'Akola',
+      district: 'Nagpur (Urban)',
+      distance: '50 Meters',
       status: 'Active',
-      distance: '65 Meters',
       isEditing: false,
     },
     {
       id: 3,
+      serial: 3,
       country: 'India',
       state: 'Maharashtra',
-      district: 'Akola',
+      district: 'Nagpur (Urban)',
+      distance: '50 Meters',
       status: 'Active',
-      distance: '20 Meters',
       isEditing: false,
     },
     {
       id: 4,
+      serial: 4,
       country: 'India',
       state: 'Maharashtra',
-      district: 'Akola',
-      status: 'Active',
+      district: 'Nagpur (Urban)',
       distance: '50 Meters',
+      status: 'Active',
       isEditing: false,
     },
-  ])
+    {
+      id: 5,
+      serial: 5,
+      country: 'India',
+      state: 'Maharashtra',
+      district: 'Nagpur (Urban)',
+      distance: '50 Meters',
+      status: 'Active',
+      isEditing: false,
+    },
+  ]);
 
-  const [searchQuery, setSearchQuery] = useState('')
-  const [currentPage, setCurrentPage] = useState(1)
-  const pageSize = 5
+  const [searchQuery, setSearchQuery] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [serialCounter, setSerialCounter] = useState(rows.length); // Initialize with the number of rows
+
+  const pageSize = 10;
 
   const handleAddRow = () => {
+    const newSerial = serialCounter + 1;
+    setSerialCounter(newSerial); // Update serial counter
+
     const newRow = {
-      id: rows.length + 1,
+      id: newSerial,
+      serial: newSerial,
       country: '',
       state: '',
       district: '',
-      status: 'Active',
       distance: '',
-      isEditing: false,
-    }
-    setRows([...rows, newRow])
-  }
+      status: 'Active',
+      isEditing: true, // Start editing immediately after adding
+    };
+    setRows((prevRows) => [...prevRows, newRow]);
+  };
 
   return (
     <CRow>
       <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader className="d-flex justify-content-between align-items-center">
-            <strong>Manage SDPO</strong>
+            <strong>Manage Districts</strong>
             <div className="d-flex align-items-center">
               <CInputGroup>
                 <CInputGroupText>
@@ -312,7 +343,7 @@ const Validation = () => {
         </CCard>
       </CCol>
     </CRow>
-  )
-}
+  );
+};
 
-export default Validation
+export default Validation;

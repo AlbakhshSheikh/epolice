@@ -27,7 +27,7 @@ const Taskmanages = React.lazy(() => import('./views/tasks/managepolice/Taskmana
 const Managepolice = React.lazy(() => import('./views/tasks/policetask/Managepolice'))
 
 //Incedence Spot
-const Spot = React.lazy(() => import('./views/base/incedencespot/Spot'))
+const spot = React.lazy(() => import('./views/incedencespot/spot'))
 
 //Manage Police User
 const User = React.lazy(() => import('./views/policeusers/User'))
@@ -130,7 +130,7 @@ const routes = [
   { path: '/tasks/policetask', name: 'Manage Police Task', element: Managepolice },
   { path: '/policeusers', name: 'Manage Polices ', element: User },
 
-  { path: '/incedencespot', name: 'Incidence Spot', element: Spot },
+  { path: '/incedencespot', name: 'Incidence Spot', element: spot },
   { path: '/criminal', name: 'Manage Criminals', element: Cri },
   { path: '/patrolling', name: 'Patrolling Attendance', element: Patrol },
 
