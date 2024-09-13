@@ -22,6 +22,7 @@ import {
   CDropdownToggle,
   CDropdownMenu,
   CDropdownItem,
+  CTooltip,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilSearch, cilSettings, cilPencil, cilTrash, cilUser } from '@coreui/icons'
@@ -87,70 +88,91 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                   <CTableDataCell>{row.id}</CTableDataCell>
                   <CTableDataCell>
                     {row.isEditing ? (
-                      <CFormInput
-                        value={row.policeStationName}
-                        onChange={(e) => handleInputChange(e, row.id, 'policeStationName')}
-                      />
+                      
+                        <CFormInput
+                          value={row.policeStationName}
+                          onChange={(e) => handleInputChange(e, row.id, 'policeStationName')}
+                          placeholder="Enter police station name"
+                        />
+                      
                     ) : (
                       row.policeStationName
                     )}
                   </CTableDataCell>
                   <CTableDataCell>
                     {row.isEditing ? (
-                      <CFormInput
-                        value={row.email}
-                        onChange={(e) => handleInputChange(e, row.id, 'email')}
-                      />
+                      
+                        <CFormInput
+                          value={row.email}
+                          onChange={(e) => handleInputChange(e, row.id, 'email')}
+                          placeholder="Enter email address"
+                        />
+                     
                     ) : (
                       row.email
                     )}
                   </CTableDataCell>
                   <CTableDataCell>
                     {row.isEditing ? (
-                      <CFormInput
-                        value={row.mobile}
-                        onChange={(e) => handleInputChange(e, row.id, 'mobile')}
-                      />
+                  
+                        <CFormInput
+                          value={row.mobile}
+                          onChange={(e) => handleInputChange(e, row.id, 'mobile')}
+                          placeholder="Enter mobile number"
+                        />
+                      
                     ) : (
                       row.mobile
                     )}
                   </CTableDataCell>
                   <CTableDataCell>
                     {row.isEditing ? (
-                      <CFormInput
-                        value={row.state}
-                        onChange={(e) => handleInputChange(e, row.id, 'state')}
-                      />
+                      
+                        <CFormInput
+                          value={row.state}
+                          onChange={(e) => handleInputChange(e, row.id, 'state')}
+                          placeholder="Enter state"
+                        />
+                      
                     ) : (
                       row.state
                     )}
                   </CTableDataCell>
                   <CTableDataCell>
                     {row.isEditing ? (
-                      <CFormInput
-                        value={row.district}
-                        onChange={(e) => handleInputChange(e, row.id, 'district')}
-                      />
+                      
+                        <CFormInput
+                          value={row.district}
+                          onChange={(e) => handleInputChange(e, row.id, 'district')}
+                          placeholder="Enter district"
+                        />
+                      
                     ) : (
                       row.district
                     )}
                   </CTableDataCell>
                   <CTableDataCell>
                     {row.isEditing ? (
-                      <CFormInput
-                        value={row.city}
-                        onChange={(e) => handleInputChange(e, row.id, 'city')}
-                      />
+                      
+                        <CFormInput
+                          value={row.city}
+                          onChange={(e) => handleInputChange(e, row.id, 'city')}
+                          placeholder="Enter city"
+                        />
+                      
                     ) : (
                       row.city
                     )}
                   </CTableDataCell>
                   <CTableDataCell>
                     {row.isEditing ? (
-                      <CFormInput
-                        value={row.category}
-                        onChange={(e) => handleInputChange(e, row.id, 'category')}
-                      />
+                      
+                        <CFormInput
+                          value={row.category}
+                          onChange={(e) => handleInputChange(e, row.id, 'category')}
+                          placeholder="Enter category"
+                        />
+                      
                     ) : (
                       row.category
                     )}
@@ -175,39 +197,49 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                   <CTableDataCell>
                     {row.isEditing ? (
                       <>
-                        <CButton color="success" size="sm" onClick={() => handleSaveClick(row.id)}>
-                          Save
-                        </CButton>
-                        <CButton
-                          color="danger"
-                          size="sm"
-                          className="ms-2"
-                          onClick={() => handleDeleteClick(row.id)}
-                        >
-                          Delete
-                        </CButton>
+                        <CTooltip content="Save changes">
+                          <CButton color="success" size="sm" onClick={() => handleSaveClick(row.id)}>
+                            Save
+                          </CButton>
+                        </CTooltip>
+                        <CTooltip content="Delete">
+                          <CButton
+                            color="danger"
+                            size="sm"
+                            className="ms-2"
+                            onClick={() => handleDeleteClick(row.id)}
+                          >
+                            Delete
+                          </CButton>
+                        </CTooltip>
                       </>
                     ) : (
                       <>
-                        <CButton
-                          color="info"
-                          size="sm"
-                          className="me-2"
-                          onClick={() => handleEditClick(row.id)}
-                        >
-                          <CIcon icon={cilUser} />
-                        </CButton>
-                        <CButton
-                          color="info"
-                          size="sm"
-                          className="me-2"
-                          onClick={() => handleEditClick(row.id)}
-                        >
-                          <CIcon icon={cilPencil} />
-                        </CButton>
-                        <CButton color="danger" size="sm" onClick={() => handleDeleteClick(row.id)}>
-                          <CIcon icon={cilTrash} />
-                        </CButton>
+                        <CTooltip content="Edit">
+                          <CButton
+                            color="info"
+                            size="sm"
+                            className="me-2"
+                            onClick={() => handleEditClick(row.id)}
+                          >
+                            <CIcon icon={cilPencil} />
+                          </CButton>
+                        </CTooltip>
+                        <CTooltip content="View">
+                          <CButton
+                            color="info"
+                            size="sm"
+                            className="me-2"
+                            onClick={() => handleEditClick(row.id)}
+                          >
+                            <CIcon icon={cilUser} />
+                          </CButton>
+                        </CTooltip>
+                        <CTooltip content="Delete">
+                          <CButton color="danger" size="sm" onClick={() => handleDeleteClick(row.id)}>
+                            <CIcon icon={cilTrash} />
+                          </CButton>
+                        </CTooltip>
                       </>
                     )}
                   </CTableDataCell>
@@ -228,7 +260,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
           >
             Previous
           </CButton>
-          <CButton color="secondary" className="mx-2" disabled>
+          <CButton color="secondary" className="ms-2 me-2">
             Page {currentPage} of {totalPages}
           </CButton>
           <CButton
@@ -240,23 +272,6 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
           </CButton>
         </CCol>
       </CRow>
-      {/* Settings Icon with Dropdown */}
-      <CDropdown className="position-fixed bottom-0 end-0 m-3">
-        <CDropdownToggle
-          color="secondary"
-          style={{ borderRadius: '50%', width: '50px', height: '50px' }}
-        >
-          <CIcon icon={cilSettings} className="text-white" />
-        </CDropdownToggle>
-        <CDropdownMenu>
-          <CDropdownItem>PDF</CDropdownItem>
-          <CDropdownItem>Copy</CDropdownItem>
-          <CDropdownItem>Excel</CDropdownItem>
-          <CDropdownItem>Print</CDropdownItem>
-          <CDropdownItem>Show 50 rows</CDropdownItem>
-          <CDropdownItem>Column visibility</CDropdownItem>
-        </CDropdownMenu>
-      </CDropdown>
     </>
   )
 }
@@ -315,7 +330,7 @@ const Validation = () => {
 
   const [searchQuery, setSearchQuery] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
-  const pageSize = 5
+  const pageSize = 10
 
   const handleAddRow = () => {
     const newRow = {

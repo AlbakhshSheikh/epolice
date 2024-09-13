@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import React, { useState } from 'react'
 import {
   CButton,
@@ -22,6 +21,7 @@ import {
   CDropdownToggle,
   CDropdownMenu,
   CDropdownItem,
+  CTooltip, // Import CTooltip
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilSearch, cilSettings, cilPencil, cilTrash, cilUser } from '@coreui/icons'
@@ -88,6 +88,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                       <CFormInput
                         value={row.policeStationName}
                         onChange={(e) => handleInputChange(e, row.id, 'policeStationName')}
+                        placeholder='Police Station '
                       />
                     ) : (
                       row.policeStationName
@@ -98,6 +99,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                       <CFormInput
                         value={row.state}
                         onChange={(e) => handleInputChange(e, row.id, 'state')}
+                        placeholder='State'
                       />
                     ) : (
                       row.state
@@ -108,6 +110,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                       <CFormInput
                         value={row.district}
                         onChange={(e) => handleInputChange(e, row.id, 'district')}
+                        placeholder='District'
                       />
                     ) : (
                       row.district
@@ -118,6 +121,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                       <CFormInput
                         value={row.city}
                         onChange={(e) => handleInputChange(e, row.id, 'city')}
+                        placeholder='City'
                       />
                     ) : (
                       row.city
@@ -128,6 +132,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                       <CFormInput
                         value={row.address}
                         onChange={(e) => handleInputChange(e, row.id, 'address')}
+                        placeholder='Address'
                       />
                     ) : (
                       row.address
@@ -138,6 +143,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                       <CFormInput
                         value={row.cameraDescription}
                         onChange={(e) => handleInputChange(e, row.id, 'cameraDescription')}
+                        placeholder='Camera Description'
                       />
                     ) : (
                       row.cameraDescription
@@ -163,39 +169,49 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                   <CTableDataCell>
                     {row.isEditing ? (
                       <>
-                        <CButton color="success" size="sm" onClick={() => handleSaveClick(row.id)}>
-                          Save
-                        </CButton>
-                        <CButton
-                          color="danger"
-                          size="sm"
-                          className="ms-2"
-                          onClick={() => handleDeleteClick(row.id)}
-                        >
-                          Delete
-                        </CButton>
+                        <CTooltip content="Save changes" placement="top">
+                          <CButton color="success" size="sm" onClick={() => handleSaveClick(row.id)}>
+                            Save
+                          </CButton>
+                        </CTooltip>
+                        <CTooltip content="Delete" placement="top">
+                          <CButton
+                            color="danger"
+                            size="sm"
+                            className="ms-2"
+                            onClick={() => handleDeleteClick(row.id)}
+                          >
+                            Delete
+                          </CButton>
+                        </CTooltip>
                       </>
                     ) : (
                       <>
-                        <CButton
-                          color="info"
-                          size="sm"
-                          className="me-2"
-                          onClick={() => handleEditClick(row.id)}
-                        >
-                          <CIcon icon={cilUser} />
-                        </CButton>
-                        <CButton
-                          color="info"
-                          size="sm"
-                          className="me-2"
-                          onClick={() => handleEditClick(row.id)}
-                        >
-                          <CIcon icon={cilPencil} />
-                        </CButton>
-                        <CButton color="danger" size="sm" onClick={() => handleDeleteClick(row.id)}>
-                          <CIcon icon={cilTrash} />
-                        </CButton>
+                        <CTooltip content="View" placement="top">
+                          <CButton
+                            color="info"
+                            size="sm"
+                            className="me-2"
+                            onClick={() => handleEditClick(row.id)}
+                          >
+                            <CIcon icon={cilUser} />
+                          </CButton>
+                        </CTooltip>
+                        <CTooltip content="Edit" placement="top">
+                          <CButton
+                            color="info"
+                            size="sm"
+                            className="me-2"
+                            onClick={() => handleEditClick(row.id)}
+                          >
+                            <CIcon icon={cilPencil} />
+                          </CButton>
+                        </CTooltip>
+                        <CTooltip content="Delete" placement="top">
+                          <CButton color="danger" size="sm" onClick={() => handleDeleteClick(row.id)}>
+                            <CIcon icon={cilTrash} />
+                          </CButton>
+                        </CTooltip>
                       </>
                     )}
                   </CTableDataCell>
@@ -307,7 +323,7 @@ const Validation = () => {
 
   const [searchQuery, setSearchQuery] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
-  const pageSize = 5
+  const pageSize = 10
 
   const handleAddRow = () => {
     const newRow = {

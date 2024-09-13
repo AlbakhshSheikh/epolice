@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import React, { useState } from 'react'
 import {
   CButton,
@@ -22,6 +21,7 @@ import {
   CDropdownToggle,
   CDropdownMenu,
   CDropdownItem,
+  CTooltip
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilSearch, cilSettings, cilPencil, cilTrash } from '@coreui/icons'
@@ -78,11 +78,12 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
             <CTableBody>
               {paginatedRows.map((row) => (
                 <CTableRow key={row.id}>
-                  <CTableDataCell>{row.id}</CTableDataCell>
+                  <CTableDataCell>{row.serial}</CTableDataCell>
                   <CTableDataCell>
                     {row.isEditing ? (
                       <CFormInput
                         value={row.country}
+                        placeholder="Enter Country"
                         onChange={(e) => handleInputChange(e, row.id, 'country')}
                       />
                     ) : (
@@ -93,6 +94,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                     {row.isEditing ? (
                       <CFormInput
                         value={row.state}
+                        placeholder="Enter State"
                         onChange={(e) => handleInputChange(e, row.id, 'state')}
                       />
                     ) : (
@@ -103,30 +105,31 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                     {row.isEditing ? (
                       <CFormInput
                         value={row.district}
+                        placeholder="Enter District"
                         onChange={(e) => handleInputChange(e, row.id, 'district')}
                       />
                     ) : (
                       row.district
                     )}
                   </CTableDataCell>
-
                   <CTableDataCell>
                     {row.isEditing ? (
                       <CFormInput
                         value={row.city}
+                        placeholder="Enter City"
                         onChange={(e) => handleInputChange(e, row.id, 'city')}
                       />
                     ) : (
                       row.city
                     )}
                   </CTableDataCell>
-                 
                   <CTableDataCell>
                     {row.isEditing ? (
                       <CFormSelect
                         value={row.status}
                         onChange={(e) => handleInputChange(e, row.id, 'status')}
                       >
+                        <option value="">Select Status</option>
                         <option value="Active">Active</option>
                         <option value="Inactive">Inactive</option>
                       </CFormSelect>
@@ -138,35 +141,42 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                       </span>
                     )}
                   </CTableDataCell>
-
                   <CTableDataCell>
                     {row.isEditing ? (
                       <>
-                        <CButton color="success" size="sm" onClick={() => handleSaveClick(row.id)}>
-                          Save
-                        </CButton>
-                        <CButton
-                          color="danger"
-                          size="sm"
-                          className="ms-2"
-                          onClick={() => handleDeleteClick(row.id)}
-                        >
-                          Delete
-                        </CButton>
+                        <CTooltip content="Save changes">
+                          <CButton color="success" size="sm" onClick={() => handleSaveClick(row.id)}>
+                            Save
+                          </CButton>
+                        </CTooltip>
+                        <CTooltip content="Delete">
+                          <CButton
+                            color="danger"
+                            size="sm"
+                            className="ms-2"
+                            onClick={() => handleDeleteClick(row.id)}
+                          >
+                            Delete
+                          </CButton>
+                        </CTooltip>
                       </>
                     ) : (
                       <>
-                        <CButton
-                          color="info"
-                          size="sm"
-                          className="me-2"
-                          onClick={() => handleEditClick(row.id)}
-                        >
-                          <CIcon icon={cilPencil} />
-                        </CButton>
-                        <CButton color="danger" size="sm" onClick={() => handleDeleteClick(row.id)}>
-                          <CIcon icon={cilTrash} />
-                        </CButton>
+                        <CTooltip content="Edit">
+                          <CButton
+                            color="info"
+                            size="sm"
+                            className="me-2"
+                            onClick={() => handleEditClick(row.id)}
+                          >
+                            <CIcon icon={cilPencil} />
+                          </CButton>
+                        </CTooltip>
+                        <CTooltip content="Delete">
+                          <CButton color="danger" size="sm" onClick={() => handleDeleteClick(row.id)}>
+                            <CIcon icon={cilTrash} />
+                          </CButton>
+                        </CTooltip>
                       </>
                     )}
                   </CTableDataCell>
@@ -224,37 +234,51 @@ const Validation = () => {
   const [rows, setRows] = useState([
     {
       id: 1,
+      serial: 1,
       country: 'India',
       state: 'Maharashtra',
-      district: 'Akola',
-      city: 'Akola',
+      district: 'Nagpur (Urbun)',
+      city: 'Nagpur',
       status: 'Active',
       isEditing: false,
     },
     {
       id: 2,
+      serial: 2,
       country: 'India',
       state: 'Maharashtra',
-      district: 'Akola',
+      district: 'Nagpur (Urbun)',
       city: 'Nagpur',
       status: 'Active',
       isEditing: false,
     },
     {
       id: 3,
+      serial: 3,
       country: 'India',
       state: 'Maharashtra',
-      district: 'Akola',
-      city: 'Mumbai',
+      district: 'Nagpur (Urbun)',
+      city: 'Nagpur',
       status: 'Active',
       isEditing: false,
     },
     {
       id: 4,
+      serial: 4,
       country: 'India',
       state: 'Maharashtra',
-      district: 'Akola',
-      city: 'Pune',
+      district: 'Nagpur (Urbun)',
+      city: 'Nagpur',
+      status: 'Active',
+      isEditing: false,
+    },
+    {
+      id: 5,
+      serial: 5,
+      country: 'India',
+      state: 'Maharashtra',
+      district: 'Nagpur (Urbun)',
+      city: 'Nagpur',
       status: 'Active',
       isEditing: false,
     },
@@ -262,17 +286,23 @@ const Validation = () => {
 
   const [searchQuery, setSearchQuery] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
-  const pageSize = 5
+  const [serialCounter, setSerialCounter] = useState(rows.length) // Initialize with the number of rows
+
+  const pageSize = 10
 
   const handleAddRow = () => {
+    const newSerial = serialCounter + 1
+    setSerialCounter(newSerial) // Update serial counter
+
     const newRow = {
-      id: rows.length + 1,
+      id: newSerial,
+      serial: newSerial,
       country: '',
       state: '',
       district: '',
       city: '',
       status: 'Active',
-      isEditing: false,
+      isEditing: true, // Start editing immediately after adding
     }
     setRows([...rows, newRow])
   }

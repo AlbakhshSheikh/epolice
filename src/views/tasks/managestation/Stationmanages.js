@@ -366,7 +366,7 @@ const Validation = () => {
 
   const [searchQuery, setSearchQuery] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
-  const pageSize = 15
+  const pageSize = 10
 
   const handleAddRow = () => {
     const newRow = {
