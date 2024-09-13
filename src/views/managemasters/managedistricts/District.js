@@ -21,10 +21,11 @@ import {
   CDropdownToggle,
   CDropdownMenu,
   CDropdownItem,
-  CTooltip,
-} from '@coreui/react';
-import CIcon from '@coreui/icons-react';
-import { cilSearch, cilSettings, cilPencil, cilTrash } from '@coreui/icons';
+} from '@coreui/react'
+import CIcon from '@coreui/icons-react'
+import { cilSearch, cilSettings, cilPencil, cilTrash } from '@coreui/icons'
+import { jsPDF } from 'jspdf' // For PDF generation
+import * as XLSX from 'xlsx' // For Excel export
 
 const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setCurrentPage }) => {
   const handleEditClick = (id) => {
@@ -55,8 +56,41 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
   );
 
   // Paginate rows
-  const totalPages = Math.ceil(filteredRows.length / pageSize);
-  const paginatedRows = filteredRows.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+  const totalPages = Math.ceil(filteredRows.length / pageSize)
+  const paginatedRows = filteredRows.slice((currentPage - 1) * pageSize, currentPage * pageSize)
+
+  // PDF Export Functionality
+  const handleExportPDF = () => {
+    const doc = new jsPDF()
+    doc.text('SDPO Table Data', 10, 10)
+    let rowData = paginatedRows.map(row => [row.id, row.country, row.state, row.district, row.status, row.distance])
+    doc.autoTable({
+      head: [['Sr.No', 'Country Name', 'State Name', 'District Name', 'Status', 'Distance']],
+      body: rowData,
+    })
+    doc.save('table-data.pdf')
+  }
+
+  // Excel Export Functionality
+  const handleExportExcel = () => {
+    const worksheet = XLSX.utils.json_to_sheet(paginatedRows)
+    const workbook = XLSX.utils.book_new()
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1')
+    XLSX.writeFile(workbook, 'table-data.xlsx')
+  }
+
+  // Copy to Clipboard Functionality
+  const handleCopy = () => {
+    const copyText = paginatedRows.map(row => `ID: ${row.id}, Country: ${row.country}, State: ${row.state}, District: ${row.district}, Status: ${row.status}, Distance: ${row.distance}`).join('\n')
+    navigator.clipboard.writeText(copyText).then(() => {
+      alert('Copied to clipboard!')
+    })
+  }
+
+  // Print Functionality
+  const handlePrint = () => {
+    window.print()
+  }
 
   return (
     <>
@@ -219,10 +253,10 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
           <CIcon icon={cilSettings} className="text-white" />
         </CDropdownToggle>
         <CDropdownMenu>
-          <CDropdownItem>PDF</CDropdownItem>
-          <CDropdownItem>Copy</CDropdownItem>
-          <CDropdownItem>Excel</CDropdownItem>
-          <CDropdownItem>Print</CDropdownItem>
+          <CDropdownItem onClick={handleExportPDF}>PDF</CDropdownItem>
+          <CDropdownItem onClick={handleCopy}>Copy</CDropdownItem>
+          <CDropdownItem onClick={handleExportExcel}>Excel</CDropdownItem>
+          <CDropdownItem onClick={handlePrint}>Print</CDropdownItem>
           <CDropdownItem>Show 50 rows</CDropdownItem>
           <CDropdownItem>Column visibility</CDropdownItem>
         </CDropdownMenu>
@@ -238,7 +272,8 @@ const Validation = () => {
       serial: 1,
       country: 'India',
       state: 'Maharashtra',
-      district: 'Nagpur (Urban)',
+      district: 'Nagpur',
+      status: 'Active',
       distance: '50 Meters',
       status: 'Active',
       isEditing: false,

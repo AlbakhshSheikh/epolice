@@ -1,5 +1,4 @@
-/* eslint-disable prettier/prettier */
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import {
   CButton,
   CCard,
@@ -22,10 +21,12 @@ import {
   CDropdownToggle,
   CDropdownMenu,
   CDropdownItem,
-  CTooltip,
-} from '@coreui/react';
-import CIcon from '@coreui/icons-react';
-import { cilSearch, cilSettings, cilPencil, cilTrash } from '@coreui/icons';
+} from '@coreui/react'
+import CIcon from '@coreui/icons-react'
+import { cilSearch, cilSettings, cilPencil, cilTrash } from '@coreui/icons'
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
+import * as XLSX from 'xlsx'
 
 const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setCurrentPage }) => {
   const handleEditClick = (id) => {
@@ -49,13 +50,97 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
 
   // Filter rows based on search query
   const filteredRows = rows.filter(row =>
-    row.country.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    row.state.toLowerCase().includes(searchQuery.toLowerCase()),
-  );
+      row.country.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      row.state.toLowerCase().includes(searchQuery.toLowerCase()),
+  )
 
   // Paginate rows
-  const totalPages = Math.ceil(filteredRows.length / pageSize);
-  const paginatedRows = filteredRows.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+  const totalPages = Math.ceil(filteredRows.length / pageSize)
+  const paginatedRows = filteredRows.slice((currentPage - 1) * pageSize, currentPage * pageSize)
+
+  // PDF generation functionality
+  const handlePDFDownload = () => {
+    const doc = new jsPDF()
+
+    doc.text('State Management Table', 20, 10)
+
+    const tableColumn = ['Sr.No', 'Country Name', 'State Name', 'Status']
+    const tableRows = filteredRows.map((row) => [row.id, row.country, row.state, row.status])
+
+    doc.autoTable({
+      head: [tableColumn],
+      body: tableRows,
+      startY: 20,
+    })
+
+    doc.save('state_management_table.pdf')
+  }
+
+  // Copy functionality to copy the table content
+  const handleCopyTable = () => {
+    let tableText = 'Sr.No\tCountry Name\tState Name\tStatus\n'
+
+    filteredRows.forEach((row) => {
+      tableText += `${row.id}\t${row.country}\t${row.state}\t${row.status}\n`
+    })
+
+    navigator.clipboard
+      .writeText(tableText)
+      .then(() => {
+        alert('Table copied to clipboard!')
+      })
+      .catch((err) => {
+        console.error('Error copying table: ', err)
+      })
+  }
+
+  // Excel export functionality
+  const handleExcelDownload = () => {
+    const worksheet = XLSX.utils.json_to_sheet(
+      filteredRows.map((row) => ({
+        'Sr.No': row.id,
+        'Country Name': row.country,
+        'State Name': row.state,
+        Status: row.status,
+      })),
+    )
+
+    const workbook = XLSX.utils.book_new()
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'States')
+
+    XLSX.writeFile(workbook, 'state_management_table.xlsx')
+  }
+
+  // Print functionality
+  const handlePrint = () => {
+    // Create a new window for print preview
+    const printWindow = window.open('', '', 'height=600,width=800')
+
+    printWindow.document.write('<html><head><title>Print</title>')
+    printWindow.document.write(
+      '<style>table { width: 100%; border-collapse: collapse; } th, td { border: 1px solid black; padding: 8px; text-align: left; }</style>',
+    )
+    printWindow.document.write('</head><body>')
+
+    // Add table HTML
+    printWindow.document.write('<table>')
+    printWindow.document.write(
+      '<thead><tr><th>Sr.No</th><th>Country Name</th><th>State Name</th><th>Status</th></tr></thead>',
+    )
+    printWindow.document.write('<tbody>')
+    filteredRows.forEach(row => {
+      printWindow.document.write(
+        `<tr><td>${row.id}</td><td>${row.country}</td><td>${row.state}</td><td>${row.status}</td></tr>`
+      )
+    })
+    printWindow.document.write('</tbody></table>')
+
+    printWindow.document.write('</body></html>')
+
+    printWindow.document.close() // Close the document for printing
+    printWindow.focus() // Focus on the print window
+    printWindow.print() // Trigger the print dialog
+  }
 
   return (
     <>
@@ -194,10 +279,10 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
           <CIcon icon={cilSettings} className="text-white" />
         </CDropdownToggle>
         <CDropdownMenu>
-          <CDropdownItem>PDF</CDropdownItem>
-          <CDropdownItem>Copy</CDropdownItem>
-          <CDropdownItem>Excel</CDropdownItem>
-          <CDropdownItem>Print</CDropdownItem>
+          <CDropdownItem onClick={handlePDFDownload}>PDF</CDropdownItem>
+          <CDropdownItem onClick={handleCopyTable}>Copy</CDropdownItem>
+          <CDropdownItem onClick={handleExcelDownload}>Excel</CDropdownItem>
+          <CDropdownItem onClick={handlePrint}>Print</CDropdownItem>
           <CDropdownItem>Show 50 rows</CDropdownItem>
           <CDropdownItem>Column visibility</CDropdownItem>
         </CDropdownMenu>
@@ -216,39 +301,157 @@ const Validation = () => {
       isEditing: false,
     },
     {
-      id: 2,
+      id: 1,
       country: 'India',
       state: 'Maharashtra',
       status: 'Active',
       isEditing: false,
     },
     {
-      id: 3,
+      id: 1,
       country: 'India',
       state: 'Maharashtra',
       status: 'Active',
       isEditing: false,
     },
     {
-      id: 4,
+      id: 1,
       country: 'India',
       state: 'Maharashtra',
       status: 'Active',
       isEditing: false,
     },
     {
-      id: 5,
+      id: 1,
       country: 'India',
       state: 'Maharashtra',
       status: 'Active',
       isEditing: false,
     },
-  ]);
+    {
+      id: 1,
+      country: 'India',
+      state: 'Maharashtra',
+      status: 'Active',
+      isEditing: false,
+    },
+    {
+      id: 1,
+      country: 'India',
+      state: 'Maharashtra',
+      status: 'Active',
+      isEditing: false,
+    },
+    {
+      id: 1,
+      country: 'India',
+      state: 'Maharashtra',
+      status: 'Active',
+      isEditing: false,
+    },
+    {
+      id: 1,
+      country: 'India',
+      state: 'Maharashtra',
+      status: 'Active',
+      isEditing: false,
+    },
+    {
+      id: 1,
+      country: 'India',
+      state: 'Maharashtra',
+      status: 'Active',
+      isEditing: false,
+    },
+    {
+      id: 1,
+      country: 'India',
+      state: 'Maharashtra',
+      status: 'Active',
+      isEditing: false,
+    },
+    {
+      id: 1,
+      country: 'India',
+      state: 'Maharashtra',
+      status: 'Active',
+      isEditing: false,
+    },
+    {
+      id: 1,
+      country: 'India',
+      state: 'Maharashtra',
+      status: 'Active',
+      isEditing: false,
+    },
+    {
+      id: 1,
+      country: 'India',
+      state: 'Maharashtra',
+      status: 'Active',
+      isEditing: false,
+    },
+    {
+      id: 1,
+      country: 'India',
+      state: 'Maharashtra',
+      status: 'Active',
+      isEditing: false,
+    },
+    {
+      id: 1,
+      country: 'India',
+      state: 'Maharashtra',
+      status: 'Active',
+      isEditing: false,
+    },
+    {
+      id: 1,
+      country: 'India',
+      state: 'Maharashtra',
+      status: 'Active',
+      isEditing: false,
+    },
+    {
+      id: 1,
+      country: 'India',
+      state: 'Maharashtra',
+      status: 'Active',
+      isEditing: false,
+    },
+    {
+      id: 1,
+      country: 'India',
+      state: 'Maharashtra',
+      status: 'Active',
+      isEditing: false,
+    },
+    {
+      id: 1,
+      country: 'India',
+      state: 'Maharashtra',
+      status: 'Active',
+      isEditing: false,
+    },
+    {
+      id: 1,
+      country: 'India',
+      state: 'Maharashtra',
+      status: 'Active',
+      isEditing: false,
+    },
+    {
+      id: 1,
+      country: 'India',
+      state: 'Maharashtra',
+      status: 'Active',
+      isEditing: false,
+    },
+  ])
 
-  const [searchQuery, setSearchQuery] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
-  const [serialCounter, setSerialCounter] = useState(rows.length); // Initialize with the number of rows
-  const pageSize = 10;
+  const [searchQuery, setSearchQuery] = useState('')
+  const [currentPage, setCurrentPage] = useState(1)
+  const pageSize = 10
 
   const handleAddRow = () => {
     const newSerial = serialCounter + 1;
