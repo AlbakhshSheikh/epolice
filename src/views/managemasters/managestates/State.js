@@ -33,12 +33,8 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
       rows.map((row) => (row.id === id ? { ...row, isEditing: !row.isEditing } : row)),
     );
   };
-    );
-  };
 
   const handleSaveClick = (id) => {
-    setRows((rows) => rows.map((row) => (row.id === id ? { ...row, isEditing: false } : row)));
-  };
     setRows((rows) => rows.map((row) => (row.id === id ? { ...row, isEditing: false } : row)));
   };
 
@@ -46,13 +42,8 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
     const value = e.target.value;
     setRows((rows) => rows.map((row) => (row.id === id ? { ...row, [field]: value } : row)));
   };
-    const value = e.target.value;
-    setRows((rows) => rows.map((row) => (row.id === id ? { ...row, [field]: value } : row)));
-  };
 
   const handleDeleteClick = (id) => {
-    setRows((rows) => rows.filter((row) => row.id !== id));
-  };
     setRows((rows) => rows.filter((row) => row.id !== id));
   };
 
@@ -90,7 +81,6 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                       <CFormInput
                         value={row.country}
                         placeholder="Enter country name"
-                        placeholder="Enter country name"
                         onChange={(e) => handleInputChange(e, row.id, 'country')}
                       />
                     ) : (
@@ -101,7 +91,6 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                     {row.isEditing ? (
                       <CFormInput
                         value={row.state}
-                        placeholder="Enter state name"
                         placeholder="Enter state name"
                         onChange={(e) => handleInputChange(e, row.id, 'state')}
                       />
@@ -115,7 +104,6 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                         value={row.status}
                         onChange={(e) => handleInputChange(e, row.id, 'status')}
                       >
-                        <option value="" disabled>Select status</option>
                         <option value="" disabled>Select status</option>
                         <option value="Active">Active</option>
                         <option value="Inactive">Inactive</option>
@@ -146,39 +134,9 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                             Delete
                           </CButton>
                         </CTooltip>
-                        <CTooltip content="Save changes">
-                          <CButton color="success" size="sm" onClick={() => handleSaveClick(row.id)}>
-                            Save
-                          </CButton>
-                        </CTooltip>
-                        <CTooltip content="Delete">
-                          <CButton
-                            color="danger"
-                            size="sm"
-                            className="ms-2"
-                            onClick={() => handleDeleteClick(row.id)}
-                          >
-                            Delete
-                          </CButton>
-                        </CTooltip>
                       </>
                     ) : (
                       <>
-                        <CTooltip content="Edit">
-                          <CButton
-                            color="info"
-                            size="sm"
-                            className="me-2"
-                            onClick={() => handleEditClick(row.id)}
-                          >
-                            <CIcon icon={cilPencil} />
-                          </CButton>
-                        </CTooltip>
-                        <CTooltip content="Delete">
-                          <CButton color="danger" size="sm" onClick={() => handleDeleteClick(row.id)}>
-                            <CIcon icon={cilTrash} />
-                          </CButton>
-                        </CTooltip>
                         <CTooltip content="Edit">
                           <CButton
                             color="info"
@@ -227,7 +185,6 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
         </CCol>
       </CRow>
 
-
       {/* Settings Icon with Dropdown */}
       <CDropdown className="position-fixed bottom-0 end-0 m-3">
         <CDropdownToggle
@@ -237,17 +194,15 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
           <CIcon icon={cilSettings} className="text-white" />
         </CDropdownToggle>
         <CDropdownMenu>
-          <CDropdownItem onClick={handlePDFDownload}>PDF</CDropdownItem>
-          <CDropdownItem onClick={handleCopyTable}>Copy</CDropdownItem>
-          <CDropdownItem onClick={handleExcelDownload}>Excel</CDropdownItem>
-          <CDropdownItem onClick={handlePrint}>Print</CDropdownItem>
+          <CDropdownItem>PDF</CDropdownItem>
+          <CDropdownItem>Copy</CDropdownItem>
+          <CDropdownItem>Excel</CDropdownItem>
+          <CDropdownItem>Print</CDropdownItem>
           <CDropdownItem>Show 50 rows</CDropdownItem>
           <CDropdownItem>Column visibility</CDropdownItem>
         </CDropdownMenu>
       </CDropdown>
     </>
-  );
-};
   );
 };
 
@@ -299,19 +254,11 @@ const Validation = () => {
     const newSerial = serialCounter + 1;
     setSerialCounter(newSerial); // Update serial counter
 
-    const newSerial = serialCounter + 1;
-    setSerialCounter(newSerial); // Update serial counter
-
     const newRow = {
-      id: newSerial,
       id: newSerial,
       country: '',
       state: '',
       status: 'Active',
-      isEditing: true, // Start editing immediately after adding
-    };
-    setRows([...rows, newRow]);
-  };
       isEditing: true, // Start editing immediately after adding
     };
     setRows([...rows, newRow]);
@@ -339,11 +286,6 @@ const Validation = () => {
                   Add
                 </CButton>
               
-              
-                <CButton color="primary" className="ms-2" onClick={handleAddRow}>
-                  Add
-                </CButton>
-              
             </div>
           </CCardHeader>
           <CCardBody>
@@ -359,8 +301,6 @@ const Validation = () => {
         </CCard>
       </CCol>
     </CRow>
-  );
-};
   );
 };
 
