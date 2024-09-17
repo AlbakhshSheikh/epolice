@@ -17,6 +17,7 @@ import {
   CRow,
   CInputGroup,
   CInputGroupText,
+  CTooltip,
   CDropdown,
   CDropdownToggle,
   CDropdownMenu,
@@ -27,22 +28,26 @@ import { cilSearch, cilSettings, cilTrash, cilUser, cilPencil, cilPlus } from '@
 
 const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setCurrentPage }) => {
   const handleEditClick = (id) => {
-    setRows((rows) =>
-      rows.map((row) => (row.id === id ? { ...row, isEditing: !row.isEditing } : row)),
-    )
+    setRows(rows.map((row) =>
+      row.id === id ? { ...row, isEditing: !row.isEditing } : row
+    ));
   }
 
   const handleSaveClick = (id) => {
-    setRows((rows) => rows.map((row) => (row.id === id ? { ...row, isEditing: false } : row)))
+    setRows(rows.map((row) =>
+      row.id === id ? { ...row, isEditing: false } : row
+    ));
   }
 
   const handleInputChange = (e, id, field) => {
-    const value = e.target.value
-    setRows((rows) => rows.map((row) => (row.id === id ? { ...row, [field]: value } : row)))
+    const value = e.target.value;
+    setRows(rows.map((row) =>
+      row.id === id ? { ...row, [field]: value } : row
+    ));
   }
 
   const handleDeleteClick = (id) => {
-    setRows((rows) => rows.filter((row) => row.id !== id))
+    setRows(rows.filter((row) => row.id !== id));
   }
 
   // Filter rows based on search query
@@ -50,12 +55,12 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
     row.stationName.toLowerCase().includes(searchQuery.toLowerCase()) ||
     row.criminalName.toLowerCase().includes(searchQuery.toLowerCase()) ||
     row.mobile.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    row.address.toLowerCase().includes(searchQuery.toLowerCase()),
-  )
+    row.address.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   // Paginate rows
-  const totalPages = Math.ceil(filteredRows.length / pageSize)
-  const paginatedRows = filteredRows.slice((currentPage - 1) * pageSize, currentPage * pageSize)
+  const totalPages = Math.ceil(filteredRows.length / pageSize);
+  const paginatedRows = filteredRows.slice((currentPage - 1) * pageSize, currentPage * pageSize);
 
   return (
     <>
@@ -80,6 +85,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                   <CTableDataCell>
                     {row.isEditing ? (
                       <CFormInput
+                        placeholder="Enter police station"
                         value={row.stationName}
                         onChange={(e) => handleInputChange(e, row.id, 'stationName')}
                       />
@@ -90,7 +96,8 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                   <CTableDataCell>
                     {row.isEditing ? (
                       <CFormInput
-                        value={row.criminalNameName}
+                        placeholder="Enter criminal name"
+                        value={row.criminalName}
                         onChange={(e) => handleInputChange(e, row.id, 'criminalName')}
                       />
                     ) : (
@@ -100,6 +107,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                   <CTableDataCell>
                     {row.isEditing ? (
                       <CFormInput
+                        placeholder="Enter mobile number"
                         value={row.mobile}
                         onChange={(e) => handleInputChange(e, row.id, 'mobile')}
                       />
@@ -110,6 +118,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                   <CTableDataCell>
                     {row.isEditing ? (
                       <CFormInput
+                        placeholder="Enter address"
                         value={row.address}
                         onChange={(e) => handleInputChange(e, row.id, 'address')}
                       />
@@ -117,7 +126,6 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                       row.address
                     )}
                   </CTableDataCell>
-
                   <CTableDataCell>
                     {row.isEditing ? (
                       <CFormSelect
@@ -135,7 +143,6 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                       </span>
                     )}
                   </CTableDataCell>
-
                   <CTableDataCell>
                     {row.isEditing ? (
                       <>
@@ -153,40 +160,44 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                       </>
                     ) : (
                       <>
+                        <CTooltip content='View'>
                           <CButton
-                          color="info"
-                          size="sm"
-                          className="me-2"
-                          onClick={() => handleEditClick(row.id)}
-                        >
-                          <CIcon icon={cilUser} />
-                        </CButton>
-
-                        <CButton
-                          color="info"
-                          size="sm"
-                          className="me-2"
-                          onClick={() => handleEditClick(row.id)}
-                        >
-                          <CIcon icon={cilPlus} />
-                        </CButton>
-
-                        <CButton
-                          color="info"
-                          size="sm"
-                          className="me-2"
-                          onClick={() => handleEditClick(row.id)}
-                        >
-                          <CIcon icon={cilPencil} />
-                        </CButton>
-
-                        <CButton color="danger" size="sm" onClick={() => handleDeleteClick(row.id)}>
-                          <CIcon icon={cilTrash} />
-                        </CButton>
+                            color="info"
+                            size="sm"
+                            className="me-2"
+                            onClick={() => handleEditClick(row.id)}
+                          >
+                            <CIcon icon={cilUser} />
+                          </CButton>
+                        </CTooltip>
+                        <CTooltip content='Add'>
+                          <CButton
+                            color="info"
+                            size="sm"
+                            className="me-2"
+                            onClick={() => handleEditClick(row.id)}
+                          >
+                            <CIcon icon={cilPlus} />
+                          </CButton>
+                        </CTooltip>
+                        <CTooltip content='Edit'>
+                          <CButton
+                            color="info"
+                            size="sm"
+                            className="me-2"
+                            onClick={() => handleEditClick(row.id)}
+                          >
+                            <CIcon icon={cilPencil} />
+                          </CButton>
+                        </CTooltip>
+                        <CTooltip content='Delete'>
+                          <CButton color="danger" size="sm" onClick={() => handleDeleteClick(row.id)}>
+                            <CIcon icon={cilTrash} />
+                          </CButton>
+                        </CTooltip>
                       </>
                     )}
                   </CTableDataCell>
-
                 </CTableRow>
               ))}
             </CTableBody>
@@ -233,131 +244,131 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
         </CDropdownMenu>
       </CDropdown>
     </>
-  )
-}
+    );
+  };
+  
 
-const Validation = () => {
-  const [rows, setRows] = useState([
-    {
-      id: 1,
-      stationName: 'Maharashtra',
-      criminalName: 'Alok',
-      mobile: '9876543210',
-      address: 'BALLAPUR',
-      status: 'Active',
-      isEditing: false,
-    },
-    {
-      id: 2,
-      stationName: 'Maharashtra',
-      criminalName: 'Alok',
-      mobile: '9876543210',
-      address: 'BALLAPUR',
-      status: 'Active',
-      isEditing: false,
-    },
-    {
-      id: 3,
-      stationName: 'Maharashtra',
-      criminalName: 'Alok',
-      mobile: '9876543210',
-      address: 'BALLAPUR',
-      status: 'Active',
-      isEditing: false,
-    },
-    {
-      id: 4,
-      stationName: 'Maharashtra',
-      criminalName: 'Alok',
-      mobile: '9876543210',
-      address: 'BALLAPUR',
-      status: 'Active',
-      isEditing: false,
-    },
-  ])
+  const Validation = () => {
+    const [rows, setRows] = useState([
+      {
+        id: 1,
+        stationName: 'Maharashtra',
+        criminalName: 'Alok',
+        mobile: '9876543210',
+        address: 'BALLAPUR',
+        status: 'Active',
+        isEditing: false,
+      },
+      {
+        id: 2,
+        stationName: 'Maharashtra',
+        criminalName: 'Alok',
+        mobile: '9876543210',
+        address: 'BALLAPUR',
+        status: 'Active',
+        isEditing: false,
+      },
+      {
+        id: 3,
+        stationName: 'Maharashtra',
+        criminalName: 'Alok',
+        mobile: '9876543210',
+        address: 'BALLAPUR',
+        status: 'Active',
+        isEditing: false,
+      },
+      {
+        id: 4,
+        stationName: 'Maharashtra',
+        criminalName: 'Alok',
+        mobile: '9876543210',
+        address: 'BALLAPUR',
+        status: 'Active',
+        isEditing: false,
+      },
+    ]);
 
-  const [searchQuery, setSearchQuery] = useState('')
-  const [currentPage, setCurrentPage] = useState(1)
-  const [fromDate, setFromDate] = useState('')
-  const [toDate, setToDate] = useState('')
-  const [dropdownValue, setDropdownValue] = useState('')
-  const [inputValue, setInputValue] = useState('')
-  const pageSize = 5
+    const [searchQuery, setSearchQuery] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
+    const [cityValue, setCityValue] = useState('');
+    const [policeStationValue, setPoliceStationValue] = useState('');
+    const pageSize = 10;
 
-  const handleAddRow = () => {
-    const newRow = {
-      id: rows.length + 1,
-      stationName: '',
-      criminalName: '',
-      mobile: '',
-      address: '',
-      status: 'Active',
-      isEditing: false,
+    const handleAddRow = () => {
+      const newRow = {
+        id: rows.length + 1,
+        stationName: '',
+        criminalName: '',
+        mobile: '',
+        address: '',
+        status: 'Active',
+        isEditing: false,
+      }
+      setRows([...rows, newRow]);
     }
-    setRows([...rows, newRow])
+
+    return (
+      <CRow>
+        <CCol xs={12}>
+          <CCard className="mb-4">
+            <CCardHeader className="d-flex justify-content-between align-items-center">
+              <strong>Manage Selfie Report</strong>
+              <div className="d-flex align-items-center">
+                <CInputGroup>
+                  <CInputGroupText>
+                    <CIcon icon={cilSearch} />
+                  </CInputGroupText>
+                  <CFormInput
+                    placeholder="Search..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                  />
+                </CInputGroup>
+                <CButton color="success" className="ms-2" onClick={handleAddRow}>
+                  Upload
+                </CButton>
+                <CButton color="primary" className="ms-2" onClick={handleAddRow}>
+                  Add
+                </CButton>
+              </div>
+            </CCardHeader>
+
+            <CCardHeader className="d-flex p-2">
+              <CInputGroup className='p-1'>
+                <CInputGroupText>City</CInputGroupText>
+                <CFormSelect value={cityValue} onChange={(e) => setCityValue(e.target.value)}>
+                  <option value="">Select city</option>
+                  <option value="option1">Option 1</option>
+                  <option value="option2">Option 2</option>
+                  <option value="option3">Option 3</option>
+                </CFormSelect>
+              </CInputGroup>
+
+              <CInputGroup className='p-1'>
+                <CInputGroupText>Police Station</CInputGroupText>
+                <CFormSelect value={policeStationValue} onChange={(e) => setPoliceStationValue(e.target.value)}>
+                  <option value="">Select police station</option>
+                  <option value="option1">Option 1</option>
+                  <option value="option2">Option 2</option>
+                  <option value="option3">Option 3</option>
+                </CFormSelect>
+              </CInputGroup>
+            </CCardHeader>
+
+            <CCardBody>
+              <CustomStyles1
+                rows={rows}
+                setRows={setRows}
+                searchQuery={searchQuery}
+                currentPage={currentPage}
+                pageSize={pageSize}
+                setCurrentPage={setCurrentPage}
+              />
+            </CCardBody>
+          </CCard>
+        </CCol>
+      </CRow>
+    );
   }
 
-  return (
-    <CRow>
-      <CCol xs={12}>
-        <CCard className="mb-4">
-          <CCardHeader className="d-flex justify-content-between align-items-center">
-            <strong>Manage Selfie Report</strong>
-            <div className="d-flex align-items-center">
-              <CInputGroup>
-                <CInputGroupText>
-                  <CIcon icon={cilSearch} />
-                </CInputGroupText>
-                <CFormInput
-                  placeholder="Search..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
-              </CInputGroup>
-              <CButton color="primary" className="ms-2" onClick={handleAddRow}>
-                Upload
-              </CButton>
-              <CButton color="primary" className="ms-2" onClick={handleAddRow}>
-                Add
-              </CButton>
-            </div>
-          </CCardHeader>
-
-          <CCardHeader className="d-flex p-2">
-
-              <CInputGroup className='p-1'>
-              <CInputGroupText>City</CInputGroupText>
-              <CFormSelect value={dropdownValue} onChange={(e) => setDropdownValue(e.target.value)}>
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
-              </CFormSelect>
-              </CInputGroup>
-
-              <CInputGroup className='p-1'>
-              <CInputGroupText>Police Station</CInputGroupText>
-              <CFormSelect value={dropdownValue} onChange={(e) => setDropdownValue(e.target.value)}>
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
-              </CFormSelect>
-            </CInputGroup>
-          </CCardHeader>
-
-          <CCardBody>
-            <CustomStyles1
-              rows={rows}
-              setRows={setRows}
-              searchQuery={searchQuery}
-              currentPage={currentPage}
-              pageSize={pageSize}
-              setCurrentPage={setCurrentPage}
-            />
-          </CCardBody>
-        </CCard>
-      </CCol>
-    </CRow>
-  )
-}
-
-export default Validation
+  export default Validation

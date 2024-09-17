@@ -83,7 +83,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                 <CTableHeaderCell>Station</CTableHeaderCell>
                 <CTableHeaderCell>District</CTableHeaderCell>
                 <CTableHeaderCell>City</CTableHeaderCell>
-                {/* <CTableHeaderCell>Action</CTableHeaderCell> */}
+                <CTableHeaderCell>Action</CTableHeaderCell>
               </CTableRow>
             </CTableHead>
             <CTableBody>
@@ -94,6 +94,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                     {row.isEditing ? (
                       <CFormInput
                         value={row.policeName}
+                        placeholder='Police Name'
                         onChange={(e) => handleInputChange(e, row.id, 'policeName')}
                       />
                     ) : (
@@ -104,6 +105,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                     {row.isEditing ? (
                       <CFormInput
                         value={row.mobile}
+                        placeholder='Mobile'
                         onChange={(e) => handleInputChange(e, row.id, 'mobile')}
                       />
                     ) : (
@@ -114,6 +116,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                     {row.isEditing ? (
                       <CFormInput
                         value={row.qr}
+                        placeholder='QR'
                         onChange={(e) => handleInputChange(e, row.id, 'qr')}
                       />
                     ) : (
@@ -124,6 +127,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                     {row.isEditing ? (
                       <CFormInput
                         value={row.latLong}
+                        placeholder='Lat/Long'
                         onChange={(e) => handleInputChange(e, row.id, 'latLong')}
                       />
                     ) : (
@@ -134,6 +138,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                     {row.isEditing ? (
                       <CFormInput
                         value={row.inputLatLong}
+                        placeholder='Input Lat/Long'
                         onChange={(e) => handleInputChange(e, row.id, 'inputLatLong')}
                       />
                     ) : (
@@ -144,6 +149,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                     {row.isEditing ? (
                       <CFormInput
                         value={row.dist}
+                        placeholder='Dist.'
                         onChange={(e) => handleInputChange(e, row.id, 'dist')}
                       />
                     ) : (
@@ -154,6 +160,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                     {row.isEditing ? (
                       <CFormInput
                         value={row.date}
+                        placeholder='Date'
                         onChange={(e) => handleInputChange(e, row.id, 'date')}
                       />
                     ) : (
@@ -164,6 +171,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                     {row.isEditing ? (
                       <CFormInput
                         value={row.station}
+                        placeholder='Station'
                         onChange={(e) => handleInputChange(e, row.id, 'station')}
                       />
                     ) : (
@@ -174,6 +182,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                     {row.isEditing ? (
                       <CFormInput
                         value={row.district}
+                        placeholder='District'
                         onChange={(e) => handleInputChange(e, row.id, 'district')}
                       />
                     ) : (
@@ -184,13 +193,14 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                     {row.isEditing ? (
                       <CFormInput
                         value={row.city}
+                        placeholder='City'
                         onChange={(e) => handleInputChange(e, row.id, 'city')}
                       />
                     ) : (
                       row.city
                     )}
                   </CTableDataCell>
-                  {/* <CTableDataCell>
+                  <CTableDataCell>
                     {row.isEditing ? (
                       <>
                         <CButton color="success" size="sm" onClick={() => handleSaveClick(row.id)}>
@@ -220,7 +230,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                         </CButton>
                       </>
                     )}
-                  </CTableDataCell> */}
+                  </CTableDataCell>
                 </CTableRow>
               ))}
             </CTableBody>
