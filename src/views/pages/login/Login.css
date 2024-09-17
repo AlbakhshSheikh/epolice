@@ -1,0 +1,13 @@
+.centered-placeholder::placeholder {
+  text-align: center;
+}
+
+.forgot-password-btn {
+  color: white;
+  /* Change text color to white */
+  background: none;
+  /* Remove default button background */
+  border: none;
+  /* Remove default button border */
+  text-decoration: none;
+}
