@@ -1,19 +1,15 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 import {
   CButton,
-  CCard,
-  CCardBody,
-  CCol,
-  CContainer,
   CForm,
   CFormInput,
   CInputGroup,
-  CInputGroupText,
   CRow,
-} from '@coreui/react'
-import CIcon from '@coreui/icons-react'
-import { cilLockLocked, cilUser } from '@coreui/icons'
+  CCol
+} from '@coreui/react';
+import './Login.css'; // Import your CSS file
+import { height } from '@fortawesome/free-solid-svg-icons/fa0';
 
 const Login = () => {
   const containerStyle = {
@@ -25,108 +21,100 @@ const Login = () => {
 
   const leftSectionStyle = {
     width: '50%',
-    backgroundImage: 'url("src/assets/brand/E Police Login Page.jpg")', // Use the correct path for your image
+    backgroundImage: 'url("src/assets/brand/E Police Login Page.jpg")',
     backgroundSize: '100% 100%',
-    // backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center' 
+    backgroundPosition: 'center'
   };
 
   const rightSectionStyle = {
     width: '50%',
+    height: '100vh',
+    backgroundColor: '#B3B3B3',
     display: 'flex',
+    flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'grey'
+    justifyContent: 'flex-start',
+    paddingTop: '100px',
+    paddingLeft: '20px',
+    paddingRight: '20px'
   };
 
-  const formContainerStyle = {
+  const imageStyle = {
+    width: '350px',
+    height: '350px',
+    marginBottom: '20px'
+  };
+
+  const headingStyle = {
+    margin: '0',
+    fontSize: '2rem',
     textAlign: 'center'
   };
 
-  const logoStyle = {
-    width: '150px',
-    marginBottom: '1.5rem'
-  };
-
   const inputGroupStyle = {
-    marginBottom: '1.5rem'
-  };
-
-  const buttonStyle = {
-    width: '100%'
+    marginBottom: '1.5rem',
+    width: '150%',
+    height: '20'
   };
 
   const appDownloadStyle = {
-    marginTop: '1.5rem'
+    marginTop: '1.5rem',
+    display: 'flex',
+    alignItems: 'center',  // Aligns text and images vertically centered
+    gap: '10px'           // Adds space between the text and the images
   };
 
   const iconStyle = {
-    width: '50px',
+    width: '30px',
     marginRight: '0.5rem'
+  };
+
+  const buttonStyle = {
+    width: '150%',
+    backgroundColor: 'black'
   };
 
   return (
     <div style={containerStyle}>
-      {/* Left section with the background image */}
       <div style={leftSectionStyle}></div>
 
-      {/* Right section - Login form */}
       <div style={rightSectionStyle}>
-        <CContainer>
-          <CCard className="p-4">
-            <CCardBody>
-              <div style={formContainerStyle}>
-                {/* Logo and tagline */}
-                <img src="src/assets/brand/E-Police.png" alt="Police Logo" style={logoStyle} /> {/* Replace with your logo path */}
-                <h2>E-POLICE</h2>
-                <p>Smart Tracking for Efficient Patrolling</p>
-              </div>
-              <CForm>
-                <CInputGroup style={inputGroupStyle}>
-                  <CInputGroupText>
-                    <CIcon icon={cilUser} />
-                  </CInputGroupText>
-                  <CFormInput placeholder="Email Address" autoComplete="username" />
-                </CInputGroup>
-                <CInputGroup style={inputGroupStyle}>
-                  <CInputGroupText>
-                    <CIcon icon={cilLockLocked} />
-                  </CInputGroupText>
-                  <CFormInput
-                    type="password"
-                    placeholder="Password"
-                    autoComplete="current-password"
-                  />
-                </CInputGroup>
-                <CRow>
-                  <CCol xs={12}>
-                    <Link to="/dashboard">
-                      <CButton color="primary" style={buttonStyle}>
-                        Login
-                      </CButton>
-                    </Link>
-                  </CCol>
-                  <CCol xs={12} className="text-right mt-2">
-                    <CButton color="link">
-                      Forgot Password?
-                    </CButton>
-                  </CCol>
-                </CRow>
-              </CForm>
-              {/* Download Apps */}
-              <div style={appDownloadStyle}>
-                <p>Download our Apps</p>
-                <div>
-                  <img src="/path/to/apple_store_logo.png" alt="Apple Store" style={iconStyle} /> {/* Replace with your app store logo */}
-                  <img src="/path/to/google_play_logo.png" alt="Google Play" style={iconStyle} /> {/* Replace with your play store logo */}
-                </div>
-              </div>
-            </CCardBody>
-          </CCard>
-        </CContainer>
+        <img src="src/assets/brand/E-Police.png" alt="Centered Image" style={imageStyle} />
+        <h2 style={headingStyle}>Smart Tracking for Efficient Patrolling</h2>
+        <CForm className='pt-5'>
+          <CInputGroup style={inputGroupStyle}>
+            <CFormInput className="centered-placeholder" placeholder="Email Address" autoComplete="username" />
+          </CInputGroup>
+          <CInputGroup style={inputGroupStyle}>
+            <CFormInput
+              className="centered-placeholder"
+              type="password"
+              placeholder="Password"
+              autoComplete="current-password"
+            />
+          </CInputGroup>
+          <CRow>
+            <CCol xs={12}>
+              <Link to="/dashboard">
+                <CButton color="primary" style={buttonStyle}>
+                  Login
+                </CButton>
+              </Link>
+            </CCol>
+
+          </CRow>
+        </CForm>
+        <CCol xs={12} className="text-right mt-2">
+          <CButton className="forgot-password-btn" color="link">　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　Forgot Password?</CButton>
+        </CCol>
+        <div style={appDownloadStyle}>
+          <p className='mt-2 px-2'>　　　　　　　　　　　　　　Download our Apps</p>
+          <img src="src\views\pages\login\Iphone.png" alt="Apple Store" style={iconStyle} /> {/* Replace with your app store logo */}
+          <img src="src\views\pages\login\android.png" alt="Google Play" style={iconStyle} /> {/* Replace with your play store logo */}
+        </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
