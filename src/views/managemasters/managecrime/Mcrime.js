@@ -111,7 +111,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                             Save
                           </CButton>
                         </CTooltip>
-                        <CTooltip content="Cancel editing">
+                        <CTooltip content="Delete">
                           <CButton
                             color="danger"
                             size="sm"
@@ -134,6 +134,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                             <CIcon icon={cilPencil} />
                           </CButton>
                         </CTooltip>
+                        
                         <CTooltip content="Delete">
                           <CButton color="danger" size="sm" onClick={() => handleDeleteClick(row.id)}>
                             <CIcon icon={cilTrash} />
@@ -258,11 +259,11 @@ const Validation = () => {
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
               </CInputGroup>
-              <CTooltip content="Add a new crime record">
+              
                 <CButton color="primary" className="ms-2" onClick={handleAddRow}>
                   Add
                 </CButton>
-              </CTooltip>
+              
             </div>
           </CCardHeader>
           <CCardBody>
