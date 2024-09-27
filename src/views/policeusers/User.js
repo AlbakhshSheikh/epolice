@@ -21,6 +21,7 @@ import {
   CDropdownToggle,
   CDropdownMenu,
   CDropdownItem,
+  CTooltip,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilSearch, cilSettings, cilPencil, cilTrash, cilUser } from '@coreui/icons'
@@ -44,6 +45,24 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
   const handleDeleteClick = (id) => {
     setRows((rows) => rows.filter((row) => row.id !== id))
   }
+
+  const handleImageUpload = (e, rowId) => {
+    const file = e.target.files[0]
+    if (file) {
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        const updatedRows = rows.map((row) => {
+          if (row.id === rowId) {
+            return { ...row, image: reader.result }
+          }
+          return row
+        })
+        setRows(updatedRows)
+      }
+      reader.readAsDataURL(file) // Convert file to base64 URL
+    }
+  }
+  
 
   // Filter rows based on search query
   const filteredRows = rows.filter(row =>
@@ -90,6 +109,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                     {row.isEditing ? (
                       <CFormInput
                         value={row.stationName}
+                        placeholder='Station Name'
                         onChange={(e) => handleInputChange(e, row.id, 'stationName')}
                       />
                     ) : (
@@ -100,6 +120,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                     {row.isEditing ? (
                       <CFormInput
                         value={row.policeName}
+                        placeholder='Police Name'
                         onChange={(e) => handleInputChange(e, row.id, 'policeName')}
                       />
                     ) : (
@@ -110,6 +131,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                     {row.isEditing ? (
                       <CFormInput
                         value={row.buckalNumber}
+                        placeholder='Buckal Number'
                         onChange={(e) => handleInputChange(e, row.id, 'buckalNumber')}
                       />
                     ) : (
@@ -120,6 +142,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                     {row.isEditing ? (
                       <CFormInput
                         value={row.designation}
+                        placeholder='Designation'
                         onChange={(e) => handleInputChange(e, row.id, 'designation')}
                       />
                     ) : (
@@ -129,16 +152,20 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
 
                   <CTableDataCell>
                     {row.isEditing ? (
-                      <CFormInput
-                        value={row.image}
-                        onChange={(e) => handleInputChange(e, row.id, 'image')}
-                      />
+                      <>
+                        <CFormInput
+                          type="file"
+                          accept="image/*"
+                          placeholder='Images'
+                          onChange={(e) => handleImageUpload(e, row.id)} // Handle file input
+                        />
+                      </>
                     ) : (
                       <>
                         {row.image && (
                           <img
-                            src='https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg?t=st=1725271852~exp=1725275452~hmac=c6cff51c8b70509d2d25131b776d91adb73ef04584c11d70e6446fab636de852&w=826'
-                            // src={row.selfie}
+                            src={row.image} // Display uploaded image
+                            // src = 'https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg?t=st=1725271852~exp=1725275452~hmac=c6cff51c8b70509d2d25131b776d91adb73ef04584c11d70e6446fab636de852&w=826'
                             alt="Selfie"
                             style={{ width: '100px', height: 'auto', objectFit: 'contain' }}
                           />
@@ -147,10 +174,12 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                     )}
                   </CTableDataCell>
 
+
                   <CTableDataCell>
                     {row.isEditing ? (
                       <CFormInput
                         value={row.email}
+                        placeholder='Email'
                         onChange={(e) => handleInputChange(e, row.id, 'email')}
                       />
                     ) : (
@@ -162,6 +191,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                     {row.isEditing ? (
                       <CFormInput
                         value={row.mobile}
+                        placeholder='Mobile'
                         onChange={(e) => handleInputChange(e, row.id, 'mobile')}
                       />
                     ) : (
@@ -173,6 +203,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                     {row.isEditing ? (
                       <CFormInput
                         value={row.gender}
+                        placeholder='Gender'
                         onChange={(e) => handleInputChange(e, row.id, 'gender')}
                       />
                     ) : (
@@ -221,9 +252,13 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                   <CTableDataCell>
                     {row.isEditing ? (
                       <>
+                      <CTooltip content = 'Save Change'>
                         <CButton color="success" size="sm" onClick={() => handleSaveClick(row.id)}>
                           Save
                         </CButton>
+                        </CTooltip>
+
+                        <CTooltip content = 'Delete'>
                         <CButton
                           color="danger"
                           size="sm"
@@ -232,9 +267,11 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                         >
                           Delete
                         </CButton>
+                        </CTooltip>
                       </>
                     ) : (
                       <>
+                        <CTooltip content = 'View'>
                         <CButton
                           color="info"
                           size="sm"
@@ -243,6 +280,9 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                         >
                           <CIcon icon={cilUser} />
                         </CButton>
+                        </CTooltip>
+
+                        <CTooltip content = 'Edit'>
                         <CButton
                           color="info"
                           size="sm"
@@ -251,9 +291,13 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                         >
                           <CIcon icon={cilPencil} />
                         </CButton>
+                        </CTooltip>
+
+                        <CTooltip content = 'Delete'>
                         <CButton color="danger" size="sm" onClick={() => handleDeleteClick(row.id)}>
                           <CIcon icon={cilTrash} />
                         </CButton>
+                        </CTooltip>
                       </>
                     )}
                   </CTableDataCell>
@@ -372,7 +416,7 @@ const Validation = () => {
   const [toDate, setToDate] = useState('')
   const [dropdownValue, setDropdownValue] = useState('')
   const [inputValue, setInputValue] = useState('')
-  const pageSize = 5
+  const pageSize = 10
 
   const handleAddRow = () => {
     const newRow = {
@@ -387,10 +431,11 @@ const Validation = () => {
       gender: '',
       approved: 'Approved',
       status: 'Active',
-      isEditing: false,
+      isEditing: true, // Set isEditing to true so the new row is editable immediately
     }
     setRows([...rows, newRow])
   }
+
 
   return (
     <CRow>

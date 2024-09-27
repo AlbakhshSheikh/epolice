@@ -22,6 +22,7 @@ import {
   CDropdownToggle,
   CDropdownMenu,
   CDropdownItem,
+  CTooltip,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilSearch, cilSettings, cilPencil, cilTrash, cilUser } from '@coreui/icons'
@@ -76,12 +77,6 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                 <CTableHeaderCell>Address</CTableHeaderCell>
                 <CTableHeaderCell>Assign Police</CTableHeaderCell>
                 <CTableHeaderCell>Action</CTableHeaderCell>
-
-                {/* <CTableHeaderCell>C</CTableHeaderCell>
-                <CTableHeaderCell>From Date</CTableHeaderCell>
-                <CTableHeaderCell>To Date</CTableHeaderCell>
-                <CTableHeaderCell>Address</CTableHeaderCell>
-                <CTableHeaderCell>Status</CTableHeaderCell> */}
               </CTableRow>
             </CTableHead>
             <CTableBody>
@@ -92,6 +87,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                     {row.isEditing ? (
                       <CFormInput
                         value={row.activity}
+                        placeholder='Activity'
                         onChange={(e) => handleInputChange(e, row.id, 'activity')}
                       />
                     ) : (
@@ -103,6 +99,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                     {row.isEditing ? (
                       <CFormInput
                         value={row.stationName}
+                        placeholder='Station Name'
                         onChange={(e) => handleInputChange(e, row.id, 'stationName')}
                       />
                     ) : (
@@ -113,7 +110,9 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                   <CTableDataCell>
                     {row.isEditing ? (
                       <CFormInput
+                        type='date'
                         value={row.fd}
+                        placeholder='From Date'
                         onChange={(e) => handleInputChange(e, row.id, 'fd')}
                       />
                     ) : (
@@ -124,7 +123,9 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                   <CTableDataCell>
                     {row.isEditing ? (
                       <CFormInput
+                        type='date'
                         value={row.td}
+                        placeholder='To Date'
                         onChange={(e) => handleInputChange(e, row.id, 'td')}
                       />
                     ) : (
@@ -137,6 +138,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                     {row.isEditing ? (
                       <CFormInput
                         value={row.address}
+                        placeholder='Address'
                         onChange={(e) => handleInputChange(e, row.id, 'address')}
                       />
                     ) : (
@@ -148,6 +150,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                     {row.isEditing ? (
                       <CFormInput
                         value={row.ap}
+                        placeholder='Assing Police'
                         onChange={(e) => handleInputChange(e, row.id, 'ap')}
                       />
                     ) : (
@@ -158,9 +161,13 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                   <CTableDataCell>
                     {row.isEditing ? (
                       <>
+                        <CTooltip content = 'Save Change'>
                         <CButton color="success" size="sm" onClick={() => handleSaveClick(row.id)}>
                           Save
                         </CButton>
+                        </CTooltip>
+
+                        <CTooltip content = 'Delete'>
                         <CButton
                           color="danger"
                           size="sm"
@@ -169,18 +176,11 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                         >
                           Delete
                         </CButton>
+                        </CTooltip>
                       </>
                     ) : (
                       <>
-                        {/* <CButton
-                          color="info"
-                          size="sm"
-                          className="me-2"
-                          onClick={() => handleEditClick(row.id)}
-                        >
-                          <CIcon icon={cilUser} />
-                        </CButton> */}
-                        
+                        <CTooltip content = 'Edit'>
                         <CButton
                           color="info"
                           size="sm"
@@ -189,78 +189,16 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                         >
                           <CIcon icon={cilPencil} />
                         </CButton>
+                        </CTooltip>
+
+                        <CTooltip content = 'Delete'>
                         <CButton color="danger" size="sm" onClick={() => handleDeleteClick(row.id)}>
                           <CIcon icon={cilTrash} />
                         </CButton>
+                        </CTooltip>
                       </>
                     )}
                   </CTableDataCell>
-
-                  {/* <CTableDataCell>
-                    {row.isEditing ? (
-                      <CFormSelect
-                        value={row.status}
-                        onChange={(e) => handleInputChange(e, row.id, 'status')}
-                      >
-                        <option value="Active">Active</option>
-                        <option value="Inactive">Inactive</option>
-                      </CFormSelect>
-                    ) : (
-                      <span
-                        className={`badge bg-${row.status === 'Active' ? 'success' : 'danger'}`}
-                      >
-                        {row.status}
-                      </span>
-                    )}
-                  </CTableDataCell> */}
-
-                  {/* <CTableDataCell>
-                    {row.isEditing ? (
-                      <CFormInput
-                        value={row.city}
-                        onChange={(e) => handleInputChange(e, row.id, 'city')}
-                      />
-                    ) : (
-                      row.city
-                    )}
-                  </CTableDataCell> */}
-
-                  {/* <CTableDataCell>
-                    {row.isEditing ? (
-                      <CFormInput
-                        value={row.fromdate}
-                        onChange={(e) => handleInputChange(e, row.id, 'fromdate')}
-                      />
-                    ) : (
-                      row.fromdate
-                    )}
-                  </CTableDataCell> */}
-
-                  {/* <CTableDataCell>
-                    {row.isEditing ? (
-                      <CFormInput
-                        value={row.todate}
-                        onChange={(e) => handleInputChange(e, row.id, 'todate')}
-                      />
-                    ) : (
-                      row.todate
-                    )}
-                  </CTableDataCell> */}
-
-                  {/* <CTableDataCell>
-                    {row.isEditing ? (
-                      <CFormInput
-                        value={row.address}
-                        onChange={(e) => handleInputChange(e, row.id, 'address')}
-                      />
-                    ) : (
-                      row.address
-                    )}
-                  </CTableDataCell> */}
-
-
-
-
 
                 </CTableRow>
               ))}
@@ -349,7 +287,7 @@ const Validation = () => {
 
   const [searchQuery, setSearchQuery] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
-  const pageSize = 5
+  const pageSize = 10
 
   const handleAddRow = () => {
     const newRow = {
@@ -361,14 +299,11 @@ const Validation = () => {
       address: '',
       ap: '',
       status: 'Active',
-      // city: 'Akola',
-      // fromdate: 'ex',
-      // todate: 'ex',
-      // address: 'DYSP BALLAPUR',
-      // isEditing: false,
+      isEditing: true, // Set isEditing to true for the new row
     }
     setRows([...rows, newRow])
   }
+
 
   return (
     <CRow>
