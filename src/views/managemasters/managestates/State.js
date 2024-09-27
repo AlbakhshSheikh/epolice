@@ -1,5 +1,4 @@
-/* eslint-disable prettier/prettier */
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   CButton,
   CCard,
@@ -26,8 +25,13 @@ import {
 } from '@coreui/react';
 import CIcon from '@coreui/icons-react';
 import { cilSearch, cilSettings, cilPencil, cilTrash } from '@coreui/icons';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
+import * as XLSX from 'xlsx';
 
 const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setCurrentPage }) => {
+  const tableRef = useRef(); // Create a ref for the table
+
   const handleEditClick = (id) => {
     setRows((rows) =>
       rows.map((row) => (row.id === id ? { ...row, isEditing: !row.isEditing } : row)),
@@ -47,8 +51,67 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
     setRows((rows) => rows.filter((row) => row.id !== id));
   };
 
+  const handleExportPDF = () => {
+    const doc = new jsPDF();
+    doc.autoTable({
+      head: [['Sr.No', 'Country Name', 'State Name', 'Status']],
+      body: rows.map((row) => [
+        row.id,
+        row.country,
+        row.state,
+        row.status,
+      ]),
+    });
+    doc.save('table-data.pdf');
+  };
+
+  const handleCopyToClipboard = () => {
+    const header = ['Sr.No', 'Country Name', 'State Name', 'Status'];
+    const data = rows.map((row) => [
+      row.id,
+      row.country,
+      row.state,
+      row.status,
+    ]);
+    const csvContent = [header, ...data].map((e) => e.join(",")).join("\n");
+
+    navigator.clipboard.writeText(csvContent).then(() => {
+      alert('Table data copied to clipboard!');
+    }, (err) => {
+      console.error('Failed to copy text: ', err);
+    });
+  };
+
+  const handleExportExcel = () => {
+    const header = ['Sr.No', 'Country Name', 'State Name', 'Status'];
+    const data = rows.map((row) => [
+      row.id,
+      row.country,
+      row.state,
+      row.status,
+    ]);
+
+    const ws = XLSX.utils.aoa_to_sheet([header, ...data]);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    XLSX.writeFile(wb, 'table-data.xlsx');
+  };
+
+  const handlePrintTable = () => {
+    const printContents = tableRef.current.innerHTML;
+    const originalContents = document.body.innerHTML;
+    
+    // Replace the body content with table content and trigger the print
+    document.body.innerHTML = printContents;
+    window.print();
+    
+    // Restore the original content after printing
+    document.body.innerHTML = originalContents;
+  };
+
   // Filter rows based on search query
-  const filteredRows = rows.filter(row =>
+  const filteredRows = rows.filter((row) =>
     row.country.toLowerCase().includes(searchQuery.toLowerCase()) ||
     row.state.toLowerCase().includes(searchQuery.toLowerCase()),
   );
@@ -61,7 +124,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
     <>
       <CForm className="row g-3 needs-validation" noValidate>
         {/* Table */}
-        <CCol xs={12} className="mt-4">
+        <CCol xs={12} className="mt-4" ref={tableRef}>
           <CTable bordered>
             <CTableHead>
               <CTableRow>
@@ -189,15 +252,15 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
       <CDropdown className="position-fixed bottom-0 end-0 m-3">
         <CDropdownToggle
           color="secondary"
-          style={{ borderRadius: '50%', width: '50px', height: '50px' }}
+          style={{ borderRadius: '50%', padding: '10px', height: '48px', width: '48px' }}
         >
-          <CIcon icon={cilSettings} className="text-white" />
+          <CIcon icon={cilSettings} />
         </CDropdownToggle>
         <CDropdownMenu>
-          <CDropdownItem>PDF</CDropdownItem>
-          <CDropdownItem>Copy</CDropdownItem>
-          <CDropdownItem>Excel</CDropdownItem>
-          <CDropdownItem>Print</CDropdownItem>
+          <CDropdownItem onClick={handleExportPDF}>PDF</CDropdownItem>
+          <CDropdownItem onClick={handleCopyToClipboard}>Copy</CDropdownItem>
+          <CDropdownItem onClick={handleExportExcel}>Excel</CDropdownItem>
+          <CDropdownItem onClick={handlePrintTable}>Print </CDropdownItem>
           <CDropdownItem>Show 50 rows</CDropdownItem>
           <CDropdownItem>Column visibility</CDropdownItem>
         </CDropdownMenu>

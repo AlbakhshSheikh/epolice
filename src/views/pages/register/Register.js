@@ -24,8 +24,8 @@ const Register = () => {
             <CCard className="mx-4">
               <CCardBody className="p-4">
                 <CForm>
-                  <h1>Register</h1>
-                  <p className="text-body-secondary">Create your account</p>
+                  <h1>Forget Password</h1>
+                  <p className="text-body-secondary">Enter new password</p>
                   <CInputGroup className="mb-3">
                     <CInputGroupText>
                       <CIcon icon={cilUser} />
@@ -62,3 +62,4 @@ const Register = () => {
 }
 
 export default Register
+  

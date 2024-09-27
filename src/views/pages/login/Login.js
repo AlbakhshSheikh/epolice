@@ -47,7 +47,7 @@ const Login = () => {
 
   const headingStyle = {
     margin: '0',
-    fontSize: '2rem',
+    fontSize: '1.5rem',
     textAlign: 'center'
   };
 
@@ -105,12 +105,16 @@ const Login = () => {
           </CRow>
         </CForm>
         <CCol xs={12} className="text-right mt-2">
-          <CButton className="forgot-password-btn" color="link">　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　Forgot Password?</CButton>
+          <Link to="/register"><CButton className="forgot-password-btn" color="link" >　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　Forgot Password?</CButton></Link>
+
         </CCol>
         <div style={appDownloadStyle}>
           <p className='mt-2 px-2'>　　　　　　　　　　　　　　Download our Apps</p>
           <img src="src\views\pages\login\Iphone.png" alt="Apple Store" style={iconStyle} /> {/* Replace with your app store logo */}
-          <img src="src\views\pages\login\android.png" alt="Google Play" style={iconStyle} /> {/* Replace with your play store logo */}
+          <a href="https://play.google.com/store/apps/details?id=com.tbd.epoliceapp&hl=en_IN&pli=1" target="_blank" rel="noopener noreferrer">
+            <img src="src\views\pages\login\android.png" alt="Google Play" style={iconStyle} /> {/* Replace with your play store logo */}
+          </a>
+
         </div>
       </div>
     </div>
