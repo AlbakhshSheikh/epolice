@@ -259,12 +259,18 @@ const CustomStyles1 = ({ entries, onEdit, onDelete }) => {
                 <CTableDataCell>
                   {editIndex === indexOfFirstEntry + index ? (
                     <>
+                      <CTooltip content ="Save Change">
                       <CButton color="success" size="sm" onClick={() => saveEdit(indexOfFirstEntry + index)}>
                         Save
-                      </CButton>{' '}
+                      </CButton>
+                      </CTooltip>
+                      {' '}
+
+                      <CTooltip content ="Delete">
                       <CButton color="warning" size="sm" onClick={() => setEditIndex(null)}>
                         Cancel
                       </CButton>
+                      </CTooltip>
                     </>
                   ) : (
                     <>

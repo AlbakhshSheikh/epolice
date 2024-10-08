@@ -17,6 +17,7 @@ import {
   CRow,
   CFormLabel,
   CFormFeedback,
+  CTooltip,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilPencil, cilTrash } from '@coreui/icons'
@@ -128,21 +129,31 @@ const CustomStyles1 = ({ rows, handleEditClick, handleSaveClick, handleDeleteCli
             <CTableDataCell>
               {row.isEditing ? (
                 <>
+                <CTooltip content= "Save Change">
                   <CButton color="success" size="sm" onClick={() => handleSaveClick(row.id)}>
                     Save
                   </CButton>
+                  </CTooltip>
+
+                  <CTooltip content= "Delete">
                   <CButton color="danger" size="sm" className="ms-2" onClick={() => handleDeleteClick(row.id)}>
                     Delete
                   </CButton>
+                  </CTooltip>
                 </>
               ) : (
                 <>
+                <CTooltip content= "Edit">
                   <CButton color="info" size="sm" className="me-2" onClick={() => handleEditClick(row.id)}>
                     <CIcon icon={cilPencil} />
                   </CButton>
+                  </CTooltip>
+
+                  <CTooltip content= "Delete">
                   <CButton color="danger" size="sm" onClick={() => handleDeleteClick(row.id)}>
                     <CIcon icon={cilTrash} />
                   </CButton>
+                  </CTooltip>
                 </>
               )}
             </CTableDataCell>

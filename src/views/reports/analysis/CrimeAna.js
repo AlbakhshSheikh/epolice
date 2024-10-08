@@ -22,6 +22,7 @@ import {
   CDropdownToggle,
   CDropdownMenu,
   CDropdownItem,
+  CTooltip,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilSearch, cilSettings, cilPencil, cilTrash, cilUser } from '@coreui/icons'
@@ -157,9 +158,13 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                   <CTableDataCell>
                     {row.isEditing ? (
                       <>
+                        <CTooltip content= "Save Change">
                         <CButton color="success" size="sm" onClick={() => handleSaveClick(row.id)}>
                           Save
                         </CButton>
+                        </CTooltip>
+
+                        <CTooltip content= "Delete">
                         <CButton
                           color="danger"
                           size="sm"
@@ -168,9 +173,11 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                         >
                           Delete
                         </CButton>
+                        </CTooltip>
                       </>
                     ) : (
                       <>
+                      <CTooltip content= "View">
                         <CButton
                           color="info"
                           size="sm"
@@ -179,6 +186,7 @@ const CustomStyles1 = ({ rows, setRows, searchQuery, currentPage, pageSize, setC
                         >
                           <CIcon icon={cilUser} />
                         </CButton>
+                        </CTooltip>
                         {/* <CButton
                           color="info"
                           size="sm"
